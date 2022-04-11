@@ -76,13 +76,13 @@ function appendTab(tab, nombre, contenido) {
          UpdateGraphviz(imprimir(resultado));
          var interprete = new Interprete();
          var texto= interprete.analizar(resultado);
-        download(texto, 'Analisis.txt', 'text/plain')
+        //download(texto, 'Analisis.txt', 'text/plain')
         consola.value=texto;
         return;
       }catch(error){
           consola.value=error+"\n"+L_Error.getInstance().getErrores();
           console.log(error);
-          download(error,'Archivo con errores','text/plain')
+          //download(error,'Archivo con errores','text/plain')
           return;
       }
   }

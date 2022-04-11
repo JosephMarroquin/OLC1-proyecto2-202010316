@@ -89,6 +89,24 @@ class Operador{
                     Resultado.tipo="string";
                     Resultado.valor=raiz.value;
                     return Resultado;
+            
+            case "char":
+                    Resultado= new ResultadoOp();
+                    Resultado.tipo="char";
+                    Resultado.valor=raiz.value;
+                    return Resultado;
+            
+            case "tolower":
+                    Resultado= new ResultadoOp();
+                    Resultado.tipo="string";
+                    Resultado.valor=raiz.value.toLowerCase();
+                    return Resultado;
+            
+            case "toupper":
+                    Resultado= new ResultadoOp();
+                    Resultado.tipo="string";
+                    Resultado.valor=raiz.value.toUpperCase();
+                    return Resultado;
             default:
                 break;
         }
@@ -135,15 +153,29 @@ class Operador{
                             switch(tipo2){
                                 case "integer":
                                     res.tipo="integer";
-                                    res.valor=R1.valor+R2.valor;
+                                    res.valor=parseInt(R1.valor)+parseInt(R2.valor);
                                     return res;
                                 case "double":
                                     res.tipo="double";
-                                    res.valor=R1.valor+R2.valor;
+                                    res.valor=parseFloat(R1.valor)+parseFloat(R2.valor);
                                     return res;
                                 case "string":
                                     res.tipo="string";
-                                    res.valor=R1.valor+R2.valor;
+                                    res.valor=R1.valor.toString()+R2.valor.toString();
+                                    return res;
+                                case "char":
+                                    res.tipo="integer";
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=parseInt(R1.valor)+parseInt(R2.valor);
+                                    return res;
+                                case "boolean":
+                                    res.tipo="integer";
+                                    if(R2.valor==true){
+                                        R2.valor=1;
+                                    }else if(R2.valor==false){
+                                        R2.valor=0;
+                                    }
+                                    res.valor=parseInt(R1.valor)+parseInt(R2.valor);
                                     return res;
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
@@ -154,13 +186,86 @@ class Operador{
                         case "double":
                             switch(tipo2){
                                 case "integer":
+                                    res.tipo="double";
+                                    res.valor=parseFloat(R1.valor)+parseFloat(R2.valor);
+                                    return res;
                                 case "double":
                                     res.tipo="double";
-                                    res.valor=R1.valor+R2.valor;
+                                    res.valor=parseFloat(R1.valor)+parseFloat(R2.valor);
+                                    return res;
+                                case "boolean":
+                                    res.tipo="double";
+                                    if(R2.valor==true){
+                                        R2.valor=1;
+                                    }else if(R2.valor==false){
+                                        R2.valor=0;
+                                    }
+                                    res.valor=parseFloat(R1.valor)+parseFloat(R2.valor);
+                                    return res;
+                                case "char":
+                                    res.tipo="double";
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=parseFloat(R1.valor)+parseFloat(R2.valor);
                                     return res;
                                 case "string":
                                     res.tipo="string";
-                                    res.valor=R1.valor+R2.valor;
+                                    res.valor=R1.valor.toString()+R2.valor.toString();
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="error";
+                                        return res;
+                            }
+                        case "boolean":
+                            switch(tipo2){
+                                case "integer":
+                                    res.tipo="integer";
+                                    if(R1.valor==true){
+                                        R1.valor=1;
+                                    }else if(R1.valor==false){
+                                        R1.valor=0;
+                                    }
+                                    res.valor=parseInt(R1.valor)+parseInt(R2.valor);
+                                    return res;
+                                case "double":
+                                    res.tipo="double";
+                                    if(R1.valor==true){
+                                        R1.valor=1;
+                                    }else if(R1.valor==false){
+                                        R1.valor=0;
+                                    }
+                                    res.valor=parseFloat(R1.valor)+parseFloat(R2.valor);
+                                    return res; 
+                                case "string":
+                                    res.tipo="string";
+                                    res.valor=R1.valor.toString()+R2.valor.toString();
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="error";
+                                        return res;
+                            }
+                        case "char":
+                            switch(tipo2){
+                                case "integer":
+                                    res.tipo="integer";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    res.valor=parseInt(R1.valor)+parseInt(R2.valor);
+                                    return res;
+                                case "double":
+                                    res.tipo="double";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    res.valor=parseFloat(R1.valor)+parseFloat(R2.valor);
+                                    return res;
+                                case "char":
+                                    res.tipo="string";
+                                    res.valor=R1.valor.toString()+R2.valor.toString();
+                                    return res;
+                                case "string":
+                                    res.tipo="string";
+                                    res.valor=R1.valor.toString()+R2.valor.toString();
                                     return res;
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
@@ -171,10 +276,24 @@ class Operador{
                         case "string":
                             switch(tipo2){
                                 case "integer":
+                                    res.tipo="string";
+                                    res.valor=R1.valor.toString()+R2.valor.toString();
+                                    return res;
                                 case "double":
+                                    res.tipo="string";
+                                    res.valor=R1.valor.toString()+R2.valor.toString();
+                                    return res;
+                                case "boolean":
+                                    res.tipo="string";
+                                    res.valor=R1.valor.toString()+R2.valor.toString();
+                                    return res;
+                                case "char":
+                                    res.tipo="string";
+                                    res.valor=R1.valor.toString()+R2.valor.toString();
+                                    return res;
                                 case "string":
                                     res.tipo="string";
-                                    res.valor=R1.valor+R2.valor;
+                                    res.valor=R1.valor.toString()+R2.valor.toString();
                                     return res;
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
@@ -194,11 +313,25 @@ class Operador{
                             switch(tipo2){
                                     case "integer":
                                         res.tipo="integer";
-                                        res.valor=R1.valor-R2.valor;
+                                        res.valor=parseInt(R1.valor)-parseInt(R2.valor);
                                         return res;
                                     case "double":
                                         res.tipo="double";
-                                        res.valor=R1.valor-R2.valor;
+                                        res.valor=parseFloat(R1.valor)-parseFloat(R2.valor);
+                                        return res;
+                                    case "boolean":
+                                        res.tipo="integer";
+                                        if(R2.valor==true){
+                                            R2.valor=1;
+                                        }else if(R2.valor==false){
+                                            R2.valor=0;
+                                        }
+                                        res.valor=parseInt(R1.valor)-parseInt(R2.valor);
+                                        return res;
+                                    case "char":
+                                        res.tipo="integer";
+                                        R2.valor=R2.valor.charCodeAt(0);
+                                        res.valor=parseInt(R1.valor)-parseInt(R2.valor);
                                         return res;
                                     default:
                                         L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
@@ -209,9 +342,70 @@ class Operador{
                         case "double":
                             switch(tipo2){
                                 case "integer":
+                                    res.tipo="double";
+                                    res.valor=parseFloat(R1.valor)-parseFloat(R2.valor);
+                                    return res;
                                 case "double":
                                     res.tipo="double";
-                                    res.valor=R1.valor-R2.valor;
+                                    res.valor=parseFloat(R1.valor)-parseFloat(R2.valor);
+                                    return res;
+                                case "boolean":
+                                    res.tipo="double";
+                                    if(R2.valor==true){
+                                        R2.valor=1;
+                                    }else if(R2.valor==false){
+                                        R2.valor=0;
+                                    }
+                                    res.valor=parseFloat(R1.valor)-parseFloat(R2.valor);
+                                    return res;
+                                case "char":
+                                    res.tipo="double";
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=parseFloat(R1.valor)-parseFloat(R2.valor);
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="error";
+                                    return res;
+                                }
+                        case "boolean":
+                            switch(tipo2){
+                                case "integer":
+                                    res.tipo="integer";
+                                    if(R1.valor==true){
+                                        R1.valor=1;
+                                    }else if(R1.valor==false){
+                                        R1.valor=0;
+                                    }
+                                    res.valor=parseInt(R1.valor)-parseInt(R2.valor);
+                                    return res;
+                                case "double":
+                                    res.tipo="double";
+                                    if(R1.valor==true){
+                                        R1.valor=1;
+                                    }else if(R1.valor==false){
+                                        R1.valor=0;
+                                    }
+                                    res.valor=parseFloat(R1.valor)-parseFloat(R2.valor);
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="error";
+                                    return res;
+                                }
+                        case "char":
+                            switch(tipo2){
+                                case "integer":
+                                    res.tipo="integer";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    res.valor=parseInt(R1.valor)-parseInt(R2.valor);
+                                    return res;
+                                case "double":
+                                    res.tipo="double";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    res.valor=parseFloat(R1.valor)-parseFloat(R2.valor);
                                     return res;
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
