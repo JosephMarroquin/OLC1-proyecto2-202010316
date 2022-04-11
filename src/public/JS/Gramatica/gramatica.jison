@@ -47,7 +47,7 @@
 "-"                 return 'Tok_menos'
 "!="                return 'Tok_diferente'
 "!"                 return 'Tok_not'
-"^^"                return 'Tok_pot'
+"^"                return 'Tok_pot'
 "*"                 return 'Tok_por'
 "/"                 return 'Tok_div'
 "%"                 return 'Tok_mod'
@@ -112,8 +112,9 @@
 %nonassoc  'Tok_mayor' 'Tok_menor' 'Tok_menori' 'Tok_mayori'
 %left  'Tok_mas' 'Tok_menos'
 %left  'Tok_por' 'Tok_div' 'Tok_mod'
-%right 'Tok_pot'
-%right 'Tok_not' UMINUS
+%nonassoc 'Tok_pot'
+%right 'Tok_not' 
+%left UMENOS
 
 //Iniciando la gramatica
 
@@ -206,6 +207,12 @@ EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.fi
     |EXP Tok_or EXP                     {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
     |Tok_not EXP                        {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds(new AST_Node("op",$1,this._$.first_line,@1.last_column),$2);}
     |Tok_par1 EXP Tok_par2              {$$=$2}
+    |Tok_menos ENTERO %prec UMENOS      {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("entero",$2*-1,this._$.first_line,@1.last_column));}
+    |Tok_menos Tok_numero %prec UMENOS  {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("decimal",$2*-1,this._$.first_line,@1.last_column));}
+    |Tok_menos Tok_true %prec UMENOS    {L_Error.getInstance().insertar(new N_Error("Semantico","No esta permitida la negacion unario en esta expresion" ,this._$.first_line,@1.last_column));}
+    |Tok_menos Tok_false %prec UMENOS   {L_Error.getInstance().insertar(new N_Error("Semantico","No esta permitida la negacion unario en esta expresion" ,this._$.first_line,@1.last_column));}
+    |Tok_menos Tok_string %prec UMENOS  {L_Error.getInstance().insertar(new N_Error("Semantico","No esta permitida la negacion unario en esta expresion" ,this._$.first_line,@1.last_column));}
+    |Tok_menos Tok_char %prec UMENOS    {L_Error.getInstance().insertar(new N_Error("Semantico","No esta permitida la negacion unario en esta expresion" ,this._$.first_line,@1.last_column));}
     |Tok_string                         {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);
                                          var text = $1.substr(0,$1.length);
                                          text=text.replace(/\\n/g,"\n");
@@ -224,8 +231,8 @@ EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.fi
                                          text2=text2.replace(/\\\"/g,"\"");
                                          text2=text2.replace(/\\\'/g,"\'");
                                         $$.addChilds(new AST_Node("char",text2,this._$.first_line,@1.last_column));}
-    |ENTERO                             {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("numero",$1,this._$.first_line,@1.last_column));}                                    
-    |Tok_numero                         {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("numero",$1,this._$.first_line,@1.last_column));}
+    |ENTERO                             {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("entero",$1,this._$.first_line,@1.last_column));}                                    
+    |Tok_numero                         {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("decimal",$1,this._$.first_line,@1.last_column));}
     |Tok_true                           {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("true",$1,this._$.first_line,@1.last_column));}
     |Tok_false                          {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("false",$1,this._$.first_line,@1.last_column));}
     |Tok_ID                             {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("id",$1,this._$.first_line,@1.last_column));}
