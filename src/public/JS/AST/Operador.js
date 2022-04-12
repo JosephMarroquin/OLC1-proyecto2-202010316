@@ -7,6 +7,9 @@ class Operador{
         var Resultado1=null;
         var Resultado2=null;
         var Resultado=null;
+        var ternario1=null;
+        var ternario2=null;
+        var condicionTernario=null;
         switch (raiz.tag) {
             case "EXP":
                 if (raiz.childs.length==3) {
@@ -35,7 +38,36 @@ class Operador{
                         default:
                             break;  
                     }
-                }else if(raiz.childs.length==2){
+                }else if(raiz.childs.length==5){
+                    Resultado1=this.ejecutar(raiz.childs[0]);
+                    Resultado2=this.ejecutar(raiz.childs[2]);
+                    ternario1=this.ejecutar(raiz.childs[3]);
+                    ternario2=this.ejecutar(raiz.childs[4]);
+                    var op = raiz.childs[1].value;
+                    switch (op) {
+                        case "==":
+                        case "!=":
+                        case ">":
+                        case ">=":
+                        case "<":
+                        case "<=":
+                            condicionTernario=this.relacional(Resultado1,Resultado2,raiz.childs[1].fila,raiz.childs[1].columna,op);
+                    }
+                    if(condicionTernario.tipo=="boolean"){
+                        if(condicionTernario.valor==true){
+                            Resultado= new ResultadoOp();
+                            Resultado.tipo=ternario1.tipo;
+                            Resultado.valor=ternario1.valor;
+                            return Resultado
+                        }else if(condicionTernario.valor==false){
+                            Resultado= new ResultadoOp();
+                            Resultado.tipo=ternario2.tipo;
+                            Resultado.valor=ternario2.valor;
+                            return Resultado
+                        }
+                    }
+                }
+                else if(raiz.childs.length==2){
                    if(raiz.childs[0].value=="!"){
                        Resultado1=this.ejecutar(raiz.childs[1])
                        if(Resultado1.tipo=="boolean"){
