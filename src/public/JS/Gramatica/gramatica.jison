@@ -59,7 +59,7 @@
 
 //Expresiones regulares
 
-["]([^("|\)]|[\\\"]|[\\n]|[\\t]|[\\r]|[\\\\]|[\\'])*["]  { yytext = yytext.substr(1,yyleng-2); return 'Tok_string'; }
+[\"]("\\n"|"\\r"|"\\t"|"\\'"|"\\\""|"\\\\"|[^\"])*[\"]  { yytext = yytext.substr(1,yyleng-2); return 'Tok_string'; }
 
 [\']("\\n"|"\\r"|"\\t"|"\\'"|"\\\""|"\\\\"|[^\'])[\'] { yytext = yytext.substr(1,yyleng-2); return 'Tok_char'; }
 

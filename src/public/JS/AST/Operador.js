@@ -24,7 +24,6 @@ class Operador{
                             return this.aritmetico(Resultado1,Resultado2,raiz.childs[1].fila,raiz.childs[1].columna,op);
                         case "==":
                         case "!=":
-                            return this.igualdad(Resultado1,Resultado2,raiz.childs[1].fila,raiz.childs[1].columna,op);
                         case ">":
                         case ">=":
                         case "<":
@@ -180,7 +179,7 @@ class Operador{
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                     res.tipo="error";
-                                    res.valor="error";
+                                    res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                     return res;
                             }
                         case "double":
@@ -214,7 +213,7 @@ class Operador{
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                     res.tipo="error";
-                                    res.valor="error";
+                                    res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                         return res;
                             }
                         case "boolean":
@@ -244,7 +243,7 @@ class Operador{
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                     res.tipo="error";
-                                    res.valor="error";
+                                    res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                         return res;
                             }
                         case "char":
@@ -270,7 +269,7 @@ class Operador{
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                     res.tipo="error";
-                                    res.valor="error";
+                                    res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                         return res;
                             }
                         case "string":
@@ -298,13 +297,13 @@ class Operador{
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                     res.tipo="error";
-                                    res.valor="error";
+                                    res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                     return res;
                             }
                         default:
                             L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                             res.tipo="error";
-                            res.valor="error";
+                            res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                             return res;
                     }
                 case "-":
@@ -336,7 +335,7 @@ class Operador{
                                     default:
                                         L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                         res.tipo="error";
-                                        res.valor="error";
+                                        res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                         return res;
                                 }
                         case "double":
@@ -366,7 +365,7 @@ class Operador{
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                     res.tipo="error";
-                                    res.valor="error";
+                                    res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                     return res;
                                 }
                         case "boolean":
@@ -392,7 +391,7 @@ class Operador{
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                     res.tipo="error";
-                                    res.valor="error";
+                                    res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                     return res;
                                 }
                         case "char":
@@ -410,13 +409,13 @@ class Operador{
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                     res.tipo="error";
-                                    res.valor="error";
+                                    res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                     return res;
                                 }
                         default:
                             L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                             res.tipo="error";
-                            res.valor="error";
+                            res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                             return res;
                         }
                 case "*":
@@ -439,7 +438,7 @@ class Operador{
                                         default:
                                             L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                             res.tipo="error";
-                                            res.valor="error";
+                                            res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                             return res;
                                     }
                             case "double":
@@ -460,7 +459,7 @@ class Operador{
                                     default:
                                         L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                         res.tipo="error";
-                                        res.valor="error";
+                                        res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                         return res;
                                     }
                             case "char":
@@ -478,13 +477,13 @@ class Operador{
                                     default:
                                         L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                         res.tipo="error";
-                                        res.valor="error";
+                                        res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                         return res;
                                     }
                             default:
                                 L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                 res.tipo="error";
-                                res.valor="error";
+                                res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                 return res;
                             }
                 case "/":
@@ -507,7 +506,7 @@ class Operador{
                                         default:
                                             L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                             res.tipo="error";
-                                            res.valor="error";
+                                            res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                             return res;
                                     }
                             case "double":
@@ -528,7 +527,7 @@ class Operador{
                                     default:
                                         L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                         res.tipo="error";
-                                        res.valor="error";
+                                        res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                         return res;
                                     }
                             case "char":
@@ -546,13 +545,13 @@ class Operador{
                                     default:
                                         L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                         res.tipo="error";
-                                        res.valor="error";
+                                        res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                         return res;
                                     }
                             default:
                                 L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                 res.tipo="error";
-                                res.valor="error";
+                                res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                 return res;
                             }
                 case "^":
@@ -570,7 +569,7 @@ class Operador{
                                         default:
                                             L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                             res.tipo="error";
-                                            res.valor="error";
+                                            res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                             return res;
                                     }
                             case "double":
@@ -586,13 +585,13 @@ class Operador{
                                     default:
                                         L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                         res.tipo="error";
-                                        res.valor="error";
+                                        res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                         return res;
                                     }
                             default:
                                 L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                 res.tipo="error";
-                                res.valor="error";
+                                res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                 return res;
                             }
                 case "%":
@@ -610,7 +609,7 @@ class Operador{
                                         default:
                                             L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                             res.tipo="error";
-                                            res.valor="error";
+                                            res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                             return res;
                                     }
                             case "double":
@@ -626,13 +625,13 @@ class Operador{
                                     default:
                                         L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                         res.tipo="error";
-                                        res.valor="error";
+                                        res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                         return res;
                                     }
                             default:
                                 L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                 res.tipo="error";
-                                res.valor="error";
+                                res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
                                 return res;
                             }
 
@@ -662,16 +661,63 @@ class Operador{
                                 res.tipo="boolean";
                                 res.valor=R1.valor>R2.valor;
                                 return res;
+                            case "char":
+                                res.tipo="boolean";
+                                R2.valor=R2.valor.charCodeAt(0);
+                                res.valor=R1.valor>R2.valor;
+                                return res;
                             default:
                                 L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                 res.tipo="error";
-                                res.valor="error";
-                                    return res;
+                                res.valor="Semantico"+" No es posible operacion "+"fila: "+fila+" columna: "+columna;
+                                return res;
                         }
+                    case "char":
+                        switch(tipo2){
+                            case "integer":
+                            case "double":
+                                res.tipo="boolean";
+                                R1.valor=R1.valor.charCodeAt(0);
+                                res.valor=R1.valor>R2.valor;
+                                return res;
+                            case "char":
+                                res.tipo="boolean";
+                                R1.valor=R1.valor.charCodeAt(0);
+                                R2.valor=R2.valor.charCodeAt(0);
+                                res.valor=R1.valor>R2.valor;
+                                return res;
+                            default:
+                                L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                res.tipo="error";
+                                res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                return res;
+                        }
+                    case "boolean":
+                            switch(tipo2){
+                                case "boolean":
+                                    res.tipo="boolean";
+                                    if(R1.valor==true){
+                                        R1.valor=1;
+                                    }else if(R1.valor==false){
+                                        R1.valor=0;
+                                    }
+                                    if(R2.valor==true){
+                                        R2.valor=1;
+                                    }else if(R2.valor==false){
+                                        R2.valor=0;
+                                    }
+                                    res.valor=R1.valor>R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
                     default:
                         L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                         res.tipo="error";
-                        res.valor="error";
+                        res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
                         return res;
                 }
                 case "<":
@@ -684,84 +730,346 @@ class Operador{
                                     res.tipo="boolean";
                                     res.valor=R1.valor<R2.valor;
                                     return res;
+                                case "char":
+                                    res.tipo="boolean";
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=R1.valor<R2.valor;
+                                    return res;
                                 default:
                                     L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                                     res.tipo="error";
-                                    res.valor="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
                                         return res;
                             }
+                        case "char":
+                            switch(tipo2){
+                                case "integer":
+                                case "double":
+                                    res.tipo="boolean";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    res.valor=R1.valor<R2.valor;
+                                    return res;
+                                case "char":
+                                    res.tipo="boolean";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=R1.valor<R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
+                        case "boolean":
+                            switch(tipo2){
+                                case "boolean":
+                                    res.tipo="boolean";
+                                    if(R1.valor==true){
+                                        R1.valor=1;
+                                    }else if(R1.valor==false){
+                                        R1.valor=0;
+                                    }
+                                    if(R2.valor==true){
+                                        R2.valor=1;
+                                    }else if(R2.valor==false){
+                                        R2.valor=0;
+                                    }
+                                    res.valor=R1.valor<R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
                         default:
                             L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
                             res.tipo="error";
-                            res.valor="error";
+                            res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
                             return res;
                     }
                 case ">=":
-                        switch(tipo1){
-                            case "integer":
-                            case "double":
-                                switch(tipo2){
-                                    case "integer":
-                                    case "double":
-                                        res.tipo="boolean";
-                                        res.valor=R1.valor>=R2.valor;
+                    switch(tipo1){
+                        case "integer":
+                        case "double":
+                            switch(tipo2){
+                                case "integer":
+                                case "double":
+                                    res.tipo="boolean";
+                                    res.valor=R1.valor>=R2.valor;
+                                    return res;
+                                case "char":
+                                    res.tipo="boolean";
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=R1.valor>=R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
                                         return res;
-                                    default:
-                                        L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
-                                        res.tipo="error";
-                                        res.valor="error";
-                                            return res;
+                            }
+                        case "char":
+                            switch(tipo2){
+                                case "integer":
+                                case "double":
+                                    res.tipo="boolean";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    res.valor=R1.valor>=R2.valor;
+                                    return res;
+                                case "char":
+                                    res.tipo="boolean";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=R1.valor>=R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
                                 }
-                            default:
-                                L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
-                                res.tipo="error";
-                                res.valor="error";
-                                return res;
-                        }
+                        case "boolean":
+                            switch(tipo2){
+                                case "boolean":
+                                    res.tipo="boolean";
+                                    if(R1.valor==true){
+                                        R1.valor=1;
+                                    }else if(R1.valor==false){
+                                        R1.valor=0;
+                                    }
+                                    if(R2.valor==true){
+                                        R2.valor=1;
+                                    }else if(R2.valor==false){
+                                        R2.valor=0;
+                                    }
+                                    res.valor=R1.valor>=R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
+                        default:
+                            L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                            res.tipo="error";
+                            res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                            return res;
+                    }
                 case "<=":
-                                switch(tipo1){
-                                    case "integer":
-                                    case "double":
-                                        switch(tipo2){
-                                            case "integer":
-                                            case "double":
-                                                res.tipo="boolean";
-                                                res.valor=R1.valor<=R2.valor;
-                                                return res;
-                                            default:
-                                                L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
-                                                res.tipo="error";
-                                                res.valor="error";
-                                                    return res;
-                                        }
-                                    default:
-                                        L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
-                                        res.tipo="error";
-                                        res.valor="error";
+                    switch(tipo1){
+                        case "integer":
+                        case "double":
+                            switch(tipo2){
+                                case "integer":
+                                case "double":
+                                    res.tipo="boolean";
+                                    res.valor=R1.valor<=R2.valor;
+                                    return res;
+                                case "char":
+                                    res.tipo="boolean";
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=R1.valor<=R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
                                         return res;
+                            }
+                        case "char":
+                            switch(tipo2){
+                                case "integer":
+                                case "double":
+                                    res.tipo="boolean";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    res.valor=R1.valor<=R2.valor;
+                                    return res;
+                                case "char":
+                                    res.tipo="boolean";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=R1.valor<=R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
                                 }
+                        case "boolean":
+                            switch(tipo2){
+                                case "boolean":
+                                    res.tipo="boolean";
+                                    if(R1.valor==true){
+                                        R1.valor=1;
+                                    }else if(R1.valor==false){
+                                        R1.valor=0;
+                                    }
+                                    if(R2.valor==true){
+                                        R2.valor=1;
+                                    }else if(R2.valor==false){
+                                        R2.valor=0;
+                                    }
+                                    res.valor=R1.valor<=R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
+                        default:
+                            L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                            res.tipo="error";
+                            res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                            return res;
+                    }
+                case "==":
+                    switch(tipo1){
+                        case "integer":
+                        case "double":
+                            switch(tipo2){
+                                case "integer":
+                                case "double":
+                                    res.tipo="boolean";
+                                    res.valor=R1.valor==R2.valor;
+                                    return res;
+                                case "char":
+                                    res.tipo="boolean";
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=R1.valor==R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                        return res;
+                            }
+                        case "char":
+                            switch(tipo2){
+                                case "integer":
+                                case "double":
+                                    res.tipo="boolean";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    res.valor=R1.valor==R2.valor;
+                                    return res;
+                                case "char":
+                                    res.tipo="boolean";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=R1.valor==R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
+                        case "boolean":
+                            switch(tipo2){
+                                case "boolean":
+                                    res.tipo="boolean";
+                                    res.valor=R1.valor==R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
+                        case "string":
+                            switch(tipo2){
+                                case "string":
+                                    res.tipo="boolean";
+                                    res.valor=R1.valor==R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
+                        default:
+                            L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                            res.tipo="error";
+                            res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                            return res;
+                    }
+                case "!=":
+                    switch(tipo1){
+                        case "integer":
+                        case "double":
+                            switch(tipo2){
+                                case "integer":
+                                case "double":
+                                    res.tipo="boolean";
+                                    res.valor=R1.valor!=R2.valor;
+                                    return res;
+                                case "char":
+                                    res.tipo="boolean";
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=R1.valor!=R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                        return res;
+                            }
+                        case "char":
+                            switch(tipo2){
+                                case "integer":
+                                case "double":
+                                    res.tipo="boolean";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    res.valor=R1.valor!=R2.valor;
+                                    return res;
+                                case "char":
+                                    res.tipo="boolean";
+                                    R1.valor=R1.valor.charCodeAt(0);
+                                    R2.valor=R2.valor.charCodeAt(0);
+                                    res.valor=R1.valor!=R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
+                        case "boolean":
+                            switch(tipo2){
+                                case "boolean":
+                                    res.tipo="boolean";
+                                    res.valor=R1.valor!=R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
+                        case "string":
+                            switch(tipo2){
+                                case "string":
+                                    res.tipo="boolean";
+                                    res.valor=R1.valor!=R2.valor;
+                                    return res;
+                                default:
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                                    res.tipo="error";
+                                    res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                                    return res;
+                                }
+                        default:
+                            L_Error.getInstance().insertar(new N_Error("Semantico","No es posible operacion entre: "+tipo1 +' % '+tipo2,fila,columna));
+                            res.tipo="error";
+                            res.valor="Semantico"+" No es posible operacion"+"fila: "+fila+" columna: "+columna;
+                            return res;
+                    }
 
-        }
-
-    }
-
-    igualdad(R1,R2,fila,columna,op){
-        let tipo1 = R1.tipo;
-        let tipo2 = R2.tipo;
-        var res = new ResultadoOp();
-        if(tipo1=="error"||tipo2=="error"){
-            res.tipo="error";
-            return res;
-        }
-        switch(op){
-            case "==":
-                res.tipo="boolean";
-                res.valor=R1.valor==R2.valor
-                return res;
-            case "!=":
-                res.tipo="boolean";
-                res.valor=R1.valor!=R2.valor;
-                return res;
         }
 
     }
@@ -795,42 +1103,6 @@ class Operador{
                         default: return false;
                     }
 
-            }
-        }
-        verificarigualdad(tipo1,tipo2){
-            switch(tipo1){
-                case "integer":
-                    switch(tipo2){
-                        case "integer":
-                        case "double":
-                        case "char":
-                            return true;
-                        default:
-                            return false;
-                    }
-                case "double":
-                    switch(tipo2){
-                        case "integer":
-                        case "double":
-                        case "char":
-                            return true;
-                        default: return false;
-
-                    }
-                case "char":
-                    switch(tipo2){
-                        case "integer":
-                        case "double":
-                        case "char":
-                            return true;
-                        default: return false;
-                    }
-                case "boolean":
-                    switch(tipo2){
-                        case "boolean":
-                            return true;
-                        default: return false;
-                    }
             }
         }
 
