@@ -107,16 +107,14 @@
 
 // Precedencia de operadores
 
-%right 'Tok_asigna1'
-%left  'Tok_or'
-%left  'Tok_and'
-%left  'Tok_igual' 'Tok_igualr' 'Tok_diferente'
-%nonassoc  'Tok_mayor' 'Tok_menor' 'Tok_menori' 'Tok_mayori'
-%left  'Tok_mas' 'Tok_menos'
-%left  'Tok_por' 'Tok_div' 'Tok_mod'
+%right UMENOS
 %nonassoc 'Tok_pot'
-%right 'Tok_not' 
-%left UMENOS
+%left  'Tok_por' 'Tok_div'
+%left  'Tok_mas' 'Tok_menos'
+%left  'Tok_igual' 'Tok_diferente' 'Tok_mayor' 'Tok_menor' 'Tok_menori' 'Tok_mayori'
+%right 'Tok_not'
+%left  'Tok_and' 
+%left  'Tok_or' 
 
 //Iniciando la gramatica
 

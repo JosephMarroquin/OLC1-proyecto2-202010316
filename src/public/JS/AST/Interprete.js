@@ -26,22 +26,26 @@ class Interprete{
 
             case "DECLARACION":
                 raiz.childs[0].childs.forEach(hijo=>{
-                    if(raiz.childs[1]=="int"){
-                        simbolo= new Simbolo(hijo.value,"integer",0);
-                    }
-                    else if(raiz.childs[1]=="double"){
-                        simbolo= new Simbolo(hijo.value,"double","0.0");
-                    }
-                    else if(raiz.childs[1]=="boolean"){
-                        simbolo= new Simbolo(hijo.value,"boolean",true);
-                    }
-                    else if(raiz.childs[1]=="string"){
-                        simbolo= new Simbolo(hijo.value,"string","");
-                    }
-                    else if(raiz.childs[1]=="char"){
-                        simbolo= new Simbolo(hijo.value,"char",'\u0000');
-                    }
-                    TS.getInstance().insertar(simbolo)
+                    if(TS.getInstance().obtener(hijo.value)==null){
+                        if(raiz.childs[1]=="int"){
+                            simbolo= new Simbolo(hijo.value,"integer",0);
+                        }
+                        else if(raiz.childs[1]=="double"){
+                            simbolo= new Simbolo(hijo.value,"double","0.0");
+                        }
+                        else if(raiz.childs[1]=="boolean"){
+                            simbolo= new Simbolo(hijo.value,"boolean",true);
+                        }
+                        else if(raiz.childs[1]=="string"){
+                            simbolo= new Simbolo(hijo.value,"string","");
+                        }
+                        else if(raiz.childs[1]=="char"){
+                            simbolo= new Simbolo(hijo.value,"char",'\u0000');
+                        }
+                        TS.getInstance().insertar(simbolo)
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                    }  
                 })
                 break;
             case "ASIGNACION":
@@ -115,22 +119,27 @@ class Interprete{
 
                 //DECLARANDO
                 raiz.childs[0].childs.forEach(hijo=>{
-                    if(raiz.childs[2]=="int"){
-                        simbolo= new Simbolo(hijo.value,"integer",0);
-                    }
-                    else if(raiz.childs[2]=="double"){
-                        simbolo= new Simbolo(hijo.value,"double","0.0");
-                    }
-                    else if(raiz.childs[2]=="boolean"){
-                        simbolo= new Simbolo(hijo.value,"boolean",true);
-                    }
-                    else if(raiz.childs[2]=="string"){
-                        simbolo= new Simbolo(hijo.value,"string","");
-                    }
-                    else if(raiz.childs[2]=="char"){
-                        simbolo= new Simbolo(hijo.value,"char",'\u0000');
-                    }
-                    TS.getInstance().insertar(simbolo)
+                    if(TS.getInstance().obtener(hijo.value)==null){
+                        if(raiz.childs[2]=="int"){
+                            simbolo= new Simbolo(hijo.value,"integer",0);
+                        }
+                        else if(raiz.childs[2]=="double"){
+                            simbolo= new Simbolo(hijo.value,"double","0.0");
+                        }
+                        else if(raiz.childs[2]=="boolean"){
+                            simbolo= new Simbolo(hijo.value,"boolean",true);
+                        }
+                        else if(raiz.childs[2]=="string"){
+                            simbolo= new Simbolo(hijo.value,"string","");
+                        }
+                        else if(raiz.childs[2]=="char"){
+                            simbolo= new Simbolo(hijo.value,"char",'\u0000');
+                        }
+                        TS.getInstance().insertar(simbolo)
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                    }  
+                    
                 })
                 
                 //ASIGNANDO
