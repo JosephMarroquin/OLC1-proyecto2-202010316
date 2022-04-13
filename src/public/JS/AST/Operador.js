@@ -138,6 +138,96 @@ class Operador{
                     Resultado.tipo="string";
                     Resultado.valor=raiz.value.toUpperCase();
                     return Resultado;
+
+            case "casteo_entero":
+                    Resultado= new ResultadoOp();
+                    Resultado1=this.ejecutar(raiz.value)
+                    Resultado.tipo="integer";
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.valor=parseInt(Resultado1.valor);
+                    }
+                    else if(Resultado1.tipo=="char"){
+                        Resultado.valor=parseInt(Resultado1.valor.codePointAt(0));
+                    }
+                    return Resultado;
+
+            case "casteo_double":
+                    Resultado= new ResultadoOp();
+                    Resultado1=this.ejecutar(raiz.value)
+                    Resultado.tipo="double";
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.valor=parseFloat(Resultado1.valor);
+                    }
+                    else if(Resultado1.tipo=="char"){
+                        Resultado.valor=parseFloat(Resultado1.valor.codePointAt(0));
+                    }
+                    return Resultado;
+            
+            case "casteo_char":
+                    Resultado= new ResultadoOp();
+                    Resultado1=this.ejecutar(raiz.value)
+                    Resultado.tipo="char";
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.valor=String.fromCodePoint(Resultado1.valor);
+                    }
+                    return Resultado;
+            
+            case "casteo_string":
+                    Resultado= new ResultadoOp();
+                    Resultado1=this.ejecutar(raiz.value)
+                    Resultado.tipo="string";
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.valor=Resultado1.valor.toString();
+                    }else if(Resultado1.tipo=="double"){
+                        Resultado.valor=Resultado1.valor.toString();
+                    }
+                    return Resultado;
+            
+            case "incremento":
+                    Resultado= new ResultadoOp();
+                    Resultado1=this.ejecutar(raiz.value)
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.tipo="integer";
+                        Resultado.valor=parseInt(Resultado1.valor)+1;
+                    }else if(Resultado1.tipo=="double"){
+                        Resultado.tipo="double";
+                        Resultado.valor=parseFloat(Resultado1.valor)+1;
+                    }else if(Resultado1.tipo=="char"){
+                        Resultado.tipo="integer";
+                        Resultado.valor=Resultado1.valor.charCodeAt(0)+1;
+                    }else if(Resultado1.tipo=="boolean"){
+                        Resultado.tipo="integer";
+                        if(Resultado1.valor==true){
+                            Resultado1.valor=1;
+                        }else if(Resultado1.valor==false){
+                            Resultado1.valor=0;
+                        }
+                        Resultado.valor=parseInt(Resultado1.valor)+1;
+                    }
+                    return Resultado;
+            
+            case "decremento":
+                    Resultado= new ResultadoOp();
+                    Resultado1=this.ejecutar(raiz.value)
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.tipo="integer";
+                        Resultado.valor=parseInt(Resultado1.valor)-1;
+                    }else if(Resultado1.tipo=="double"){
+                        Resultado.tipo="double";
+                        Resultado.valor=parseFloat(Resultado1.valor)-1;
+                    }else if(Resultado1.tipo=="char"){
+                        Resultado.tipo="integer";
+                        Resultado.valor=Resultado1.valor.charCodeAt(0)-1;
+                    }else if(Resultado1.tipo=="boolean"){
+                        Resultado.tipo="integer";
+                        if(Resultado1.valor==true){
+                            Resultado1.valor=1;
+                        }else if(Resultado1.valor==false){
+                            Resultado1.valor=0;
+                        }
+                        Resultado.valor=parseInt(Resultado1.valor)-1;
+                    }
+                    return Resultado;
             default:
                 break;
         }

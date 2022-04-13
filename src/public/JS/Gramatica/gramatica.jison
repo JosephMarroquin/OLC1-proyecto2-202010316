@@ -21,6 +21,7 @@
 "do"                return 'Tok_do'
 "tolower"           return 'Tok_toLower'
 "toupper"           return 'Tok_toupper'
+"toString"          return 'Tok_tostring'
 
 //Definir tipos de datos
 
@@ -197,6 +198,12 @@ OPTERNARIO:EXP Tok_igual EXP Tok_interrogacion EXP Tok_dospuntos EXP {$$= new AS
           |EXP Tok_mayori EXP Tok_interrogacion EXP Tok_dospuntos EXP {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3,$5,$7);}
 ;
 
+CASTEOS:Tok_par1 Tok_TD_int Tok_par2 EXP {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("casteo_entero",$4,this._$.first_line,@1.last_column));}
+       |Tok_par1 Tok_TD_double Tok_par2 EXP {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("casteo_double",$4,this._$.first_line,@1.last_column));}
+       |Tok_par1 Tok_TD_char Tok_par2 EXP {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("casteo_char",$4,this._$.first_line,@1.last_column));}
+       |Tok_tostring Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("casteo_string",$3,this._$.first_line,@1.last_column));}
+;
+
 EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
     |EXP Tok_menos EXP                  {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
     |EXP Tok_por EXP                    {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
@@ -213,6 +220,9 @@ EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.fi
     |EXP Tok_and EXP                    {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
     |EXP Tok_or EXP                     {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
     |OPTERNARIO                         {$$=$1}
+    |CASTEOS                            {$$=$1}
+    |EXP Tok_mas Tok_mas                {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("incremento",$1,this._$.first_line,@1.last_column));}
+    |EXP Tok_menos Tok_menos            {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("decremento",$1,this._$.first_line,@1.last_column));}
     |Tok_not EXP                        {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds(new AST_Node("op",$1,this._$.first_line,@1.last_column),$2);}
     |Tok_par1 EXP Tok_par2              {$$=$2}
     |Tok_menos ENTERO %prec UMENOS      {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("entero",$2*-1,this._$.first_line,@1.last_column));}
