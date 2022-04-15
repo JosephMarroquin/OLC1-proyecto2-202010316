@@ -11,8 +11,10 @@ class Interprete{
         
         let op;
         let res;
+        let switchcase;
         let codigo=""
         let simbolo;
+        let txtDefault;
         if(raiz===undefined || raiz===null)return;
 
         switch(raiz.tag){
@@ -230,16 +232,105 @@ class Interprete{
                         raiz.childs[1].childs[0].childs.forEach(nodito => {
                           codigo+=this.interpretar(nodito);
                         });
-                    return codigo;
-                }else{
-                    if(raiz.childs.length==3){
-                        codigo+=this.interpretar(raiz.childs[2].childs[0].childs[0])
+                        return codigo;
+                    }else{
+                        if(raiz.childs.length==4){
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res=op.ejecutar(nodito.childs[0])
+                                if(res.tipo=="boolean"){
+                                    if(res.valor){
+                                        nodito.childs[1].childs.forEach(hh => {
+                                            codigo+=this.interpretar(hh);
+                                        });
+                                        return codigo;
+                                    }
+                                }
+                            });
+                            if(raiz.childs[3]!="elif"){
+                                if(codigo==""){
+                                    raiz.childs[3].childs[0].childs.forEach(nodito => {
+                                        codigo+=this.interpretar(nodito);
+                                      });
+                                      return codigo;
+                                }else{
+                                    return codigo;
+                                }
+                            }
+                            if(raiz.childs[3]=="elif"){
+                                return codigo;
+                            } 
+                        }
+                        else if(raiz.childs.length==3){
+                            raiz.childs[2].childs[0].childs.forEach(nodito => {
+                                codigo+=this.interpretar(nodito);
+                              });
+                              return codigo;
+                        }else{
+                            return codigo;
+                        }
                     }
+                }else{
+                    L_Error.getInstance().insertar(new N_Error("Semantico","La instruccion asignada al if no es valida",raiz.childs[0].fila,raiz.childs[0].columna));
+                    codigo="Error, la instruccion asignada al if no es valida";
+                    return codigo;
                 }
             
-                      
+            //
+            case "SWITCH":
+                op = new Operador();
+                res=op.ejecutar(raiz.childs[0])
+                
+                if(raiz.childs.length==2){
+                    raiz.childs[1].childs.forEach(nodito => {
+                        switchcase=op.ejecutar(nodito.childs[0])
+                        switch(res.valor){
+                            case switchcase.valor:
+                                nodito.childs[1].childs.forEach(hh => {
+                                    codigo+=this.interpretar(hh);
+                                });
+                                return codigo;
+                        }
+                    });
+                    return codigo;
+                }
+                else if(raiz.childs.length==3){
+                    raiz.childs[1].childs.forEach(nodito => {
+                        switchcase=op.ejecutar(nodito.childs[0])
+                        switch(res.valor){
+                            case switchcase.valor:
+                                nodito.childs[1].childs.forEach(hh => {
+                                    codigo+=this.interpretar(hh);
+                                });
+                                return codigo;
+                        }
+                    });
+                    if(codigo==""){
+                        switch(res.valor){
+                            default:
+                                raiz.childs[2].childs.forEach(nodito => {
+                                    codigo+=this.interpretar(nodito);
+                                });
+                        }
+                        return codigo;
                     }
-            
+                    return codigo;
+                }
+                
+            case "DEFAULT":
+                op = new Operador();
+                res=op.ejecutar(raiz.childs[0])
+                switch(res.valor){
+                    default:
+                        raiz.childs[1].childs.forEach(nodito => {
+                            codigo+=this.interpretar(nodito);
+                        });
+                }
+                return codigo;
+                
+
+                    
+                
+
             case "DO_WHILE":
                 op = new Operador()
                 res = op.ejecutar(raiz.childs[1])

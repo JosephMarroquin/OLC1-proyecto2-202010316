@@ -22,6 +22,9 @@
 "tolower"           return 'Tok_toLower'
 "toupper"           return 'Tok_toupper'
 "toString"          return 'Tok_tostring'
+"switch"            return 'Tok_switch'
+"case"              return 'Tok_case'
+"default"            return 'Tok_default'
 
 //Definir tipos de datos
 
@@ -143,6 +146,7 @@ SENTENCIA: DECLARACION Tok_pyc{$$=$1}
            |DO_WHILE Tok_pyc{$$=$1}
            |PRINT{$$=$1}
            |PRINTLN{$$=$1}
+           |SWITCH{$$=$1}
            ;
 
 
@@ -177,8 +181,29 @@ BLOQUE: Tok_llav1 SENTENCIAS Tok_llav2{$$= new AST_Node("BLOQUE","BLOQUE",this._
         |Tok_llav1 Tok_llav2{$$= new AST_Node("BLOQUE","BLOQUE",this._$.first_line,@1.last_column);};
 
 
+elif_list: elif_list elif {$1.addChilds($2);$$=$1}
+         | elif {$$=new AST_Node("elif_list","elif_list",this._$.first_line,@1.last_column);$$.addChilds($1);}
+;
+
+elif: Tok_else Tok_if Tok_par1 EXP Tok_par2 BLOQUE {$$= new AST_Node("IF","IF",this._$.first_line,@1.last_column);$$.addChilds($4,$6)};
+
 IF: Tok_if Tok_par1 EXP Tok_par2 BLOQUE    {$$= new AST_Node("IF","IF",this._$.first_line,@1.last_column);$$.addChilds($3,$5)}
-    |Tok_if Tok_par1 EXP Tok_par2 BLOQUE Tok_else BLOQUE {$$= new AST_Node("IF","IF",this._$.first_line,@1.last_column); var aux = new AST_Node("ELSE","ELSE",this._$.first_line,@6.last_column); aux.addChilds($7);$$.addChilds($3,$5,aux)};
+    |Tok_if Tok_par1 EXP Tok_par2 BLOQUE Tok_else BLOQUE {$$= new AST_Node("IF","IF",this._$.first_line,@1.last_column);$$.addChilds($3,$5,$7)}
+    |Tok_if Tok_par1 EXP Tok_par2 BLOQUE elif_list {$$= new AST_Node("IF","IF",this._$.first_line,@1.last_column);$$.addChilds($3,$5,$6,"elif")}
+    |Tok_if Tok_par1 EXP Tok_par2 BLOQUE elif_list Tok_else BLOQUE {$$= new AST_Node("IF","IF",this._$.first_line,@1.last_column);$$.addChilds($3,$5,$6,$8)}
+    ;
+
+CASE_LIST: CASE_LIST CASE {$1.addChilds($2);$$=$1}
+         | CASE {$$=new AST_Node("CASE_LIST","CASE_LIST",this._$.first_line,@1.last_column);$$.addChilds($1);}
+;
+
+CASE: Tok_case EXP Tok_dospuntos SENTENCIAS {$$= new AST_Node("CASE","CASE",this._$.first_line,@1.last_column);$$.addChilds($2,$4)}
+;
+
+SWITCH: Tok_switch Tok_par1 EXP Tok_par2 Tok_llav1 CASE_LIST Tok_llav2 {$$= new AST_Node("SWITCH","SWITCH",this._$.first_line,@1.last_column);$$.addChilds($3,$6)}
+      | Tok_switch Tok_par1 EXP Tok_par2 Tok_llav1 CASE_LIST Tok_default Tok_dospuntos SENTENCIAS Tok_llav2 {$$= new AST_Node("SWITCH","SWITCH",this._$.first_line,@1.last_column);$$.addChilds($3,$6,$9)}
+      | Tok_switch Tok_par1 EXP Tok_par2 Tok_llav1 Tok_default Tok_dospuntos SENTENCIAS Tok_llav2 {$$= new AST_Node("DEFAULT","DEFAULT",this._$.first_line,@1.last_column);$$.addChilds($3,$8)}
+;
 
 WHILE: Tok_while Tok_par1 EXP Tok_par2 BLOQUE{$$=new AST_Node("WHILE","WHILE",this._$.first_line,@1.last_column); $$.addChilds($3,$5)};
 
