@@ -130,13 +130,31 @@ class Operador{
             case "tolower":
                     Resultado= new ResultadoOp();
                     Resultado.tipo="string";
-                    Resultado.valor=raiz.value.toLowerCase();
+                    Resultado1=this.ejecutar(raiz.value);
+                    if(Resultado1.tipo=="string"){
+                        Resultado.valor=Resultado1.valor.toLowerCase();
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico","El valor ingresado no es un string ",raiz.fila,raiz.columna));
+                        Resultado.tipo="error";
+                        Resultado.valor="Semantico"+" El valor ingresado no es un string "+"fila: "+raiz.fila+" columna: "+raiz.columna;
+                        return Resultado;
+                    }
                     return Resultado;
             
             case "toupper":
                     Resultado= new ResultadoOp();
                     Resultado.tipo="string";
-                    Resultado.valor=raiz.value.toUpperCase();
+                    Resultado1=this.ejecutar(raiz.value);
+                    if(Resultado1.tipo=="string"){
+                        Resultado.valor=Resultado1.valor.toUpperCase();
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico","El valor ingresado no es un string ",raiz.fila,raiz.columna));
+                        Resultado.tipo="error";
+                        Resultado.valor="Semantico"+" El valor ingresado no es un string "+"fila: "+raiz.fila+" columna: "+raiz.columna;
+                        return Resultado;
+                    }
                     return Resultado;
 
             case "casteo_entero":

@@ -116,6 +116,7 @@ class Interprete{
                     
                 })
                 break;
+            
 
             case "DECLARACIONyASIGNACION":
 
@@ -210,7 +211,33 @@ class Interprete{
                     
                 })
                 break;
-                
+            
+            case "ASIGNACION_INCREMENTO":
+                    simbolo=TS.getInstance().obtener(raiz.childs[0].value);
+                    if(simbolo.tipo=="integer"){
+                        simbolo.valor=parseInt(simbolo.valor)+1;
+                        TS.getInstance().modificar(simbolo)
+                        
+                    }
+                    else if(simbolo.tipo=="double"){
+                        simbolo.valor=parseFloat(simbolo.valor)+1;
+                        TS.getInstance().modificar(simbolo)
+                    }
+                break;
+            
+            case "ASIGNACION_DECREMENTO":
+                    simbolo=TS.getInstance().obtener(raiz.childs[0].value);
+                    if(simbolo.tipo=="integer"){
+                        simbolo.valor=parseInt(simbolo.valor)-1;
+                        TS.getInstance().modificar(simbolo)
+                        
+                    }
+                    else if(simbolo.tipo=="double"){
+                        simbolo.valor=parseFloat(simbolo.valor)-1;
+                        TS.getInstance().modificar(simbolo)
+                    }
+                break;
+
             case "PRINT":
                 op = new Operador();
                 res = op.ejecutar(raiz.childs[0]);

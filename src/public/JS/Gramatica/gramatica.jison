@@ -140,6 +140,7 @@ SENTENCIAS: SENTENCIAS SENTENCIA {$1.addChilds($2);$$=$1;}
 SENTENCIA: DECLARACION Tok_pyc{$$=$1}
            |ASIGNACION Tok_pyc{$$=$1}
            |DECLARACIONyASIGNACION Tok_pyc{$$=$1}
+           |INCREMENTO_DECREMENTO Tok_pyc{$$=$1}
            |BLOQUE{$$=$1}
            |IF{$$=$1}
            |WHILE{$$=$1}
@@ -176,6 +177,12 @@ ID_LIST: ID_LIST Tok_coma Tok_ID {$1.addChilds(new AST_Node("ID",$3,this._$.firs
 ASIGNACION: ID_LIST Tok_asigna1 EXP {$$=new AST_Node("ASIGNACION","ASIGNACION",this._$.first_line,@1.last_column); 
                                             $$.addChilds($1,$3);}
             ;
+
+INCREMENTO_DECREMENTO: Tok_ID Tok_mas Tok_mas {$$=new AST_Node("ASIGNACION_INCREMENTO","ASIGNACION_INCREMENTO",this._$.first_line,@1.last_column); 
+                                            $$.addChilds(new AST_Node("ID",$1,this._$.first_line,@1.first_column));}
+                      |Tok_ID Tok_menos Tok_menos {$$=new AST_Node("ASIGNACION_DECREMENTO","ASIGNACION_DECREMENTO",this._$.first_line,@1.last_column); 
+                                            $$.addChilds(new AST_Node("ID",$1,this._$.first_line,@1.first_column));}
+;
 
 BLOQUE: Tok_llav1 SENTENCIAS Tok_llav2{$$= new AST_Node("BLOQUE","BLOQUE",this._$.first_line,@1.last_column); $$.addChilds($2)}
         |Tok_llav1 Tok_llav2{$$= new AST_Node("BLOQUE","BLOQUE",this._$.first_line,@1.last_column);};
@@ -279,24 +286,8 @@ EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.fi
     |Tok_true                           {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("true",$1,this._$.first_line,@1.last_column));}
     |Tok_false                          {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("false",$1,this._$.first_line,@1.last_column));}
     |Tok_ID                             {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("id",$1,this._$.first_line,@1.last_column));}
-    |Tok_toLower Tok_par1 Tok_string Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);
-                                               var text3 = $3.substr(0,$3.length);
-                                               text3=text3.replace(/\\n/g,"\n");
-                                               text3=text3.replace(/\\t/g,"\t");
-                                               text3=text3.replace(/\\r/g,"\r");
-                                               text3=text3.replace(/\\\\/g,"\\");
-                                               text3=text3.replace(/\\\"/g,"\"");
-                                               text3=text3.replace(/\\\'/g,"\'");
-                                               $$.addChilds(new AST_Node("tolower",text3,this._$.first_line,@1.last_column));}
-    |Tok_toupper Tok_par1 Tok_string Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);
-                                               var text4 = $3.substr(0,$3.length);
-                                               text4=text4.replace(/\\n/g,"\n");
-                                               text4=text4.replace(/\\t/g,"\t");
-                                               text4=text4.replace(/\\r/g,"\r");
-                                               text4=text4.replace(/\\\\/g,"\\");
-                                               text4=text4.replace(/\\\"/g,"\"");
-                                               text4=text4.replace(/\\\'/g,"\'");
-                                               $$.addChilds(new AST_Node("toupper",text4,this._$.first_line,@1.last_column));}
+    |Tok_toLower Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("tolower",$3,this._$.first_line,@1.last_column));}
+    |Tok_toupper Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("toupper",$3,this._$.first_line,@1.last_column));}
     ;
 
 
