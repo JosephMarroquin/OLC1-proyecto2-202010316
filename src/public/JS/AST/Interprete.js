@@ -304,14 +304,11 @@ class Interprete{
                                 return codigo;
                         }
                     });
-                    if(codigo==""){
-                        switch(res.valor){
-                            default:
-                                raiz.childs[2].childs.forEach(nodito => {
-                                    codigo+=this.interpretar(nodito);
-                                });
-                        }
-                        return codigo;
+                    switch(res.valor){
+                        default:
+                            raiz.childs[2].childs.forEach(nodito => {
+                                codigo+=this.interpretar(nodito);
+                            });
                     }
                     return codigo;
                 }
