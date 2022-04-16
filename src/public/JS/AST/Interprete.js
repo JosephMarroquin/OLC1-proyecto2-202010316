@@ -352,9 +352,6 @@ class Interprete{
                 return codigo;
                 
 
-                    
-                
-
             case "DO_WHILE":
                 op = new Operador()
                 res = op.ejecutar(raiz.childs[1])
@@ -364,6 +361,7 @@ class Interprete{
                       res = op.ejecutar(raiz.childs[1])
                     }while(res.valor)
                     break;
+
             case "WHILE":
                 op = new Operador()
                 res = op.ejecutar(raiz.childs[0])
@@ -372,6 +370,350 @@ class Interprete{
                       res = op.ejecutar(raiz.childs[0])
                 }
                 break;
+            
+            case "FOR":
+                op = new Operador()
+                if(raiz.childs.length==4){
+                    //DECLARACION
+                    raiz.childs[0].childs[0].childs.forEach(hijo=>{
+                        if(TS.getInstance().obtener(hijo.value)==null){
+                            if(raiz.childs[0].childs[1]=="int"){
+                                simbolo= new Simbolo(hijo.value,"integer",0);
+                                TS.getInstance().insertar(simbolo)
+                            }
+                            else if(raiz.childs[0].childs[1]=="double"){
+                                simbolo= new Simbolo(hijo.value,"double","0.0");
+                                TS.getInstance().insertar(simbolo)
+                            }
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                        }  
+                    })   
+
+                    //CONDICION
+                    res = op.ejecutar(raiz.childs[1])
+
+                    //INSTRUCCIONES
+                    while(res.valor){
+                        codigo+=this.interpretar(raiz.childs[3].childs[0])
+                        //ACTUALIZACION
+                    raiz.childs[2].childs[0].childs.forEach(hijo=>{
+                        simbolo=TS.getInstance().obtener(hijo.value);
+                        if(simbolo.tipo=="integer"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2].childs[1])
+                            if(res.tipo=="integer"){
+                                simbolo.tipo=res.tipo;
+                                simbolo.valor=res.valor;
+                                TS.getInstance().modificar(simbolo)
+                            }else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
+                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                        else if(simbolo.tipo=="double"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[1])
+                            if(res.tipo=="double"){
+                                simbolo.tipo=res.tipo;
+                                simbolo.valor=res.valor;
+                                TS.getInstance().modificar(simbolo)
+                            }else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
+                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                    })
+                        res = op.ejecutar(raiz.childs[1])
+                    }
+
+                }
+                if(raiz.childs.length==5){
+                    if(raiz.childs[4]=="incremento"){
+                        //DECLARACION
+                        raiz.childs[0].childs[0].childs.forEach(hijo=>{
+                            if(TS.getInstance().obtener(hijo.value)==null){
+                                if(raiz.childs[0].childs[1]=="int"){
+                                    simbolo= new Simbolo(hijo.value,"integer",0);
+                                    TS.getInstance().insertar(simbolo)
+                                }
+                                else if(raiz.childs[0].childs[1]=="double"){
+                                    simbolo= new Simbolo(hijo.value,"double","0.0");
+                                    TS.getInstance().insertar(simbolo)
+                                }
+                            }else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                            }  
+                        })
+                        //CONDICION
+                        res = op.ejecutar(raiz.childs[1])   
+
+                        //INSTRUCCIONES
+                        while(res.valor){
+                            codigo+=this.interpretar(raiz.childs[3].childs[0])
+                            //ACTUALIZACION
+                            simbolo=TS.getInstance().obtener(raiz.childs[2]);
+                            if(simbolo.tipo=="integer"){
+                                simbolo.valor=parseInt(simbolo.valor)+1;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else if(simbolo.tipo=="double"){
+                                simbolo.valor=parseFloat(simbolo.valor)+1;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            res = op.ejecutar(raiz.childs[1])
+                        }
+                    }
+                    else if(raiz.childs[4]=="decremento"){
+                        //DECLARACION
+                        raiz.childs[0].childs[0].childs.forEach(hijo=>{
+                            if(TS.getInstance().obtener(hijo.value)==null){
+                                if(raiz.childs[0].childs[1]=="int"){
+                                    simbolo= new Simbolo(hijo.value,"integer",0);
+                                    TS.getInstance().insertar(simbolo)
+                                }
+                                else if(raiz.childs[0].childs[1]=="double"){
+                                    simbolo= new Simbolo(hijo.value,"double","0.0");
+                                    TS.getInstance().insertar(simbolo)
+                                }
+                            }else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                            }  
+                        })
+                        //CONDICION
+                        res = op.ejecutar(raiz.childs[1])   
+
+                        //INSTRUCCIONES
+                        while(res.valor){
+                            codigo+=this.interpretar(raiz.childs[3].childs[0])
+                            //ACTUALIZACION
+                            simbolo=TS.getInstance().obtener(raiz.childs[2]);
+                            if(simbolo.tipo=="integer"){
+                                simbolo.valor=parseInt(simbolo.valor)-1;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else if(simbolo.tipo=="double"){
+                                simbolo.valor=parseFloat(simbolo.valor)-1;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            res = op.ejecutar(raiz.childs[1])
+                        }
+                    }
+                    else if(raiz.childs[4]=="asigna"){
+                        //DECLARACION Y ASIGNACION
+                        raiz.childs[0].childs[0].childs.forEach(hijo=>{
+                            if(TS.getInstance().obtener(hijo.value)==null){
+                                if(raiz.childs[0].childs[2]=="int"){
+                                    simbolo= new Simbolo(hijo.value,"integer",0);
+                                    TS.getInstance().insertar(simbolo)
+                                }
+                                else if(raiz.childs[0].childs[2]=="double"){
+                                    simbolo= new Simbolo(hijo.value,"double","0.0");
+                                    TS.getInstance().insertar(simbolo)
+                                }
+                            }else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                            }  
+                        })
+
+                        raiz.childs[0].childs[0].childs.forEach(hijo=>{
+                            simbolo=TS.getInstance().obtener(hijo.value);
+                            if(simbolo.tipo=="integer"){
+                                op = new Operador()
+                                res = op.ejecutar(raiz.childs[0].childs[1])
+                                if(res.tipo=="integer"){
+                                    simbolo.tipo=res.tipo;
+                                    simbolo.valor=res.valor;
+                                    TS.getInstance().modificar(simbolo)
+                                }else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            }
+                            else if(simbolo.tipo=="double"){
+                                op = new Operador()
+                                res = op.ejecutar(raiz.childs[0].childs[1])
+                                if(res.tipo=="double"){
+                                    simbolo.tipo=res.tipo;
+                                    simbolo.valor=res.valor;
+                                    TS.getInstance().modificar(simbolo)
+                                }else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            }
+                        })
+
+                        //CONDICION
+                        res = op.ejecutar(raiz.childs[1])
+
+                        //INSTRUCCIONES
+                        while(res.valor){
+                            codigo+=this.interpretar(raiz.childs[3].childs[0])
+                            //ACTUALIZACION
+                            raiz.childs[2].childs[0].childs.forEach(hijo=>{
+                                simbolo=TS.getInstance().obtener(hijo.value);
+                                if(simbolo.tipo=="integer"){
+                                    op = new Operador()
+                                    res = op.ejecutar(raiz.childs[2].childs[1])
+                                    if(res.tipo=="integer"){
+                                        simbolo.tipo=res.tipo;
+                                        simbolo.valor=res.valor;
+                                        TS.getInstance().modificar(simbolo)
+                                    }else{
+                                        L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
+                                        simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                    }
+                                }
+                                else if(simbolo.tipo=="double"){
+                                    op = new Operador()
+                                    res = op.ejecutar(raiz.childs[1])
+                                    if(res.tipo=="double"){
+                                        simbolo.tipo=res.tipo;
+                                        simbolo.valor=res.valor;
+                                        TS.getInstance().modificar(simbolo)
+                                    }else{
+                                        L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
+                                        simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                    }
+                                }
+                            })
+                            res = op.ejecutar(raiz.childs[1])
+                        }
+                    }
+                    else if(raiz.childs[4]=="asigna_incre"){
+                        //DECLARACION Y ASIGNACION
+                        raiz.childs[0].childs[0].childs.forEach(hijo=>{
+                            if(TS.getInstance().obtener(hijo.value)==null){
+                                if(raiz.childs[0].childs[2]=="int"){
+                                    simbolo= new Simbolo(hijo.value,"integer",0);
+                                    TS.getInstance().insertar(simbolo)
+                                }
+                                else if(raiz.childs[0].childs[2]=="double"){
+                                    simbolo= new Simbolo(hijo.value,"double","0.0");
+                                    TS.getInstance().insertar(simbolo)
+                                }
+                            }else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                            }  
+                        })
+
+                        raiz.childs[0].childs[0].childs.forEach(hijo=>{
+                            simbolo=TS.getInstance().obtener(hijo.value);
+                            if(simbolo.tipo=="integer"){
+                                op = new Operador()
+                                res = op.ejecutar(raiz.childs[0].childs[1])
+                                if(res.tipo=="integer"){
+                                    simbolo.tipo=res.tipo;
+                                    simbolo.valor=res.valor;
+                                    TS.getInstance().modificar(simbolo)
+                                }else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            }
+                            else if(simbolo.tipo=="double"){
+                                op = new Operador()
+                                res = op.ejecutar(raiz.childs[0].childs[1])
+                                if(res.tipo=="double"){
+                                    simbolo.tipo=res.tipo;
+                                    simbolo.valor=res.valor;
+                                    TS.getInstance().modificar(simbolo)
+                                }else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            }
+                        })
+
+                        //CONDICION
+                        res = op.ejecutar(raiz.childs[1])
+
+                        //INSTRUCCIONES
+                        while(res.valor){
+                            codigo+=this.interpretar(raiz.childs[3].childs[0])
+                            //ACTUALIZACION
+                            simbolo=TS.getInstance().obtener(raiz.childs[2]);
+                            if(simbolo.tipo=="integer"){
+                                simbolo.valor=parseInt(simbolo.valor)+1;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else if(simbolo.tipo=="double"){
+                                simbolo.valor=parseFloat(simbolo.valor)+1;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            res = op.ejecutar(raiz.childs[1])
+                        }
+                    }
+                    else if(raiz.childs[4]=="asigna_decre"){
+                        //DECLARACION Y ASIGNACION
+                        raiz.childs[0].childs[0].childs.forEach(hijo=>{
+                            if(TS.getInstance().obtener(hijo.value)==null){
+                                if(raiz.childs[0].childs[2]=="int"){
+                                    simbolo= new Simbolo(hijo.value,"integer",0);
+                                    TS.getInstance().insertar(simbolo)
+                                }
+                                else if(raiz.childs[0].childs[2]=="double"){
+                                    simbolo= new Simbolo(hijo.value,"double","0.0");
+                                    TS.getInstance().insertar(simbolo)
+                                }
+                            }else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                            }  
+                        })
+
+                        raiz.childs[0].childs[0].childs.forEach(hijo=>{
+                            simbolo=TS.getInstance().obtener(hijo.value);
+                            if(simbolo.tipo=="integer"){
+                                op = new Operador()
+                                res = op.ejecutar(raiz.childs[0].childs[1])
+                                if(res.tipo=="integer"){
+                                    simbolo.tipo=res.tipo;
+                                    simbolo.valor=res.valor;
+                                    TS.getInstance().modificar(simbolo)
+                                }else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            }
+                            else if(simbolo.tipo=="double"){
+                                op = new Operador()
+                                res = op.ejecutar(raiz.childs[0].childs[1])
+                                if(res.tipo=="double"){
+                                    simbolo.tipo=res.tipo;
+                                    simbolo.valor=res.valor;
+                                    TS.getInstance().modificar(simbolo)
+                                }else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            }
+                        })
+
+                        //CONDICION
+                        res = op.ejecutar(raiz.childs[1])
+
+                        //INSTRUCCIONES
+                        while(res.valor){
+                            codigo+=this.interpretar(raiz.childs[3].childs[0])
+                            //ACTUALIZACION
+                            simbolo=TS.getInstance().obtener(raiz.childs[2]);
+                            if(simbolo.tipo=="integer"){
+                                simbolo.valor=parseInt(simbolo.valor)-1;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else if(simbolo.tipo=="double"){
+                                simbolo.valor=parseFloat(simbolo.valor)-1;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            res = op.ejecutar(raiz.childs[1])
+                        }
+                    }
+                }
+                
+                break;
+                
+                
         }
 
         return codigo;

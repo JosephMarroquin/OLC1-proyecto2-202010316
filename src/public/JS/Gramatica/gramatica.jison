@@ -24,7 +24,8 @@
 "toString"          return 'Tok_tostring'
 "switch"            return 'Tok_switch'
 "case"              return 'Tok_case'
-"default"            return 'Tok_default'
+"default"           return 'Tok_default'
+"for"               return 'Tok_for'  
 
 //Definir tipos de datos
 
@@ -111,14 +112,15 @@
 
 // Precedencia de operadores
 
-%right UMENOS
-%nonassoc 'Tok_pot'
-%left  'Tok_por' 'Tok_div'
+%right 'Tok_asigna1'
+%left  'Tok_or'
+%left  'Tok_and'
+%left  'Tok_igual' 'Tok_diferente'
+%nonassoc  'Tok_mayor' 'Tok_menor' 'Tok_menori' 'Tok_mayori'
 %left  'Tok_mas' 'Tok_menos'
-%left  'Tok_igual' 'Tok_diferente' 'Tok_mayor' 'Tok_menor' 'Tok_menori' 'Tok_mayori'
-%right 'Tok_not'
-%left  'Tok_and' 
-%left  'Tok_or' 
+%left  'Tok_por' 'Tok_div' 'Tok_mod'
+%right 'Tok_pot'
+%right 'Tok_not' UMENOS
 
 //Iniciando la gramatica
 
@@ -148,6 +150,7 @@ SENTENCIA: DECLARACION Tok_pyc{$$=$1}
            |PRINT{$$=$1}
            |PRINTLN{$$=$1}
            |SWITCH{$$=$1}
+           |FOR{$$=$1}
            ;
 
 
@@ -212,11 +215,18 @@ SWITCH: Tok_switch Tok_par1 EXP Tok_par2 Tok_llav1 CASE_LIST Tok_llav2 {$$= new 
       | Tok_switch Tok_par1 EXP Tok_par2 Tok_llav1 Tok_default Tok_dospuntos SENTENCIAS Tok_llav2 {$$= new AST_Node("DEFAULT","DEFAULT",this._$.first_line,@1.last_column);$$.addChilds($3,$8)}
 ;
 
-WHILE: Tok_while Tok_par1 EXP Tok_par2 BLOQUE{$$=new AST_Node("WHILE","WHILE",this._$.first_line,@1.last_column); $$.addChilds($3,$5)};
+WHILE: Tok_while Tok_par1 EXP Tok_par2 BLOQUE {$$=new AST_Node("WHILE","WHILE",this._$.first_line,@1.last_column); $$.addChilds($3,$5)};
 
 
 DO_WHILE: Tok_do BLOQUE Tok_while Tok_par1 EXP Tok_par2 {$$=new AST_Node("DO_WHILE","DO_WHILE",this._$.first_line,@1.last_column);$$.addChilds($2,$5)};
 
+FOR: Tok_for Tok_par1 DECLARACION Tok_pyc EXP Tok_pyc ASIGNACION Tok_par2 BLOQUE {$$=new AST_Node("FOR","FOR",this._$.first_line,@1.last_column); $$.addChilds($3,$5,$7,$9)}
+   | Tok_for Tok_par1 DECLARACION Tok_pyc EXP Tok_pyc Tok_ID Tok_mas Tok_mas Tok_par2 BLOQUE {$$=new AST_Node("FOR","FOR",this._$.first_line,@1.last_column); $$.addChilds($3,$5,$7,$11,"incremento")}
+   | Tok_for Tok_par1 DECLARACION Tok_pyc EXP Tok_pyc Tok_ID Tok_menos Tok_menos Tok_par2 BLOQUE {$$=new AST_Node("FOR","FOR",this._$.first_line,@1.last_column); $$.addChilds($3,$5,$7,$11,"decremento")}
+   | Tok_for Tok_par1 DECLARACIONyASIGNACION Tok_pyc EXP Tok_pyc ASIGNACION Tok_par2 BLOQUE {$$=new AST_Node("FOR","FOR",this._$.first_line,@1.last_column); $$.addChilds($3,$5,$7,$9,"asigna")}
+   | Tok_for Tok_par1 DECLARACIONyASIGNACION Tok_pyc EXP Tok_pyc Tok_ID Tok_mas Tok_mas Tok_par2 BLOQUE {$$=new AST_Node("FOR","FOR",this._$.first_line,@1.last_column); $$.addChilds($3,$5,$7,$11,"asigna_incre")}
+   | Tok_for Tok_par1 DECLARACIONyASIGNACION Tok_pyc EXP Tok_pyc Tok_ID Tok_menos Tok_menos Tok_par2 BLOQUE {$$=new AST_Node("FOR","FOR",this._$.first_line,@1.last_column); $$.addChilds($3,$5,$7,$11,"asigna_decre")}
+;
 
 PRINT: Tok_print Tok_par1 EXP Tok_par2 Tok_pyc {$$= new AST_Node("PRINT","PRINT",this._$.first_line,@1.last_column); $$.addChilds($3);};
 
@@ -244,7 +254,6 @@ EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.fi
     |EXP Tok_mod EXP                    {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
     |EXP Tok_diferente EXP              {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
     |EXP Tok_igual EXP                  {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
-    |EXP Tok_igualr EXP                 {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
     |EXP Tok_mayor EXP                  {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
     |EXP Tok_menor EXP                  {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
     |EXP Tok_mayori EXP                 {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
