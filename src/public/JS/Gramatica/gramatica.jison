@@ -151,6 +151,8 @@ SENTENCIA: DECLARACION Tok_pyc{$$=$1}
            |PRINTLN{$$=$1}
            |SWITCH{$$=$1}
            |FOR{$$=$1}
+           |METODOS{$$=$1}
+           |LLAMADAS{$$=$1}
            ;
 
 
@@ -226,6 +228,12 @@ FOR: Tok_for Tok_par1 DECLARACION Tok_pyc EXP Tok_pyc ASIGNACION Tok_par2 BLOQUE
    | Tok_for Tok_par1 DECLARACIONyASIGNACION Tok_pyc EXP Tok_pyc ASIGNACION Tok_par2 BLOQUE {$$=new AST_Node("FOR","FOR",this._$.first_line,@1.last_column); $$.addChilds($3,$5,$7,$9,"asigna")}
    | Tok_for Tok_par1 DECLARACIONyASIGNACION Tok_pyc EXP Tok_pyc Tok_ID Tok_mas Tok_mas Tok_par2 BLOQUE {$$=new AST_Node("FOR","FOR",this._$.first_line,@1.last_column); $$.addChilds($3,$5,$7,$11,"asigna_incre")}
    | Tok_for Tok_par1 DECLARACIONyASIGNACION Tok_pyc EXP Tok_pyc Tok_ID Tok_menos Tok_menos Tok_par2 BLOQUE {$$=new AST_Node("FOR","FOR",this._$.first_line,@1.last_column); $$.addChilds($3,$5,$7,$11,"asigna_decre")}
+;
+
+METODOS: Tok_ID Tok_par1 Tok_par2 BLOQUE {$$=new AST_Node("METODO_SIN_PA","METODO_SIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$4);}
+;
+
+LLAMADAS: Tok_ID Tok_par1 Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MSIN_PA","LLAMADA_MSIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1);}
 ;
 
 PRINT: Tok_print Tok_par1 EXP Tok_par2 Tok_pyc {$$= new AST_Node("PRINT","PRINT",this._$.first_line,@1.last_column); $$.addChilds($3);};

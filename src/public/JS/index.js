@@ -65,7 +65,6 @@ function appendTab(tab, nombre, contenido) {
   
 // VAMOS A INTERPRETAR 
   function final(id,consola){
-      alert(id.getValue());
       consola.value='';
       L_Error.getInstance().reiniciar();
       TS.getInstance().reiniciar();
@@ -75,7 +74,9 @@ function appendTab(tab, nombre, contenido) {
          console.log(imprimir(resultado));
          UpdateGraphviz(imprimir(resultado));
          var interprete = new Interprete();
-         var texto= interprete.analizar(resultado);
+         var metodos = new Metodos();
+         var texto= metodos.analizar(resultado);
+         texto+= interprete.analizar(resultado);
         //download(texto, 'Analisis.txt', 'text/plain')
         consola.value=texto;
         return;
