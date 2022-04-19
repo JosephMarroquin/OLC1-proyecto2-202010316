@@ -14,6 +14,7 @@ class Verificacion{
         let res;
         let switchcase;
         let codigo=""
+        let valorInstruccion=""
         let simbolo;
         let txtDefault;
         let interprete;
@@ -58,16 +59,16 @@ class Verificacion{
                         TS.getInstance().modificar(simbolo)
                     }else{
                         if(cont==0){
-                            simbolo=TS.getInstance().obtener(raiz.childs[0]);
-                            simbolo.valor="";
-                            raiz.childs[1].childs[0].childs.forEach(nodito => {
-                                interprete.analizaMetodo("si");
-                                simbolo.valor+=metodos.interpretar(nodito);
-                                simbolo.valor+=interprete.interpretar(nodito);
-                                interprete.analizaMetodo(null);
+                            simbolo=TS.getInstance().obtener(raiz.childs[0]);                            
+                            simbolo.valor.forEach(ins =>{
+                                    interprete.analizaMetodo("si");
+                                    valorInstruccion+=metodos.interpretar(ins);
+                                    valorInstruccion+=interprete.interpretar(ins);
+                                    interprete.analizaMetodo(null);
                             });
+                            simbolo.valor=valorInstruccion;
+                            
                             TS.getInstance().modificar(simbolo)
-                            cont=1;
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro el metodo anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
                             codigo="Error Semantico, Ya se declaro el metodo anteriormente"+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna+"\n";

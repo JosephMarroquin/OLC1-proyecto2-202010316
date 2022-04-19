@@ -217,27 +217,32 @@ class Metodos{
             //
             case "METODO_SIN_PA":
                 interprete=new Interprete();
+                let arregloInstrucciones=[];
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
                     simbolo= new Simbolo(raiz.childs[0],"metodo","");
                     TS.getInstance().insertar(simbolo)
                     raiz.childs[1].childs[0].childs.forEach(nodito => {
-                        interprete.analizaMetodo("si");
-                        simbolo.valor+=this.interpretar(nodito);
-                        simbolo.valor+=interprete.interpretar(nodito);
-                        interprete.analizaMetodo(null);
+                        //interprete.analizaMetodo("si");
+                        arregloInstrucciones.push(nodito)
+                        //simbolo.valor+=this.interpretar(nodito);
+                        //simbolo.valor+=interprete.interpretar(nodito);
+                        //interprete.analizaMetodo(null);
                     });
+                    simbolo.valor=arregloInstrucciones;
                     TS.getInstance().modificar(simbolo)
                 }else{
                     simbolo=TS.getInstance().obtener(raiz.childs[0]);
                     if(simbolo.valor==""){
                         raiz.childs[1].childs[0].childs.forEach(nodito => {
-                            interprete.analizaMetodo("si");
-                            simbolo.valor+=this.interpretar(nodito);
-                            simbolo.valor+=interprete.interpretar(nodito);
-                            interprete.analizaMetodo(null);
+                            //interprete.analizaMetodo("si");
+                            arregloInstrucciones.push(nodito)
+                            //simbolo.valor+=this.interpretar(nodito);
+                            //simbolo.valor+=interprete.interpretar(nodito);
+                            //interprete.analizaMetodo(null);
                         });
+                        simbolo.valor=arregloInstrucciones;
                         TS.getInstance().modificar(simbolo)
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro el metodo anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));

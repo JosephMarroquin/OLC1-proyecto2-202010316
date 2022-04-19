@@ -562,6 +562,7 @@ class Interprete{
             
             //
             case "LLAMADA_MSIN_PA":
+                metodos=new Metodos();
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
@@ -569,7 +570,16 @@ class Interprete{
                     TS.getInstance().insertar(simbolo)
                 }else{
                     simbolo=TS.getInstance().obtener(raiz.childs[0]);
-                    codigo=simbolo.valor;                  
+                    if(typeof simbolo.valor=='object'){
+                        simbolo.valor.forEach(ins =>{
+                            codigo+=metodos.interpretar(ins);
+                            codigo+=this.interpretar(ins);
+                        });
+                    }else{
+                        codigo+=simbolo.valor;
+                    }
+                    
+                                   
                 }  
 
                 break;
