@@ -1,6 +1,11 @@
+let runable;
 class Interprete{
     constructor(){
 
+    }
+    
+    analizaMetodo(raiz){
+        runable=raiz;
     }
 
     analizar(raiz){
@@ -18,6 +23,7 @@ class Interprete{
         let metodos; 
         if(raiz===undefined || raiz===null)return;
 
+        if(runable=="si"){
         switch(raiz.tag){
             case "RAIZ":
                 raiz.childs.forEach(hijo=> codigo+=this.interpretar(hijo))
@@ -553,7 +559,6 @@ class Interprete{
                 break;
             
             //
-
             
             //
             case "LLAMADA_MSIN_PA":
@@ -570,10 +575,76 @@ class Interprete{
                 break;
             
             //
+            
+            //
                 
                 
                 
         }
+    }
+    else if(runable==null){
+        switch(raiz.tag){
+            case "RAIZ":
+                raiz.childs.forEach(hijo=> codigo+=this.interpretar(hijo))
+                return codigo;
+            
+            case "SENTENCIAS":
+                raiz.childs.forEach(hijo=> codigo+=this.interpretar(hijo) )
+                return codigo;
+
+            case "METODO_SIN_RUN":
+                metodos=new Metodos();
+
+                //DECLARANDO
+                if(TS.getInstance().obtener(raiz.childs[0])==null){
+                    simbolo= new Simbolo(raiz.childs[0],"metodo","");
+                    TS.getInstance().insertar(simbolo)
+                    raiz.childs[1].childs[0].childs.forEach(nodito => {
+                        runable="si"
+                        simbolo.valor+=metodos.interpretar(nodito);
+                        simbolo.valor+=this.interpretar(nodito);
+                        runable=null;
+                    });
+                    TS.getInstance().modificar(simbolo)
+                    codigo=simbolo.valor
+                }else{
+                    simbolo=TS.getInstance().obtener(raiz.childs[0]);
+                    if(simbolo.valor==""){
+                        raiz.childs[1].childs[0].childs.forEach(nodito => {
+                            runable="si"
+                            simbolo.valor+=metodos.interpretar(nodito);
+                            simbolo.valor+=this.interpretar(nodito);
+                            runable=null;
+                        });
+                        TS.getInstance().modificar(simbolo)
+                        codigo=simbolo.valor;
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro el metodo anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico, Ya se declaro el metodo anteriormente";
+                    }
+                    
+                }  
+
+                break;
+            
+            //
+            case "LLAMADA_MSIN_RUN":
+
+                //DECLARANDO
+                if(TS.getInstance().obtener(raiz.childs[0])==null){
+                    simbolo= new Simbolo(raiz.childs[0],"metodo","");
+                    TS.getInstance().insertar(simbolo)
+                }else{
+                    simbolo=TS.getInstance().obtener(raiz.childs[0]);
+                    codigo=simbolo.valor;                  
+                }  
+
+                break;
+            
+            //
+            
+        }
+    }
 
         return codigo;
     }

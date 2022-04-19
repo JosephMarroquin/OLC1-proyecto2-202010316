@@ -26,6 +26,7 @@
 "case"              return 'Tok_case'
 "default"           return 'Tok_default'
 "for"               return 'Tok_for'  
+"run"               return 'Tok_run'
 
 //Definir tipos de datos
 
@@ -231,9 +232,11 @@ FOR: Tok_for Tok_par1 DECLARACION Tok_pyc EXP Tok_pyc ASIGNACION Tok_par2 BLOQUE
 ;
 
 METODOS: Tok_ID Tok_par1 Tok_par2 BLOQUE {$$=new AST_Node("METODO_SIN_PA","METODO_SIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$4);}
+        |Tok_run Tok_ID Tok_par1 Tok_par2 BLOQUE {$$=new AST_Node("METODO_SIN_RUN","METODO_SIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$5);}
 ;
 
 LLAMADAS: Tok_ID Tok_par1 Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MSIN_PA","LLAMADA_MSIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1);}
+        | Tok_run Tok_ID Tok_par1 Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MSIN_RUN","LLAMADA_MSIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2);}
 ;
 
 PRINT: Tok_print Tok_par1 EXP Tok_par2 Tok_pyc {$$= new AST_Node("PRINT","PRINT",this._$.first_line,@1.last_column); $$.addChilds($3);};

@@ -75,7 +75,9 @@ function appendTab(tab, nombre, contenido) {
          UpdateGraphviz(imprimir(resultado));
          var interprete = new Interprete();
          var metodos = new Metodos();
+         var verificacion= new Verificacion();
          var texto= metodos.analizar(resultado);
+         verificacion.analizar(resultado);
          texto+= interprete.analizar(resultado);
         //download(texto, 'Analisis.txt', 'text/plain')
         consola.value=texto;

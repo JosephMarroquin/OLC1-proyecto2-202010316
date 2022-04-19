@@ -27,7 +27,7 @@ class Metodos{
                 raiz.childs.forEach(hijo=> codigo+=this.interpretar(hijo) )
                 return codigo;
             
-                case "DECLARACION":
+            case "DECLARACION":
                     raiz.childs[0].childs.forEach(hijo=>{
                         if(TS.getInstance().obtener(hijo.value)==null){
                             if(raiz.childs[1]=="int"){
@@ -51,7 +51,7 @@ class Metodos{
                         }  
                     })
                     break;
-                case "ASIGNACION":
+            case "ASIGNACION":
                     raiz.childs[0].childs.forEach(hijo=>{
                         simbolo=TS.getInstance().obtener(hijo.value);
                         if(simbolo.tipo=="integer"){
@@ -119,7 +119,7 @@ class Metodos{
                     break;
                 
     
-                case "DECLARACIONyASIGNACION":
+            case "DECLARACIONyASIGNACION":
     
                     //DECLARANDO
                     raiz.childs[0].childs.forEach(hijo=>{
@@ -223,22 +223,25 @@ class Metodos{
                     simbolo= new Simbolo(raiz.childs[0],"metodo","");
                     TS.getInstance().insertar(simbolo)
                     raiz.childs[1].childs[0].childs.forEach(nodito => {
+                        interprete.analizaMetodo("si");
                         simbolo.valor+=this.interpretar(nodito);
                         simbolo.valor+=interprete.interpretar(nodito);
+                        interprete.analizaMetodo(null);
                     });
                     TS.getInstance().modificar(simbolo)
                 }else{
                     simbolo=TS.getInstance().obtener(raiz.childs[0]);
                     if(simbolo.valor==""){
                         raiz.childs[1].childs[0].childs.forEach(nodito => {
+                            interprete.analizaMetodo("si");
                             simbolo.valor+=this.interpretar(nodito);
                             simbolo.valor+=interprete.interpretar(nodito);
+                            interprete.analizaMetodo(null);
                         });
                         TS.getInstance().modificar(simbolo)
-                        codigo=simbolo.valor;
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro el metodo anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                        codigo="Error Semantico, Ya se declaro el metodo anteriormente";
+                        codigo="Error Semantico, Ya se declaro el metodo anteriormente"+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna+"\n";
                     }
                     
                 }  
