@@ -246,6 +246,31 @@ class Operador{
                         Resultado.valor=parseInt(Resultado1.valor)-1;
                     }
                     return Resultado;
+            
+            case "round":
+                Resultado= new ResultadoOp();
+                Resultado.tipo="double";
+                Resultado1=this.ejecutar(raiz.value);
+                if(Resultado1.tipo=="double"){
+                    Resultado.valor=Math.round(Resultado1.valor);
+                }
+                else{
+                    L_Error.getInstance().insertar(new N_Error("Semantico","El valor ingresado no es un double ",raiz.fila,raiz.columna));
+                    Resultado.tipo="error";
+                    Resultado.valor="Semantico"+" El valor ingresado no es un double "+"fila: "+raiz.fila+" columna: "+raiz.columna;
+                    return Resultado;
+                }
+                return Resultado;
+            
+            case "typeof":
+                Resultado= new ResultadoOp();
+                Resultado.tipo="string";
+                Resultado1=this.ejecutar(raiz.value);
+
+                Resultado.valor=Resultado1.tipo;
+
+                return Resultado;
+            
             default:
                 break;
         }

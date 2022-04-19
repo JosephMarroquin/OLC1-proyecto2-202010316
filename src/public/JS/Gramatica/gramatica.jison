@@ -27,6 +27,8 @@
 "default"           return 'Tok_default'
 "for"               return 'Tok_for'  
 "run"               return 'Tok_run'
+"round"             return 'Tok_round'
+"typeof"            return 'Tok_typeof'
 
 //Definir tipos de datos
 
@@ -308,6 +310,8 @@ EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.fi
     |Tok_ID                             {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("id",$1,this._$.first_line,@1.last_column));}
     |Tok_toLower Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("tolower",$3,this._$.first_line,@1.last_column));}
     |Tok_toupper Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("toupper",$3,this._$.first_line,@1.last_column));}
+    |Tok_round Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("round",$3,this._$.first_line,@1.last_column));}
+    |Tok_typeof Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("typeof",$3,this._$.first_line,@1.last_column));}
     ;
 
 
