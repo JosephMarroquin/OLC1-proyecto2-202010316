@@ -1,4 +1,6 @@
 let runable;
+let alamcenaContinue;
+let almacenaBreak;
 class Interprete{
     constructor(){
 
@@ -190,28 +192,61 @@ class Interprete{
                 metodos=new Metodos();
                 op = new Operador()
                 res = op.ejecutar(raiz.childs[1])
+                var BreakException = {};
             
                 do{
-                      codigo+=metodos.interpretar(raiz.childs[0].childs[0]);  
-                      codigo+=this.interpretar(raiz.childs[0].childs[0])
-                      res = op.ejecutar(raiz.childs[1])
-                    }while(res.valor)
-                    break;
+                    if(alamcenaContinue=="Si"){
+                        alamcenaContinue=null;
+                        continue;
+                    }
+                    try{
+                        raiz.childs[0].childs[0].childs.forEach(hijo=>{
+                            codigo+=metodos.interpretar(hijo);  
+                            codigo+=this.interpretar(hijo)
+                            if(alamcenaContinue=="Si"){
+                                throw BreakException;
+                            }
+                        });
+                        
+                    }catch (e) {
+                        if (e !== BreakException) throw e;
+                    }
+                    res = op.ejecutar(raiz.childs[1])
+                }while(res.valor)
+                break;
 
             case "WHILE":
                 metodos=new Metodos();
                 op = new Operador()
                 res = op.ejecutar(raiz.childs[0])
+                var BreakException = {};
+
                 while(res.valor){
-                      codigo+=metodos.interpretar(raiz.childs[1].childs[0])
-                      codigo+=this.interpretar(raiz.childs[1].childs[0])
-                      res = op.ejecutar(raiz.childs[0])
+                    if(alamcenaContinue=="Si"){
+                        alamcenaContinue=null;
+                        continue;
+                    }
+                    try {
+                        raiz.childs[1].childs[0].childs.forEach(hijo=>{
+                            codigo+=metodos.interpretar(hijo)
+                            codigo+=this.interpretar(hijo)
+                            if(alamcenaContinue=="Si"){
+                                throw BreakException;
+                            }
+                        });
+                }catch (e) {
+                    if (e !== BreakException) throw e;
+                  }
+                  res = op.ejecutar(raiz.childs[0])
+
                 }
+
                 break;
             
             case "FOR":
                 metodos=new Metodos();
                 op = new Operador()
+                var BreakException = {};
                 if(raiz.childs.length==4){
                     //DECLARACION
                     raiz.childs[0].childs[0].childs.forEach(hijo=>{
@@ -234,8 +269,22 @@ class Interprete{
 
                     //INSTRUCCIONES
                     while(res.valor){
-                        codigo+=metodos.interpretar(raiz.childs[3].childs[0])
-                        codigo+=this.interpretar(raiz.childs[3].childs[0])
+                        if(alamcenaContinue=="Si"){
+                            alamcenaContinue=null;
+                            continue;
+                        }
+                        try{
+                            raiz.childs[3].childs[0].childs.forEach(hijo=>{
+                                codigo+=metodos.interpretar(hijo)
+                                codigo+=this.interpretar(hijo)
+                                if(alamcenaContinue=="Si"){
+                                    throw BreakException;
+                                }
+                            });
+                        }catch (e) {
+                            if (e !== BreakException) throw e;
+                        }
+                        
                         //ACTUALIZACION
                     raiz.childs[2].childs[0].childs.forEach(hijo=>{
                         simbolo=TS.getInstance().obtener(hijo.value);
@@ -290,8 +339,21 @@ class Interprete{
 
                         //INSTRUCCIONES
                         while(res.valor){
-                            codigo+=metodos.interpretar(raiz.childs[3].childs[0])
-                            codigo+=this.interpretar(raiz.childs[3].childs[0])
+                            if(alamcenaContinue=="Si"){
+                                alamcenaContinue=null;
+                                continue;
+                            }
+                            try{
+                                raiz.childs[3].childs[0].childs.forEach(hijo=>{
+                                    codigo+=metodos.interpretar(hijo)
+                                    codigo+=this.interpretar(hijo)
+                                    if(alamcenaContinue=="Si"){
+                                        throw BreakException;
+                                    }
+                                });
+                            }catch (e) {
+                                if (e !== BreakException) throw e;
+                            }
                             //ACTUALIZACION
                             simbolo=TS.getInstance().obtener(raiz.childs[2]);
                             if(simbolo.tipo=="integer"){
@@ -326,8 +388,21 @@ class Interprete{
 
                         //INSTRUCCIONES
                         while(res.valor){
-                            codigo+=metodos.interpretar(raiz.childs[3].childs[0])
-                            codigo+=this.interpretar(raiz.childs[3].childs[0])
+                            if(alamcenaContinue=="Si"){
+                                alamcenaContinue=null;
+                                continue;
+                            }
+                            try{
+                                raiz.childs[3].childs[0].childs.forEach(hijo=>{
+                                    codigo+=metodos.interpretar(hijo)
+                                    codigo+=this.interpretar(hijo)
+                                    if(alamcenaContinue=="Si"){
+                                        throw BreakException;
+                                    }
+                                });
+                            }catch (e) {
+                                if (e !== BreakException) throw e;
+                            }
                             //ACTUALIZACION
                             simbolo=TS.getInstance().obtener(raiz.childs[2]);
                             if(simbolo.tipo=="integer"){
@@ -391,8 +466,21 @@ class Interprete{
 
                         //INSTRUCCIONES
                         while(res.valor){
-                            codigo+=metodos.interpretar(raiz.childs[3].childs[0])
-                            codigo+=this.interpretar(raiz.childs[3].childs[0])
+                            if(alamcenaContinue=="Si"){
+                                alamcenaContinue=null;
+                                continue;
+                            }
+                            try{
+                                raiz.childs[3].childs[0].childs.forEach(hijo=>{
+                                    codigo+=metodos.interpretar(hijo)
+                                    codigo+=this.interpretar(hijo)
+                                    if(alamcenaContinue=="Si"){
+                                        throw BreakException;
+                                    }
+                                });
+                            }catch (e) {
+                                if (e !== BreakException) throw e;
+                            }
                             //ACTUALIZACION
                             raiz.childs[2].childs[0].childs.forEach(hijo=>{
                                 simbolo=TS.getInstance().obtener(hijo.value);
@@ -474,8 +562,21 @@ class Interprete{
 
                         //INSTRUCCIONES
                         while(res.valor){
-                            codigo+=metodos.interpretar(raiz.childs[3].childs[0])
-                            codigo+=this.interpretar(raiz.childs[3].childs[0])
+                            if(alamcenaContinue=="Si"){
+                                alamcenaContinue=null;
+                                continue;
+                            }
+                            try{
+                                raiz.childs[3].childs[0].childs.forEach(hijo=>{
+                                    codigo+=metodos.interpretar(hijo)
+                                    codigo+=this.interpretar(hijo)
+                                    if(alamcenaContinue=="Si"){
+                                        throw BreakException;
+                                    }
+                                });
+                            }catch (e) {
+                                if (e !== BreakException) throw e;
+                            }
                             //ACTUALIZACION
                             simbolo=TS.getInstance().obtener(raiz.childs[2]);
                             if(simbolo.tipo=="integer"){
@@ -539,8 +640,21 @@ class Interprete{
 
                         //INSTRUCCIONES
                         while(res.valor){
-                            codigo+=metodos.interpretar(raiz.childs[3].childs[0])
-                            codigo+=this.interpretar(raiz.childs[3].childs[0])
+                            if(alamcenaContinue=="Si"){
+                                alamcenaContinue=null;
+                                continue;
+                            }
+                            try{
+                                raiz.childs[3].childs[0].childs.forEach(hijo=>{
+                                    codigo+=metodos.interpretar(hijo)
+                                    codigo+=this.interpretar(hijo)
+                                    if(alamcenaContinue=="Si"){
+                                        throw BreakException;
+                                    }
+                                });
+                            }catch (e) {
+                                if (e !== BreakException) throw e;
+                            }
                             //ACTUALIZACION
                             simbolo=TS.getInstance().obtener(raiz.childs[2]);
                             if(simbolo.tipo=="integer"){
@@ -585,6 +699,16 @@ class Interprete{
                 break;
             
             //
+            case "BREAK":
+                runable=null;
+                break;
+            
+            //
+
+            //
+            case "CONTINUE":
+                alamcenaContinue="Si"
+                break;
             
             //
                 

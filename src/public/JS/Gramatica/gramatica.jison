@@ -29,6 +29,8 @@
 "run"               return 'Tok_run'
 "round"             return 'Tok_round'
 "typeof"            return 'Tok_typeof'
+"break"             return 'Tok_break'
+"continue"          return 'Tok_continue'
 
 //Definir tipos de datos
 
@@ -156,6 +158,8 @@ SENTENCIA: DECLARACION Tok_pyc{$$=$1}
            |FOR{$$=$1}
            |METODOS{$$=$1}
            |LLAMADAS{$$=$1}
+           |BREAK{$$=$1}
+           |CONTINUE{$$=$1}
            ;
 
 
@@ -257,6 +261,12 @@ CASTEOS:Tok_par1 Tok_TD_int Tok_par2 EXP {$$= new AST_Node("EXP","EXP",this._$.f
        |Tok_par1 Tok_TD_double Tok_par2 EXP {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("casteo_double",$4,this._$.first_line,@1.last_column));}
        |Tok_par1 Tok_TD_char Tok_par2 EXP {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("casteo_char",$4,this._$.first_line,@1.last_column));}
        |Tok_tostring Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("casteo_string",$3,this._$.first_line,@1.last_column));}
+;
+
+BREAK: Tok_break Tok_pyc {$$= new AST_Node("BREAK","BREAK",this._$.first_line,@1.last_column); $$.addChilds($1);}
+;
+
+CONTINUE: Tok_continue Tok_pyc {$$= new AST_Node("CONTINUE","CONTINUE",this._$.first_line,@1.last_column); $$.addChilds($1);}
 ;
 
 EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
