@@ -31,6 +31,7 @@
 "typeof"            return 'Tok_typeof'
 "break"             return 'Tok_break'
 "continue"          return 'Tok_continue'
+"return"            return 'Tok_return'
 
 //Definir tipos de datos
 
@@ -160,6 +161,7 @@ SENTENCIA: DECLARACION Tok_pyc{$$=$1}
            |LLAMADAS{$$=$1}
            |BREAK{$$=$1}
            |CONTINUE{$$=$1}
+           |RETURN{$$=$1}
            ;
 
 
@@ -267,6 +269,9 @@ BREAK: Tok_break Tok_pyc {$$= new AST_Node("BREAK","BREAK",this._$.first_line,@1
 ;
 
 CONTINUE: Tok_continue Tok_pyc {$$= new AST_Node("CONTINUE","CONTINUE",this._$.first_line,@1.last_column); $$.addChilds($1);}
+;
+
+RETURN: Tok_return Tok_pyc {$$= new AST_Node("RETURN","RETURN",this._$.first_line,@1.last_column); $$.addChilds($1);}
 ;
 
 EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}

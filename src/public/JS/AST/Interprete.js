@@ -1,6 +1,7 @@
 let runable;
 let alamcenaContinue;
 let almacenaBreak;
+let almacenaReturn;
 class Interprete{
     constructor(){
 
@@ -248,6 +249,10 @@ class Interprete{
                         almacenaBreak=null;
                         break;
                     }
+                    else if(almacenaReturn=="Si"){
+                        almacenaReturn=null;
+                        return;
+                    }
                     try{
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
                             codigo+=metodos.interpretar(hijo);  
@@ -256,6 +261,9 @@ class Interprete{
                                 throw BreakException;
                             }
                             else if(almacenaBreak=="Si"){
+                                throw BreakException;
+                            }
+                            else if(almacenaReturn=="Si"){
                                 throw BreakException;
                             }
                         });
@@ -282,6 +290,10 @@ class Interprete{
                         almacenaBreak=null;
                         break;
                     }
+                    else if(almacenaReturn=="Si"){
+                        almacenaReturn=null;
+                        return;
+                    }
                     try {
                         raiz.childs[1].childs[0].childs.forEach(hijo=>{
                             codigo+=metodos.interpretar(hijo)
@@ -290,6 +302,9 @@ class Interprete{
                                 throw BreakException;
                             }
                             else if(almacenaBreak=="Si"){
+                                throw BreakException;
+                            }
+                            else if(almacenaReturn=="Si"){
                                 throw BreakException;
                             }
                         });
@@ -336,6 +351,10 @@ class Interprete{
                             almacenaBreak=null;
                             break;
                         }
+                        else if(almacenaReturn=="Si"){
+                            almacenaReturn=null;
+                            return;
+                        }
                         try{
                             raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                 codigo+=metodos.interpretar(hijo)
@@ -344,6 +363,9 @@ class Interprete{
                                     throw BreakException;
                                 }
                                 else if(almacenaBreak=="Si"){
+                                    throw BreakException;
+                                }
+                                else if(almacenaReturn=="Si"){
                                     throw BreakException;
                                 }
                             });
@@ -413,6 +435,10 @@ class Interprete{
                                 almacenaBreak=null;
                                 break;
                             }
+                            else if(almacenaReturn=="Si"){
+                                almacenaReturn=null;
+                                return;
+                            }
                             try{
                                 raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                     codigo+=metodos.interpretar(hijo)
@@ -421,6 +447,9 @@ class Interprete{
                                         throw BreakException;
                                     }
                                     else if(almacenaBreak=="Si"){
+                                        throw BreakException;
+                                    }
+                                    else if(almacenaReturn=="Si"){
                                         throw BreakException;
                                     }
                                 });
@@ -469,6 +498,10 @@ class Interprete{
                                 almacenaBreak=null;
                                 break;
                             }
+                            else if(almacenaReturn=="Si"){
+                                almacenaReturn=null;
+                                return;
+                            }
                             try{
                                 raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                     codigo+=metodos.interpretar(hijo)
@@ -477,6 +510,9 @@ class Interprete{
                                         throw BreakException;
                                     }
                                     else if(almacenaBreak=="Si"){
+                                        throw BreakException;
+                                    }
+                                    else if(almacenaReturn=="Si"){
                                         throw BreakException;
                                     }
                                 });
@@ -554,6 +590,10 @@ class Interprete{
                                 almacenaBreak=null;
                                 break;
                             }
+                            else if(almacenaReturn=="Si"){
+                                almacenaReturn=null;
+                                return;
+                            }
                             try{
                                 raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                     codigo+=metodos.interpretar(hijo)
@@ -562,6 +602,9 @@ class Interprete{
                                         throw BreakException;
                                     }
                                     else if(almacenaBreak=="Si"){
+                                        throw BreakException;
+                                    }
+                                    else if(almacenaReturn=="Si"){
                                         throw BreakException;
                                     }
                                 });
@@ -657,6 +700,10 @@ class Interprete{
                                 almacenaBreak=null;
                                 break;
                             }
+                            else if(almacenaReturn=="Si"){
+                                almacenaReturn=null;
+                                return;
+                            }
                             try{
                                 raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                     codigo+=metodos.interpretar(hijo)
@@ -665,6 +712,9 @@ class Interprete{
                                         throw BreakException;
                                     }
                                     else if(almacenaBreak=="Si"){
+                                        throw BreakException;
+                                    }
+                                    else if(almacenaReturn=="Si"){
                                         throw BreakException;
                                     }
                                 });
@@ -742,6 +792,10 @@ class Interprete{
                                 almacenaBreak=null;
                                 break;
                             }
+                            else if(almacenaReturn=="Si"){
+                                almacenaReturn=null;
+                                return;
+                            }
                             try{
                                 raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                     codigo+=metodos.interpretar(hijo)
@@ -750,6 +804,9 @@ class Interprete{
                                         throw BreakException;
                                     }
                                     else if(almacenaBreak=="Si"){
+                                        throw BreakException;
+                                    }
+                                    else if(almacenaReturn=="Si"){
                                         throw BreakException;
                                     }
                                 });
@@ -812,6 +869,10 @@ class Interprete{
                 break;
             
             //
+
+            case "RETURN":
+                almacenaReturn="Si"
+                break;
                 
                 
                 
