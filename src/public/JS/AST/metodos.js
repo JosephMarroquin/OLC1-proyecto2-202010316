@@ -11,6 +11,7 @@ class Metodos{
         
         let op;
         let res;
+        let res2;
         let switchcase;
         let codigo=""
         let simbolo;
@@ -214,6 +215,562 @@ class Metodos{
                     break;
 
             
+            
+            case "DECLARACION_VECTORES":
+    
+                    //DECLARANDO
+                    raiz.childs[1].childs.forEach(hijo=>{
+                        if(TS.getInstance().obtener(hijo.value)==null){
+                            if(raiz.childs[0]=="int"){
+                                simbolo= new Simbolo(hijo.value,"vector_integer",0);
+                            }
+                            else if(raiz.childs[0]=="double"){
+                                simbolo= new Simbolo(hijo.value,"vector_double",0);
+                            }
+                            else if(raiz.childs[0]=="boolean"){
+                                simbolo= new Simbolo(hijo.value,"vector_boolean",0);
+                            }
+                            else if(raiz.childs[0]=="string"){
+                                simbolo= new Simbolo(hijo.value,"vector_string",0);
+                            }
+                            else if(raiz.childs[0]=="char"){
+                                simbolo= new Simbolo(hijo.value,"vector_char",0);
+                            }
+                            TS.getInstance().insertar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                        }  
+                        
+                    })
+                    
+                    //ASIGNANDO
+                    raiz.childs[1].childs.forEach(hijo=>{
+                        simbolo=TS.getInstance().obtener(hijo.value);
+                        if(simbolo.tipo=="vector_integer"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2])
+                            if(res.tipo=="integer"){
+                                var nuevoArray=new Array(res.valor);
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    nuevoArray[i]=0;
+                                }
+                                simbolo.valor=nuevoArray;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                        else if(simbolo.tipo=="vector_double"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2])
+                            if(res.tipo=="integer"){
+                                var nuevoArray=new Array(res.valor);
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    nuevoArray[i]=0.0;
+                                }
+                                simbolo.valor=nuevoArray;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                        else if(simbolo.tipo=="vector_boolean"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2])
+                            if(res.tipo=="integer"){
+                                var nuevoArray=new Array(res.valor);
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    nuevoArray[i]=true;
+                                }
+                                simbolo.valor=nuevoArray;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                        else if(simbolo.tipo=="vector_string"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2])
+                            if(res.tipo=="integer"){
+                                var nuevoArray=new Array(res.valor);
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    nuevoArray[i]="";
+                                }
+                                simbolo.valor=nuevoArray;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                        else if(simbolo.tipo=="vector_char"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2])
+                            if(res.tipo=="integer"){
+                                var nuevoArray=new Array(res.valor);
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    nuevoArray[i]='\u0000';
+                                }
+                                simbolo.valor=nuevoArray;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                    })
+                    break;
+            
+            case "DECLARACION_VECTORES2":
+    
+                    //DECLARANDO
+                    raiz.childs[1].childs.forEach(hijo=>{
+                        if(TS.getInstance().obtener(hijo.value)==null){
+                            if(raiz.childs[0]=="int"){
+                                simbolo= new Simbolo(hijo.value,"vector_integer",0);
+                            }
+                            else if(raiz.childs[0]=="double"){
+                                simbolo= new Simbolo(hijo.value,"vector_double",0);
+                            }
+                            else if(raiz.childs[0]=="boolean"){
+                                simbolo= new Simbolo(hijo.value,"vector_boolean",0);
+                            }
+                            else if(raiz.childs[0]=="string"){
+                                simbolo= new Simbolo(hijo.value,"vector_string",0);
+                            }
+                            else if(raiz.childs[0]=="char"){
+                                simbolo= new Simbolo(hijo.value,"vector_char",0);
+                            }
+                            TS.getInstance().insertar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                        }  
+                        
+                    })
+                    
+                    //ASIGNANDO
+                    raiz.childs[1].childs.forEach(hijo=>{
+                        simbolo=TS.getInstance().obtener(hijo.value);
+                        if(simbolo.tipo=="vector_integer"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2])
+                            res2= op.ejecutar(raiz.childs[3])
+                            if(res.tipo=="integer" && res2.tipo=="integer"){
+                                var nuevoArray=new Array(res.valor);
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    nuevoArray[i]=new Array(res2.valor);
+                                }
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    for(var j=0; j<nuevoArray[i].length; j++) {
+                                        nuevoArray[i][j]=0;
+                                    }
+                                }
+                                simbolo.valor=nuevoArray;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                        else if(simbolo.tipo=="vector_double"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2])
+                            res2= op.ejecutar(raiz.childs[3])
+                            if(res.tipo=="integer" && res2.tipo=="integer"){
+                                var nuevoArray=new Array(res.valor);
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    nuevoArray[i]=new Array(res2.valor);
+                                }
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    for(var j=0; j<nuevoArray[i].length; j++) {
+                                        nuevoArray[i][j]=0.0;
+                                    }
+                                }
+                                simbolo.valor=nuevoArray;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                        else if(simbolo.tipo=="vector_boolean"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2])
+                            res2= op.ejecutar(raiz.childs[3])
+                            if(res.tipo=="integer" && res2.tipo=="integer"){
+                                var nuevoArray=new Array(res.valor);
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    nuevoArray[i]=new Array(res2.valor);
+                                }
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    for(var j=0; j<nuevoArray[i].length; j++) {
+                                        nuevoArray[i][j]=true;
+                                    }
+                                }
+                                simbolo.valor=nuevoArray;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                        else if(simbolo.tipo=="vector_string"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2])
+                            res2= op.ejecutar(raiz.childs[3])
+                            if(res.tipo=="integer" && res2.tipo=="integer"){
+                                var nuevoArray=new Array(res.valor);
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    nuevoArray[i]=new Array(res2.valor);
+                                }
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    for(var j=0; j<nuevoArray[i].length; j++) {
+                                        nuevoArray[i][j]="";
+                                    }
+                                }
+                                simbolo.valor=nuevoArray;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                        else if(simbolo.tipo=="vector_char"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[2])
+                            res2= op.ejecutar(raiz.childs[3])
+                            if(res.tipo=="integer" && res2.tipo=="integer"){
+                                var nuevoArray=new Array(res.valor);
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    nuevoArray[i]=new Array(res2.valor);
+                                }
+                                for(var i=0; i<nuevoArray.length; i++) {
+                                    for(var j=0; j<nuevoArray[i].length; j++) {
+                                        nuevoArray[i][j]='\u0000';
+                                    }
+                                }
+                                simbolo.valor=nuevoArray;
+                                TS.getInstance().modificar(simbolo)
+                            }
+                            else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                        }
+                    })
+                    break;
+                    
+            //DECLARACION VECTORES TIPO 2
+            case "DECLARACION_VECTORES_TIPO2":
+    
+                    //DECLARANDO
+                    raiz.childs[1].childs.forEach(hijo=>{
+                        if(TS.getInstance().obtener(hijo.value)==null){
+                            if(raiz.childs[0]=="int"){
+                                simbolo= new Simbolo(hijo.value,"vector_integer",0);
+                            }
+                            else if(raiz.childs[0]=="double"){
+                                simbolo= new Simbolo(hijo.value,"vector_double",0);
+                            }
+                            else if(raiz.childs[0]=="boolean"){
+                                simbolo= new Simbolo(hijo.value,"vector_boolean",0);
+                            }
+                            else if(raiz.childs[0]=="string"){
+                                simbolo= new Simbolo(hijo.value,"vector_string",0);
+                            }
+                            else if(raiz.childs[0]=="char"){
+                                simbolo= new Simbolo(hijo.value,"vector_char",0);
+                            }
+                            TS.getInstance().insertar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                        }  
+                        
+                    })
+                    
+                    //ASIGNANDO
+                    raiz.childs[1].childs.forEach(hijo=>{
+                        simbolo=TS.getInstance().obtener(hijo.value);
+                        if(simbolo.tipo=="vector_integer"){
+                            op = new Operador()
+                            let nuevoArray=[];
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="integer"){
+                                    nuevoArray.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            simbolo.valor=nuevoArray;
+                            TS.getInstance().modificar(simbolo)
+                        }
+                        else if(simbolo.tipo=="vector_double"){
+                            op = new Operador()
+                            let nuevoArray=[];
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="double"){
+                                    nuevoArray.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            simbolo.valor=nuevoArray;
+                            TS.getInstance().modificar(simbolo)
+                        }
+                        else if(simbolo.tipo=="vector_boolean"){
+                            op = new Operador()
+                            let nuevoArray=[];
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="boolean"){
+                                    nuevoArray.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            simbolo.valor=nuevoArray;
+                            TS.getInstance().modificar(simbolo)
+                        }
+                        else if(simbolo.tipo=="vector_string"){
+                            op = new Operador()
+                            let nuevoArray=[];
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="string"){
+                                    nuevoArray.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            simbolo.valor=nuevoArray;
+                            TS.getInstance().modificar(simbolo)
+                        }
+                        else if(simbolo.tipo=="vector_char"){
+                            op = new Operador()
+                            let nuevoArray=[];
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="char"){
+                                    nuevoArray.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            simbolo.valor=nuevoArray;
+                            TS.getInstance().modificar(simbolo)
+                        }
+                    })
+                    break;
+            
+            //
+            case "DECLARACION_VECTORES_TIPO22":
+    
+                    //DECLARANDO
+                    raiz.childs[1].childs.forEach(hijo=>{
+                        if(TS.getInstance().obtener(hijo.value)==null){
+                            if(raiz.childs[0]=="int"){
+                                simbolo= new Simbolo(hijo.value,"vector_integer",0);
+                            }
+                            else if(raiz.childs[0]=="double"){
+                                simbolo= new Simbolo(hijo.value,"vector_double",0);
+                            }
+                            else if(raiz.childs[0]=="boolean"){
+                                simbolo= new Simbolo(hijo.value,"vector_boolean",0);
+                            }
+                            else if(raiz.childs[0]=="string"){
+                                simbolo= new Simbolo(hijo.value,"vector_string",0);
+                            }
+                            else if(raiz.childs[0]=="char"){
+                                simbolo= new Simbolo(hijo.value,"vector_char",0);
+                            }
+                            TS.getInstance().insertar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                        }  
+                        
+                    })
+                    
+                    //ASIGNANDO
+                    raiz.childs[1].childs.forEach(hijo=>{
+                        simbolo=TS.getInstance().obtener(hijo.value);
+                        if(simbolo.tipo=="vector_integer"){
+                            op = new Operador()
+                            let nuevoArray=[];
+                            let array2=[];
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="integer"){
+                                    nuevoArray.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            raiz.childs[3].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="integer"){
+                                    array2.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            var arregloFinal=[];
+                            arregloFinal.push(nuevoArray)
+                            arregloFinal.push(array2)
+                            simbolo.valor=arregloFinal;
+                            TS.getInstance().modificar(simbolo)
+                        }
+                        else if(simbolo.tipo=="vector_double"){
+                            op = new Operador()
+                            let nuevoArray=[];
+                            let array2=[];
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="double"){
+                                    nuevoArray.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            raiz.childs[3].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="double"){
+                                    array2.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            var arregloFinal=[];
+                            arregloFinal.push(nuevoArray)
+                            arregloFinal.push(array2)
+                            simbolo.valor=arregloFinal;
+                            TS.getInstance().modificar(simbolo)
+                        }
+                        else if(simbolo.tipo=="vector_boolean"){
+                            op = new Operador()
+                            let nuevoArray=[];
+                            let array2=[];
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="boolean"){
+                                    nuevoArray.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            raiz.childs[3].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="boolean"){
+                                    array2.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            var arregloFinal=[];
+                            arregloFinal.push(nuevoArray)
+                            arregloFinal.push(array2)
+                            simbolo.valor=arregloFinal;
+                            TS.getInstance().modificar(simbolo)
+                        }
+                        else if(simbolo.tipo=="vector_string"){
+                            op = new Operador()
+                            let nuevoArray=[];
+                            let array2=[];
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="string"){
+                                    nuevoArray.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            raiz.childs[3].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="string"){
+                                    array2.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            var arregloFinal=[];
+                            arregloFinal.push(nuevoArray)
+                            arregloFinal.push(array2)
+                            simbolo.valor=arregloFinal;
+                            TS.getInstance().modificar(simbolo)
+                        }
+                        else if(simbolo.tipo=="vector_char"){
+                            op = new Operador()
+                            let nuevoArray=[];
+                            let array2=[];
+                            raiz.childs[2].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="char"){
+                                    nuevoArray.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            raiz.childs[3].childs.forEach(nodito => {
+                                res = op.ejecutar(nodito)
+                                if(res.tipo=="char"){
+                                    array2.push(res.valor)
+                                }
+                                else{
+                                    L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                    codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                }
+                            });
+                            var arregloFinal=[];
+                            arregloFinal.push(nuevoArray)
+                            arregloFinal.push(array2)
+                            simbolo.valor=arregloFinal;
+                            TS.getInstance().modificar(simbolo)
+                        }
+                    })
+                    break;
+
+
             //
             case "METODO_SIN_PA":
                 interprete=new Interprete();
