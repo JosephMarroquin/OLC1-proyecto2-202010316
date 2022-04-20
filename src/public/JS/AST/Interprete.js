@@ -137,16 +137,28 @@ class Interprete{
                 metodos=new Metodos();
                 op = new Operador();
                 res=op.ejecutar(raiz.childs[0])
+                var BreakException = {};
                 
                 if(raiz.childs.length==2){
                     raiz.childs[1].childs.forEach(nodito => {
                         switchcase=op.ejecutar(nodito.childs[0])
                         switch(res.valor){
                             case switchcase.valor:
-                                nodito.childs[1].childs.forEach(hh => {
-                                    codigo+=metodos.interpretar(hh);
-                                    codigo+=this.interpretar(hh);
-                                });
+                                if(almacenaBreak=="Si"){
+                                    almacenaBreak=null;
+                                    break;
+                                }
+                                try{
+                                    nodito.childs[1].childs.forEach(hh => {
+                                        codigo+=metodos.interpretar(hh);
+                                        codigo+=this.interpretar(hh);
+                                        if(almacenaBreak=="Si"){
+                                            throw BreakException;
+                                        }
+                                    });
+                                }catch (e) {
+                                    if (e !== BreakException) throw e;
+                                  }
                                 return codigo;
                         }
                     });
@@ -157,19 +169,40 @@ class Interprete{
                         switchcase=op.ejecutar(nodito.childs[0])
                         switch(res.valor){
                             case switchcase.valor:
-                                nodito.childs[1].childs.forEach(hh => {
-                                    codigo+=metodos.interpretar(hh);
-                                    codigo+=this.interpretar(hh);
-                                });
+                                if(almacenaBreak=="Si"){
+                                    break;
+                                }
+                                try{
+                                    nodito.childs[1].childs.forEach(hh => {
+                                        codigo+=metodos.interpretar(hh);
+                                        codigo+=this.interpretar(hh);
+                                        if(almacenaBreak=="Si"){
+                                            throw BreakException;
+                                        }
+                                    });
+                                }catch (e) {
+                                    if (e !== BreakException) throw e;
+                                  }
                                 return codigo;
                         }
                     });
                     switch(res.valor){
                         default:
-                            raiz.childs[2].childs.forEach(nodito => {
-                                codigo+=metodos.interpretar(nodito);
-                                codigo+=this.interpretar(nodito);
-                            });
+                            if(almacenaBreak=="Si"){
+                                almacenaBreak=null;
+                                break;
+                            }
+                            try{
+                                raiz.childs[2].childs.forEach(nodito => {
+                                    codigo+=metodos.interpretar(nodito);
+                                    codigo+=this.interpretar(nodito);
+                                    if(almacenaBreak=="Si"){
+                                        throw BreakException;
+                                    }
+                                });
+                            }catch (e) {
+                                if (e !== BreakException) throw e;
+                              }
                     }
                     return codigo;
                 }
@@ -177,13 +210,25 @@ class Interprete{
             case "DEFAULT":
                 metodos=new Metodos();
                 op = new Operador();
+                var BreakException = {};
                 res=op.ejecutar(raiz.childs[0])
                 switch(res.valor){
                     default:
-                        raiz.childs[1].childs.forEach(nodito => {
-                            codigo+=metodos.interpretar(nodito);
-                            codigo+=this.interpretar(nodito);
-                        });
+                        if(almacenaBreak=="Si"){
+                            almacenaBreak=null;
+                            break;
+                        }
+                        try{
+                            raiz.childs[1].childs.forEach(nodito => {
+                                codigo+=metodos.interpretar(nodito);
+                                codigo+=this.interpretar(nodito);
+                                if(almacenaBreak=="Si"){
+                                    throw BreakException;
+                                }
+                            });
+                        }catch (e) {
+                            if (e !== BreakException) throw e;
+                          }
                 }
                 return codigo;
                 
@@ -199,11 +244,18 @@ class Interprete{
                         alamcenaContinue=null;
                         continue;
                     }
+                    else if(almacenaBreak=="Si"){
+                        almacenaBreak=null;
+                        break;
+                    }
                     try{
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
                             codigo+=metodos.interpretar(hijo);  
                             codigo+=this.interpretar(hijo)
                             if(alamcenaContinue=="Si"){
+                                throw BreakException;
+                            }
+                            else if(almacenaBreak=="Si"){
                                 throw BreakException;
                             }
                         });
@@ -226,11 +278,18 @@ class Interprete{
                         alamcenaContinue=null;
                         continue;
                     }
+                    else if(almacenaBreak=="Si"){
+                        almacenaBreak=null;
+                        break;
+                    }
                     try {
                         raiz.childs[1].childs[0].childs.forEach(hijo=>{
                             codigo+=metodos.interpretar(hijo)
                             codigo+=this.interpretar(hijo)
                             if(alamcenaContinue=="Si"){
+                                throw BreakException;
+                            }
+                            else if(almacenaBreak=="Si"){
                                 throw BreakException;
                             }
                         });
@@ -273,11 +332,18 @@ class Interprete{
                             alamcenaContinue=null;
                             continue;
                         }
+                        else if(almacenaBreak=="Si"){
+                            almacenaBreak=null;
+                            break;
+                        }
                         try{
                             raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                 codigo+=metodos.interpretar(hijo)
                                 codigo+=this.interpretar(hijo)
                                 if(alamcenaContinue=="Si"){
+                                    throw BreakException;
+                                }
+                                else if(almacenaBreak=="Si"){
                                     throw BreakException;
                                 }
                             });
@@ -343,11 +409,18 @@ class Interprete{
                                 alamcenaContinue=null;
                                 continue;
                             }
+                            else if(almacenaBreak=="Si"){
+                                almacenaBreak=null;
+                                break;
+                            }
                             try{
                                 raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                     codigo+=metodos.interpretar(hijo)
                                     codigo+=this.interpretar(hijo)
                                     if(alamcenaContinue=="Si"){
+                                        throw BreakException;
+                                    }
+                                    else if(almacenaBreak=="Si"){
                                         throw BreakException;
                                     }
                                 });
@@ -392,11 +465,18 @@ class Interprete{
                                 alamcenaContinue=null;
                                 continue;
                             }
+                            else if(almacenaBreak=="Si"){
+                                almacenaBreak=null;
+                                break;
+                            }
                             try{
                                 raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                     codigo+=metodos.interpretar(hijo)
                                     codigo+=this.interpretar(hijo)
                                     if(alamcenaContinue=="Si"){
+                                        throw BreakException;
+                                    }
+                                    else if(almacenaBreak=="Si"){
                                         throw BreakException;
                                     }
                                 });
@@ -470,11 +550,18 @@ class Interprete{
                                 alamcenaContinue=null;
                                 continue;
                             }
+                            else if(almacenaBreak=="Si"){
+                                almacenaBreak=null;
+                                break;
+                            }
                             try{
                                 raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                     codigo+=metodos.interpretar(hijo)
                                     codigo+=this.interpretar(hijo)
                                     if(alamcenaContinue=="Si"){
+                                        throw BreakException;
+                                    }
+                                    else if(almacenaBreak=="Si"){
                                         throw BreakException;
                                     }
                                 });
@@ -566,11 +653,18 @@ class Interprete{
                                 alamcenaContinue=null;
                                 continue;
                             }
+                            else if(almacenaBreak=="Si"){
+                                almacenaBreak=null;
+                                break;
+                            }
                             try{
                                 raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                     codigo+=metodos.interpretar(hijo)
                                     codigo+=this.interpretar(hijo)
                                     if(alamcenaContinue=="Si"){
+                                        throw BreakException;
+                                    }
+                                    else if(almacenaBreak=="Si"){
                                         throw BreakException;
                                     }
                                 });
@@ -644,11 +738,18 @@ class Interprete{
                                 alamcenaContinue=null;
                                 continue;
                             }
+                            else if(almacenaBreak=="Si"){
+                                almacenaBreak=null;
+                                break;
+                            }
                             try{
                                 raiz.childs[3].childs[0].childs.forEach(hijo=>{
                                     codigo+=metodos.interpretar(hijo)
                                     codigo+=this.interpretar(hijo)
                                     if(alamcenaContinue=="Si"){
+                                        throw BreakException;
+                                    }
+                                    else if(almacenaBreak=="Si"){
                                         throw BreakException;
                                     }
                                 });
@@ -700,7 +801,7 @@ class Interprete{
             
             //
             case "BREAK":
-                runable=null;
+                almacenaBreak="Si";
                 break;
             
             //
