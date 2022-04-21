@@ -271,6 +271,131 @@ class Operador{
 
                 return Resultado;
             
+            case "acceso_vector":
+                Resultado= new ResultadoOp();
+                let simbolo2= TS.getInstance().obtener(raiz.childs[0]);
+                Resultado1=this.ejecutar(raiz.childs[1]);
+                if(simbolo2.tipo=="vector_integer"){
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.tipo="integer";
+                        Resultado.valor=simbolo2.valor[Resultado1.valor];
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[0].fila,raiz.childs[0].columna));
+                        Resultado.tipo="error"
+                        Resultado.valor="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[0].fila+" columna "+raiz.childs[0].columna
+                    }
+                }
+                else if(simbolo2.tipo=="vector_double"){
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.tipo="double";
+                        Resultado.valor=simbolo2.valor[Resultado1.valor];
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[0].fila,raiz.childs[0].columna));
+                        Resultado.tipo="error"
+                        Resultado.valor="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[0].fila+" columna "+raiz.childs[0].columna
+                    }
+                }
+                else if(simbolo2.tipo=="vector_boolean"){
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.tipo="boolean";
+                        Resultado.valor=simbolo2.valor[Resultado1.valor];
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[0].fila,raiz.childs[0].columna));
+                        Resultado.tipo="error"
+                        Resultado.valor="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[0].fila+" columna "+raiz.childs[0].columna
+                    }
+                }
+                else if(simbolo2.tipo=="vector_string"){
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.tipo="string";
+                        Resultado.valor=simbolo2.valor[Resultado1.valor];
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[0].fila,raiz.childs[0].columna));
+                        Resultado.tipo="error"
+                        Resultado.valor="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[0].fila+" columna "+raiz.childs[0].columna
+                    }
+                }
+                else if(simbolo2.tipo=="vector_char"){
+                    if(Resultado1.tipo=="integer"){
+                        Resultado.tipo="char";
+                        Resultado.valor=simbolo2.valor[Resultado1.valor];
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[0].fila,raiz.childs[0].columna));
+                        Resultado.tipo="error"
+                        Resultado.valor="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[0].fila+" columna "+raiz.childs[0].columna
+                    }
+                }
+                
+                return Resultado;
+            
+            case "acceso_vector2":
+                Resultado= new ResultadoOp();
+                let simbolo3= TS.getInstance().obtener(raiz.childs[0]);
+                Resultado1=this.ejecutar(raiz.childs[1]);
+                Resultado2=this.ejecutar(raiz.childs[2]);
+                if(simbolo3.tipo=="vector_integer"){
+                    if(Resultado1.tipo=="integer" && Resultado2.tipo=="integer"){
+                        Resultado.tipo="integer";
+                        Resultado.valor=simbolo3.valor[Resultado1.valor][Resultado2.valor];
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[0].fila,raiz.childs[0].columna));
+                        Resultado.tipo="error"
+                        Resultado.valor="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[0].fila+" columna "+raiz.childs[0].columna
+                    }
+                }
+                else if(simbolo3.tipo=="vector_double"){
+                    if(Resultado1.tipo=="integer" && Resultado2.tipo=="integer"){
+                        Resultado.tipo="double";
+                        Resultado.valor=simbolo3.valor[Resultado1.valor][Resultado2.valor];
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[0].fila,raiz.childs[0].columna));
+                        Resultado.tipo="error"
+                        Resultado.valor="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[0].fila+" columna "+raiz.childs[0].columna
+                    }
+                }
+                else if(simbolo3.tipo=="vector_boolean"){
+                    if(Resultado1.tipo=="integer" && Resultado2.tipo=="integer"){
+                        Resultado.tipo="boolean";
+                        Resultado.valor=simbolo3.valor[Resultado1.valor][Resultado2.valor];
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[0].fila,raiz.childs[0].columna));
+                        Resultado.tipo="error"
+                        Resultado.valor="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[0].fila+" columna "+raiz.childs[0].columna
+                    }
+                }
+                else if(simbolo3.tipo=="vector_string"){
+                    if(Resultado1.tipo=="integer" && Resultado2.tipo=="integer"){
+                        Resultado.tipo="string";
+                        Resultado.valor=simbolo3.valor[Resultado1.valor][Resultado2.valor];
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[0].fila,raiz.childs[0].columna));
+                        Resultado.tipo="error"
+                        Resultado.valor="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[0].fila+" columna "+raiz.childs[0].columna
+                    }
+                }
+                else if(simbolo3.tipo=="vector_char"){
+                    if(Resultado1.tipo=="integer" && Resultado2.tipo=="integer"){
+                        Resultado.tipo="char";
+                        Resultado.valor=simbolo3.valor[Resultado1.valor][Resultado2.valor];
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[0].fila,raiz.childs[0].columna));
+                        Resultado.tipo="error"
+                        Resultado.valor="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[0].fila+" columna "+raiz.childs[0].columna
+                    }
+                }
+                
+                return Resultado;
+            
             default:
                 break;
         }

@@ -380,6 +380,8 @@ EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.fi
     |Tok_toupper Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("toupper",$3,this._$.first_line,@1.last_column));}
     |Tok_round Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("round",$3,this._$.first_line,@1.last_column));}
     |Tok_typeof Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("typeof",$3,this._$.first_line,@1.last_column));}
+    |Tok_ID Tok_cor1 EXP Tok_cor2 {$$= new AST_Node("acceso_vector","acceso_vector",this._$.first_line,@1.last_column);$$.addChilds($1,$3);}
+    |Tok_ID Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 {$$= new AST_Node("acceso_vector2","acceso_vector2",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$6);}
     ;
 
 
