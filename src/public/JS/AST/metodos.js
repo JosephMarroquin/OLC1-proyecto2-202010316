@@ -956,6 +956,38 @@ class Metodos{
                 }
                 break;
 
+            
+            //
+            case "VECTOR_CHAR":
+    
+                    //DECLARANDO
+                    raiz.childs[0].childs.forEach(hijo=>{
+                        if(TS.getInstance().obtener(hijo.value)==null){
+                            simbolo= new Simbolo(hijo.value,"vector_char",0);
+                            TS.getInstance().insertar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[0].fila,raiz.childs[0].columna));
+                        }  
+                        
+                    })
+                    
+                    //ASIGNANDO
+                    raiz.childs[0].childs.forEach(hijo=>{
+                        simbolo=TS.getInstance().obtener(hijo.value);
+                        if(simbolo.tipo=="vector_char"){
+                            op = new Operador()
+                            res = op.ejecutar(raiz.childs[1])
+                            if(res.tipo=="vector_char"){
+                                simbolo.valor=res.valor
+                            }else{
+                                L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                                codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            }
+                            TS.getInstance().modificar(simbolo)
+                        }
+                    })
+                    break;
+
             //
             case "METODO_SIN_PA":
                 interprete=new Interprete();

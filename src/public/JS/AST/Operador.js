@@ -396,6 +396,37 @@ class Operador{
                 
                 return Resultado;
             
+            
+            case "length":
+                    Resultado= new ResultadoOp();
+                    Resultado.tipo="integer";
+                    Resultado1=this.ejecutar(raiz.value);
+                    if(Resultado1.tipo=="string" || Resultado1.tipo=="vector_integer" || Resultado1.tipo=="vector_double" || Resultado1.tipo=="vector_boolean" || Resultado1.tipo=="vector_string" || Resultado1.tipo=="vector_char"){
+                        Resultado.valor=Resultado1.valor.length;
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Parametro invalido para funcion length ",raiz.fila,raiz.columna));
+                        Resultado.tipo="error";
+                        Resultado.valor="Semantico"+" Parametro invalido para funcion length "+"fila: "+raiz.fila+" columna: "+raiz.columna;
+                        return Resultado;
+                    }
+                    return Resultado;
+            
+            case "tochararray":
+                    Resultado= new ResultadoOp();
+                    Resultado.tipo="vector_char";
+                    Resultado1=this.ejecutar(raiz.value);
+                    if(Resultado1.tipo=="string"){
+                        Resultado.valor=Resultado1.valor.split('');
+                    }
+                    else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," El valor ingresado no es una cadena ",raiz.fila,raiz.columna));
+                        Resultado.tipo="error";
+                        Resultado.valor="Semantico"+" El valor ingresado no es una cadena "+"fila: "+raiz.fila+" columna: "+raiz.columna;
+                        return Resultado;
+                    }
+                    return Resultado;
+            
             default:
                 break;
         }

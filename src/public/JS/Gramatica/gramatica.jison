@@ -33,6 +33,8 @@
 "continue"          return 'Tok_continue'
 "return"            return 'Tok_return'
 "new"               return 'Tok_new'
+"length"            return 'Tok_length'
+"tochararray"       return 'Tok_tochararray'
 
 //Definir tipos de datos
 
@@ -153,6 +155,7 @@ SENTENCIA: DECLARACION Tok_pyc{$$=$1}
            |DECLARACION_VECTORES_TIPO2 Tok_pyc{$$=$1}
            |INCREMENTO_DECREMENTO Tok_pyc{$$=$1}
            |MODIFICA_VECTOR Tok_pyc{$$=$1}
+           |VECTOR_CHAR Tok_pyc{$$=$1}
            |BLOQUE{$$=$1}
            |IF{$$=$1}
            |WHILE{$$=$1}
@@ -179,6 +182,9 @@ DECLARACIONyASIGNACION: Tok_TD_int ID_LIST Tok_asigna1 EXP {$$=new AST_Node("DEC
                                                                    $$.addChilds($2,$4,$1);}
                         |Tok_TD_char ID_LIST Tok_asigna1 EXP {$$=new AST_Node("DECLARACIONyASIGNACION","DECLARACIONyASIGNACION",this._$.first_line,@1.last_column);
                                                                    $$.addChilds($2,$4,$1);}
+;
+
+VECTOR_CHAR:Tok_TD_char ID_LIST Tok_cor1 Tok_cor2 Tok_asigna1 EXP {$$=new AST_Node("VECTOR_CHAR","VECTOR_CHAR",this._$.first_line,@1.last_column); $$.addChilds($2,$6);}
 ;
 
 DECLARACION_VECTORES: Tok_TD_int ID_LIST Tok_cor1 Tok_cor2 Tok_asigna1 Tok_new Tok_TD_int Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES","DECLARACION_VECTORES",this._$.first_line,@1.last_column);
@@ -387,6 +393,8 @@ EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.fi
     |Tok_typeof Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("typeof",$3,this._$.first_line,@1.last_column));}
     |Tok_ID Tok_cor1 EXP Tok_cor2 {$$= new AST_Node("acceso_vector","acceso_vector",this._$.first_line,@1.last_column);$$.addChilds($1,$3);}
     |Tok_ID Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 {$$= new AST_Node("acceso_vector2","acceso_vector2",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$6);}
+    |Tok_length Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("length",$3,this._$.first_line,@1.last_column));}
+    |Tok_tochararray Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("tochararray",$3,this._$.first_line,@1.last_column));}
     ;
 
 
