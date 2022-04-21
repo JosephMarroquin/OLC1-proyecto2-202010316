@@ -925,6 +925,7 @@ class Interprete{
             
             //
             case "LLAMADA_MSIN_RUN":
+                metodos=new Metodos();
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
@@ -932,7 +933,12 @@ class Interprete{
                     TS.getInstance().insertar(simbolo)
                 }else{
                     simbolo=TS.getInstance().obtener(raiz.childs[0]);
-                    codigo=simbolo.valor;                  
+                    simbolo.valor.forEach(ins =>{
+                        runable="si"
+                        codigo+=metodos.interpretar(ins);
+                        codigo+=this.interpretar(ins);
+                        runable=null;
+                });               
                 }  
 
                 break;
