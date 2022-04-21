@@ -12,6 +12,7 @@ class Metodos{
         let op;
         let res;
         let res2;
+        let res3;
         let switchcase;
         let codigo=""
         let simbolo;
@@ -769,7 +770,191 @@ class Metodos{
                         }
                     })
                     break;
-
+            
+            //MODIFICACION VECTORES
+            case "MODIFICA_VECTOR":
+                simbolo=TS.getInstance().obtener(raiz.childs[0]);
+                if(simbolo.tipo=="vector_integer"){
+                    op = new Operador()
+                    res = op.ejecutar(raiz.childs[1])
+                    res2 = op.ejecutar(raiz.childs[2])
+                    if(res.tipo=="integer"){
+                        if(res2.tipo=="integer"){
+                            simbolo.valor[res.valor]=res2.valor;
+                            TS.getInstance().modificar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
+                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                        }  
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                    }
+                }
+                else if(simbolo.tipo=="vector_double"){
+                    op = new Operador()
+                    res = op.ejecutar(raiz.childs[1])
+                    res2 = op.ejecutar(raiz.childs[2])
+                    if(res.tipo=="integer"){
+                        if(res2.tipo=="double"){
+                            simbolo.valor[res.valor]=res2.valor;
+                            TS.getInstance().modificar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
+                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                        }  
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                    }
+                }
+                else if(simbolo.tipo=="vector_boolean"){
+                    op = new Operador()
+                    res = op.ejecutar(raiz.childs[1])
+                    res2 = op.ejecutar(raiz.childs[2])
+                    if(res.tipo=="integer"){
+                        if(res2.tipo=="boolean"){
+                            simbolo.valor[res.valor]=res2.valor;
+                            TS.getInstance().modificar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un boolean",raiz.childs[1].fila,raiz.childs[1].columna));
+                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un boolean "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                        }  
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                    }
+                }
+                else if(simbolo.tipo=="vector_string"){
+                    op = new Operador()
+                    res = op.ejecutar(raiz.childs[1])
+                    res2 = op.ejecutar(raiz.childs[2])
+                    if(res.tipo=="integer"){
+                        if(res2.tipo=="string"){
+                            simbolo.valor[res.valor]=res2.valor;
+                            TS.getInstance().modificar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un string",raiz.childs[1].fila,raiz.childs[1].columna));
+                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un string "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                        }  
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                    }
+                }
+                else if(simbolo.tipo=="vector_char"){
+                    op = new Operador()
+                    res = op.ejecutar(raiz.childs[1])
+                    res2 = op.ejecutar(raiz.childs[2])
+                    if(res.tipo=="integer"){
+                        if(res2.tipo=="char"){
+                            simbolo.valor[res.valor]=res2.valor;
+                            TS.getInstance().modificar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un char",raiz.childs[1].fila,raiz.childs[1].columna));
+                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un char "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                        }  
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                    }
+                }
+                break;
+            
+            //
+            case "MODIFICA_VECTOR2":
+                simbolo=TS.getInstance().obtener(raiz.childs[0]);
+                if(simbolo.tipo=="vector_integer"){
+                    op = new Operador()
+                    res = op.ejecutar(raiz.childs[1])
+                    res2 = op.ejecutar(raiz.childs[2])
+                    res3 = op.ejecutar(raiz.childs[3])
+                    if(res.tipo=="integer" && res2.tipo=="integer"){
+                        if(res3.tipo=="integer"){
+                            simbolo.valor[res.valor][res2.valor]=res3.valor;
+                            TS.getInstance().modificar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
+                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                        }  
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                    }
+                }
+                else if(simbolo.tipo=="vector_double"){
+                    op = new Operador()
+                    res = op.ejecutar(raiz.childs[1])
+                    res2 = op.ejecutar(raiz.childs[2])
+                    res3 = op.ejecutar(raiz.childs[3])
+                    if(res.tipo=="integer" && res2.tipo=="integer"){
+                        if(res3.tipo=="double"){
+                            simbolo.valor[res.valor][res2.valor]=res3.valor;
+                            TS.getInstance().modificar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
+                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                        }  
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                    }
+                }
+                else if(simbolo.tipo=="vector_boolean"){
+                    op = new Operador()
+                    res = op.ejecutar(raiz.childs[1])
+                    res2 = op.ejecutar(raiz.childs[2])
+                    res3 = op.ejecutar(raiz.childs[3])
+                    if(res.tipo=="integer" && res2.tipo=="integer"){
+                        if(res3.tipo=="boolean"){
+                            simbolo.valor[res.valor][res2.valor]=res3.valor;
+                            TS.getInstance().modificar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un boolean",raiz.childs[1].fila,raiz.childs[1].columna));
+                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un boolean "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                        }  
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                    }
+                }
+                else if(simbolo.tipo=="vector_string"){
+                    op = new Operador()
+                    res = op.ejecutar(raiz.childs[1])
+                    res2 = op.ejecutar(raiz.childs[2])
+                    res3 = op.ejecutar(raiz.childs[3])
+                    if(res.tipo=="integer" && res2.tipo=="integer"){
+                        if(res3.tipo=="string"){
+                            simbolo.valor[res.valor][res2.valor]=res3.valor;
+                            TS.getInstance().modificar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un string",raiz.childs[1].fila,raiz.childs[1].columna));
+                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un string "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                        }  
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                    }
+                }
+                else if(simbolo.tipo=="vector_char"){
+                    op = new Operador()
+                    res = op.ejecutar(raiz.childs[1])
+                    res2 = op.ejecutar(raiz.childs[2])
+                    res3 = op.ejecutar(raiz.childs[3])
+                    if(res.tipo=="integer" && res2.tipo=="integer"){
+                        if(res3.tipo=="char"){
+                            simbolo.valor[res.valor][res2.valor]=res3.valor;
+                            TS.getInstance().modificar(simbolo)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un char",raiz.childs[1].fila,raiz.childs[1].columna));
+                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un char "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                        }  
+                    }else{
+                        L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
+                        codigo="Error Semantico"+" Declaracion incorrecta de un vector "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                    }
+                }
+                break;
 
             //
             case "METODO_SIN_PA":

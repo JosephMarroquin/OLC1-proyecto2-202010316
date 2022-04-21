@@ -152,6 +152,7 @@ SENTENCIA: DECLARACION Tok_pyc{$$=$1}
            |DECLARACION_VECTORES Tok_pyc{$$=$1}
            |DECLARACION_VECTORES_TIPO2 Tok_pyc{$$=$1}
            |INCREMENTO_DECREMENTO Tok_pyc{$$=$1}
+           |MODIFICA_VECTOR Tok_pyc{$$=$1}
            |BLOQUE{$$=$1}
            |IF{$$=$1}
            |WHILE{$$=$1}
@@ -303,6 +304,10 @@ LLAMADAS: Tok_ID Tok_par1 Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MSIN_PA","L
 PRINT: Tok_print Tok_par1 EXP Tok_par2 Tok_pyc {$$= new AST_Node("PRINT","PRINT",this._$.first_line,@1.last_column); $$.addChilds($3);};
 
 PRINTLN: Tok_println Tok_par1 EXP Tok_par2 Tok_pyc {$$= new AST_Node("PRINTLN","PRINTLN",this._$.first_line,@1.last_column); $$.addChilds($3);};
+
+MODIFICA_VECTOR: Tok_ID Tok_cor1 EXP Tok_cor2 Tok_asigna1 EXP {$$=new AST_Node("MODIFICA_VECTOR","MODIFICA_VECTOR",this._$.first_line,@1.last_column); $$.addChilds($1,$3,$6);}
+                |Tok_ID Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 Tok_asigna1 EXP {$$=new AST_Node("MODIFICA_VECTOR2","MODIFICA_VECTOR2",this._$.first_line,@1.last_column); $$.addChilds($1,$3,$6,$9);}
+;
 
 OPTERNARIO:EXP Tok_igual EXP Tok_interrogacion EXP Tok_dospuntos EXP {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3,$5,$7);}
           |EXP Tok_diferente EXP Tok_interrogacion EXP Tok_dospuntos EXP {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3,$5,$7);}
