@@ -35,6 +35,7 @@
 "new"               return 'Tok_new'
 "length"            return 'Tok_length'
 "tochararray"       return 'Tok_tochararray'
+"void"              return 'Tok_void'
 
 //Definir tipos de datos
 
@@ -301,10 +302,24 @@ FOR: Tok_for Tok_par1 DECLARACION Tok_pyc EXP Tok_pyc ASIGNACION Tok_par2 BLOQUE
 
 METODOS: Tok_ID Tok_par1 Tok_par2 BLOQUE {$$=new AST_Node("METODO_SIN_PA","METODO_SIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$4);}
         |Tok_run Tok_ID Tok_par1 Tok_par2 BLOQUE {$$=new AST_Node("METODO_SIN_RUN","METODO_SIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$5);}
+        |Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_void BLOQUE {$$=new AST_Node("METODO_SIN_PA","METODO_SIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$6);}
+        |Tok_run Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_void BLOQUE {$$=new AST_Node("METODO_SIN_RUN","METODO_SIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$7);}
+        //CON PARAMETOS
+        |Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 BLOQUE {$$=new AST_Node("METODO_CON_PA","METODO_CON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$5);}
+        |Tok_run Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 BLOQUE {$$=new AST_Node("METODO_CON_RUN","METODO_CON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4,$6);}
+        |Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_void BLOQUE {$$=new AST_Node("METODO_CON_PA","METODO_CON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$7);}
+        |Tok_run Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_void BLOQUE {$$=new AST_Node("METODO_CON_RUN","METODO_CON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4,$8);}
 ;
 
 LLAMADAS: Tok_ID Tok_par1 Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MSIN_PA","LLAMADA_MSIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1);}
         | Tok_run Tok_ID Tok_par1 Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MSIN_RUN","LLAMADA_MSIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2);}
+        //METODOS CON PARAMETOS
+        | Tok_ID Tok_par1 LISTA_EXP Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MCON_PA","LLAMADA_MCON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3);}
+        | Tok_run Tok_ID Tok_par1 LISTA_EXP Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MCON_RUN","LLAMADA_MCON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4);}
+;
+
+LISTA_EXP:LISTA_EXP Tok_coma EXP {$1.addChilds($3);$$=$1}
+         | EXP {$$=new AST_Node("LISTA_EXP","LISTA_EXP",this._$.first_line,@1.last_column);$$.addChilds($1);}
 ;
 
 PRINT: Tok_print Tok_par1 EXP Tok_par2 Tok_pyc {$$= new AST_Node("PRINT","PRINT",this._$.first_line,@1.last_column); $$.addChilds($3);};
@@ -313,6 +328,18 @@ PRINTLN: Tok_println Tok_par1 EXP Tok_par2 Tok_pyc {$$= new AST_Node("PRINTLN","
 
 MODIFICA_VECTOR: Tok_ID Tok_cor1 EXP Tok_cor2 Tok_asigna1 EXP {$$=new AST_Node("MODIFICA_VECTOR","MODIFICA_VECTOR",this._$.first_line,@1.last_column); $$.addChilds($1,$3,$6);}
                 |Tok_ID Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 Tok_asigna1 EXP {$$=new AST_Node("MODIFICA_VECTOR2","MODIFICA_VECTOR2",this._$.first_line,@1.last_column); $$.addChilds($1,$3,$6,$9);}
+;
+
+
+LISTA_PARAMETROS: LISTA_PARAMETROS Tok_coma TIPO_IDENTIFICADOR Tok_ID {$1.addChilds($3,$4);$$=$1}
+                | TIPO_IDENTIFICADOR Tok_ID {$$=new AST_Node("LISTA_PARAMETROS","LISTA_PARAMETROS",this._$.first_line,@1.last_column);$$.addChilds($1,$2);}
+;
+
+TIPO_IDENTIFICADOR:Tok_TD_int {$$=$1}
+                  |Tok_TD_double {$$=$1}
+                  |Tok_TD_boolean {$$=$1}
+                  |Tok_TD_string {$$=$1}
+                  |Tok_TD_char {$$=$1}
 ;
 
 OPTERNARIO:EXP Tok_igual EXP Tok_interrogacion EXP Tok_dospuntos EXP {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3,$5,$7);}

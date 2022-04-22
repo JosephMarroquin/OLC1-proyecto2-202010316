@@ -29,6 +29,7 @@ var TS = (function(){
                 if(simbolo.nombre==simbol.nombre){
                     simbolo.valor=simbol.valor
                     simbolo.tipo=simbol.tipo
+                    simbolo.parametros=simbol.parametros
                 }
             })
         }

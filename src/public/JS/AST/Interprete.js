@@ -22,6 +22,7 @@ class Interprete{
         let switchcase;
         let codigo=""
         let simbolo;
+        let simbolo2;
         let txtDefault;
         let metodos; 
         if(raiz===undefined || raiz===null)return;
@@ -857,6 +858,44 @@ class Interprete{
                 break;
             
             //
+            case "LLAMADA_MCON_PA":
+                metodos=new Metodos();
+                op= new Operador();
+
+                //DECLARANDO
+                simbolo=TS.getInstance().obtener(raiz.childs[0]);
+                if(typeof simbolo.valor=='object'){
+                    //ASIGNANDO VALOR A PARAMETROS INICIALES
+                    simbolo.parametros.forEach(hh=>{});
+                    for(var i=0; i<raiz.childs[1].childs.length; i++){
+                        //Llamar a la variable asignada al metodo 
+                        simbolo2=TS.getInstance().obtener(simbolo.parametros[i]);
+                        res=op.ejecutar(raiz.childs[1].childs[i])
+                        if(simbolo2.tipo==res.tipo){
+                            simbolo2.valor=res.valor
+                            //codigo+=" id "+simbolo2.valor+"\n"
+                            //codigo+=" valor "+res.valor+ "\n"
+                            TS.getInstance().modificar(simbolo2)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico"," El valor asignado no corresponde al pedido por el metodo ",raiz.childs[1].fila,raiz.childs[1].columna));
+                            codigo="Semantico"+" El valor asignado no corresponde al pedido por el metodo "+" fila "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            break;
+                        }
+                    }
+
+                    //INTERPRETO
+                    simbolo.valor.forEach(ins =>{
+                        codigo+=metodos.interpretar(ins);
+                        codigo+=this.interpretar(ins);
+                    });
+                    
+                }else{
+                    codigo+=simbolo.valor;
+                }
+
+                break;
+
+
             case "BREAK":
                 almacenaBreak="Si";
                 break;
@@ -943,6 +982,97 @@ class Interprete{
 
                 break;
             
+            //
+            case "LLAMADA_MCON_RUN":
+                metodos=new Metodos();
+                op= new Operador();
+
+                //DECLARANDO
+                simbolo=TS.getInstance().obtener(raiz.childs[0]);
+                if(typeof simbolo.valor=='object'){
+                    //ASIGNANDO VALOR A PARAMETROS INICIALES
+                    simbolo.parametros.forEach(hh=>{});
+                    for(var i=0; i<raiz.childs[1].childs.length; i++){
+                        //Llamar a la variable asignada al metodo 
+                        simbolo2=TS.getInstance().obtener(simbolo.parametros[i]);
+                        res=op.ejecutar(raiz.childs[1].childs[i])
+                        if(simbolo2.tipo==res.tipo){
+                            simbolo2.valor=res.valor
+                            //codigo+=" id "+simbolo2.valor+"\n"
+                            //codigo+=" valor "+res.valor+ "\n"
+                            TS.getInstance().modificar(simbolo2)
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico"," El valor asignado no corresponde al pedido por el metodo ",raiz.childs[1].fila,raiz.childs[1].columna));
+                            codigo="Semantico"+" El valor asignado no corresponde al pedido por el metodo "+" fila "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            break;
+                        }
+                    }
+
+                    //INTERPRETO
+                    simbolo.valor.forEach(ins =>{
+                        runable="si"
+                        codigo+=metodos.interpretar(ins);
+                        codigo+=this.interpretar(ins);
+                        runable=null;
+                    });
+                    
+                }
+
+                break;
+
+
+            //
+            case "METODO_CON_RUN":
+                metodos=new Metodos();
+
+                //DECLARANDO
+                if(TS.getInstance().obtener(raiz.childs[0])==null){
+                    simbolo= new Simbolo(raiz.childs[0],"metodo","","");
+                    simbolo.parametros=[]
+                    for(var i=0; i<raiz.childs[1].childs.length; i=i+2) {
+                        if(TS.getInstance().obtener(raiz.childs[1].childs[i+1])==null){
+                            if(raiz.childs[1].childs[i]=="int"){
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"integer",0);
+                            }
+                            else if(raiz.childs[1].childs[i]=="double"){
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"double","0.0");
+                            }
+                            else if(raiz.childs[1].childs[i]=="boolean"){
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"boolean",true);
+                            }
+                            else if(raiz.childs[1].childs[i]=="string"){
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"string","");
+                            }
+                            else if(raiz.childs[1].childs[i]=="char"){
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"char",'\u0000');
+                            }
+                            TS.getInstance().insertar(simbolo2)
+                            simbolo.parametros.push(simbolo2.nombre);
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                            codigo="Error Semantico"+" Ya se declaro la variable anteriormente "+" fila "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna;
+                        }  
+                        //codigo+=" tipo de dato: "+raiz.childs[1].childs[i]+" ";
+                        //codigo+=" id "+raiz.childs[1].childs[i+1]+"\n";
+                    }
+                    TS.getInstance().insertar(simbolo)
+                    raiz.childs[2].childs[0].childs.forEach(nodito => {
+                        runable="si"
+                        //interprete.analizaMetodo("si");
+                        simbolo.valor+=metodos.interpretar(nodito);
+                        simbolo.valor+=this.interpretar(nodito);
+                        //interprete.analizaMetodo(null);
+                        runable=null;
+                    });
+                    TS.getInstance().modificar(simbolo)
+                    codigo=simbolo.valor;
+                    TS.getInstance().modificar(simbolo)
+                }else{
+                     L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro el metodo anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                     codigo="Error Semantico, Ya se declaro el metodo anteriormente"+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna+"\n";
+                }  
+
+                break;
             //
             
         }
