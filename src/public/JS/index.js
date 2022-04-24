@@ -38,7 +38,8 @@ function appendTab(tab, nombre, contenido) {
       '<nav class="navbar navbar-dark bg-dark">'
       +'<button class="btn btn-success" onclick="final(veditor'+numberTabs+',consola'+numberTabs+')">Analizar</button>'+
       '<button class="btn btn-success" type="button"  onclick="openFile(veditor'+numberTabs+')">Abrir Archivo</button>'+
-      '<button  class="btn btn-success" type="button"  onclick="genTS()">Generar Tabla de Simbolos</button>'
+      '<button  class="btn btn-success" type="button"  onclick="genTS()">Generar Tabla de Simbolos</button>'+
+      '<button  class="btn btn-success" type="button"  onclick="genERROR()">Generar Tabla de Errores</button>'
       +'</nav>'+
       '<br>'+'<br><textarea id="consola'+numberTabs+'"></textarea>'+' </div>')
       $('#tabs .menu .tab').tab({});
@@ -62,6 +63,12 @@ function appendTab(tab, nombre, contenido) {
     var text=TS.getInstance().getsimbolos();
     download(text,"Reporte.html","text/html");
   }
+
+//OBTENER TABLA DE ERRORES Y GENERA UN HTML
+function genERROR(){
+  var text=L_Error.getInstance().getErrores();
+  download(text,"Reporte.html","text/html");
+}
   
 // VAMOS A INTERPRETAR 
   function final(id,consola){
@@ -81,7 +88,7 @@ function appendTab(tab, nombre, contenido) {
         consola.value=texto;
         return;
       }catch(error){
-          consola.value=error+"\n"+L_Error.getInstance().getErrores();
+          consola.value=error+"\n"+L_Error.getInstance().getErrores2();
           console.log(error);
           //download(error,'Archivo con errores','text/plain')
           return;
