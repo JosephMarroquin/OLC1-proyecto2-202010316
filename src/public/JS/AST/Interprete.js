@@ -326,7 +326,7 @@ class Interprete{
                 if(raiz.childs.length==4){
                     //DECLARACION
                     raiz.childs[0].childs[0].childs.forEach(hijo=>{
-                        if(TS.getInstance().obtener(hijo.value)==null){
+                        
                             if(raiz.childs[0].childs[1]=="int"){
                                 simbolo= new Simbolo(hijo.value,"integer",0);
                                 TS.getInstance().insertar(simbolo)
@@ -335,9 +335,7 @@ class Interprete{
                                 simbolo= new Simbolo(hijo.value,"double","0.0");
                                 TS.getInstance().insertar(simbolo)
                             }
-                        }else{
-                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                        }  
+                         
                     })   
 
                     //CONDICION
@@ -411,7 +409,7 @@ class Interprete{
                     if(raiz.childs[4]=="incremento"){
                         //DECLARACION
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
-                            if(TS.getInstance().obtener(hijo.value)==null){
+                            
                                 if(raiz.childs[0].childs[1]=="int"){
                                     simbolo= new Simbolo(hijo.value,"integer",0);
                                     TS.getInstance().insertar(simbolo)
@@ -420,9 +418,7 @@ class Interprete{
                                     simbolo= new Simbolo(hijo.value,"double","0.0");
                                     TS.getInstance().insertar(simbolo)
                                 }
-                            }else{
-                                L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                            }  
+                            
                         })
                         //CONDICION
                         res = op.ejecutar(raiz.childs[1])   
@@ -474,7 +470,7 @@ class Interprete{
                     else if(raiz.childs[4]=="decremento"){
                         //DECLARACION
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
-                            if(TS.getInstance().obtener(hijo.value)==null){
+                            
                                 if(raiz.childs[0].childs[1]=="int"){
                                     simbolo= new Simbolo(hijo.value,"integer",0);
                                     TS.getInstance().insertar(simbolo)
@@ -483,9 +479,7 @@ class Interprete{
                                     simbolo= new Simbolo(hijo.value,"double","0.0");
                                     TS.getInstance().insertar(simbolo)
                                 }
-                            }else{
-                                L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                            }  
+                            
                         })
                         //CONDICION
                         res = op.ejecutar(raiz.childs[1])   
@@ -537,7 +531,7 @@ class Interprete{
                     else if(raiz.childs[4]=="asigna"){
                         //DECLARACION Y ASIGNACION
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
-                            if(TS.getInstance().obtener(hijo.value)==null){
+                            
                                 if(raiz.childs[0].childs[2]=="int"){
                                     simbolo= new Simbolo(hijo.value,"integer",0);
                                     TS.getInstance().insertar(simbolo)
@@ -546,9 +540,7 @@ class Interprete{
                                     simbolo= new Simbolo(hijo.value,"double","0.0");
                                     TS.getInstance().insertar(simbolo)
                                 }
-                            }else{
-                                L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                            }  
+                            
                         })
 
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
@@ -647,7 +639,7 @@ class Interprete{
                     else if(raiz.childs[4]=="asigna_incre"){
                         //DECLARACION Y ASIGNACION
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
-                            if(TS.getInstance().obtener(hijo.value)==null){
+                            
                                 if(raiz.childs[0].childs[2]=="int"){
                                     simbolo= new Simbolo(hijo.value,"integer",0);
                                     TS.getInstance().insertar(simbolo)
@@ -656,9 +648,7 @@ class Interprete{
                                     simbolo= new Simbolo(hijo.value,"double","0.0");
                                     TS.getInstance().insertar(simbolo)
                                 }
-                            }else{
-                                L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                            }  
+                            
                         })
 
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
@@ -739,7 +729,7 @@ class Interprete{
                     else if(raiz.childs[4]=="asigna_decre"){
                         //DECLARACION Y ASIGNACION
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
-                            if(TS.getInstance().obtener(hijo.value)==null){
+                            
                                 if(raiz.childs[0].childs[2]=="int"){
                                     simbolo= new Simbolo(hijo.value,"integer",0);
                                     TS.getInstance().insertar(simbolo)
@@ -748,9 +738,7 @@ class Interprete{
                                     simbolo= new Simbolo(hijo.value,"double","0.0");
                                     TS.getInstance().insertar(simbolo)
                                 }
-                            }else{
-                                L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                            }  
+                              
                         })
 
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{

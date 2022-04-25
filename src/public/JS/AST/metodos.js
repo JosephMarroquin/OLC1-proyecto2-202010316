@@ -32,7 +32,7 @@ class Metodos{
             
             case "DECLARACION":
                     raiz.childs[0].childs.forEach(hijo=>{
-                        if(TS.getInstance().obtener(hijo.value)==null){
+                        
                             if(raiz.childs[1]=="int"){
                                 simbolo= new Simbolo(hijo.value,"integer",0);
                             }
@@ -49,9 +49,7 @@ class Metodos{
                                 simbolo= new Simbolo(hijo.value,"char",'\u0000');
                             }
                             TS.getInstance().insertar(simbolo)
-                        }else{
-                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                        }  
+                        
                     })
                     break;
             case "ASIGNACION":
@@ -126,7 +124,7 @@ class Metodos{
     
                     //DECLARANDO
                     raiz.childs[0].childs.forEach(hijo=>{
-                        if(TS.getInstance().obtener(hijo.value)==null){
+                        
                             if(raiz.childs[2]=="int"){
                                 simbolo= new Simbolo(hijo.value,"integer",0);
                             }
@@ -143,9 +141,7 @@ class Metodos{
                                 simbolo= new Simbolo(hijo.value,"char",'\u0000');
                             }
                             TS.getInstance().insertar(simbolo)
-                        }else{
-                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                        }  
+                        
                         
                     })
                     
@@ -222,7 +218,7 @@ class Metodos{
     
                     //DECLARANDO
                     raiz.childs[1].childs.forEach(hijo=>{
-                        if(TS.getInstance().obtener(hijo.value)==null){
+                        
                             if(raiz.childs[0]=="int"){
                                 simbolo= new Simbolo(hijo.value,"vector_integer",0);
                             }
@@ -239,9 +235,7 @@ class Metodos{
                                 simbolo= new Simbolo(hijo.value,"vector_char",0);
                             }
                             TS.getInstance().insertar(simbolo)
-                        }else{
-                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                        }  
+                         
                         
                     })
                     
@@ -335,7 +329,7 @@ class Metodos{
     
                     //DECLARANDO
                     raiz.childs[1].childs.forEach(hijo=>{
-                        if(TS.getInstance().obtener(hijo.value)==null){
+                        
                             if(raiz.childs[0]=="int"){
                                 simbolo= new Simbolo(hijo.value,"vector_integer",0);
                             }
@@ -352,9 +346,7 @@ class Metodos{
                                 simbolo= new Simbolo(hijo.value,"vector_char",0);
                             }
                             TS.getInstance().insertar(simbolo)
-                        }else{
-                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                        }  
+                        
                         
                     })
                     
@@ -479,7 +471,7 @@ class Metodos{
     
                     //DECLARANDO
                     raiz.childs[1].childs.forEach(hijo=>{
-                        if(TS.getInstance().obtener(hijo.value)==null){
+                        
                             if(raiz.childs[0]=="int"){
                                 simbolo= new Simbolo(hijo.value,"vector_integer",0);
                             }
@@ -496,9 +488,7 @@ class Metodos{
                                 simbolo= new Simbolo(hijo.value,"vector_char",0);
                             }
                             TS.getInstance().insertar(simbolo)
-                        }else{
-                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                        }  
+                         
                         
                     })
                     
@@ -593,7 +583,7 @@ class Metodos{
     
                     //DECLARANDO
                     raiz.childs[1].childs.forEach(hijo=>{
-                        if(TS.getInstance().obtener(hijo.value)==null){
+                        
                             if(raiz.childs[0]=="int"){
                                 simbolo= new Simbolo(hijo.value,"vector_integer",0);
                             }
@@ -610,9 +600,7 @@ class Metodos{
                                 simbolo= new Simbolo(hijo.value,"vector_char",0);
                             }
                             TS.getInstance().insertar(simbolo)
-                        }else{
-                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                        }  
+                        
                         
                     })
                     
@@ -963,12 +951,10 @@ class Metodos{
     
                     //DECLARANDO
                     raiz.childs[0].childs.forEach(hijo=>{
-                        if(TS.getInstance().obtener(hijo.value)==null){
+                        
                             simbolo= new Simbolo(hijo.value,"vector_char",0);
                             TS.getInstance().insertar(simbolo)
-                        }else{
-                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[0].fila,raiz.childs[0].columna));
-                        }  
+                        
                         
                     })
                     
@@ -1038,7 +1024,7 @@ class Metodos{
                     simbolo= new Simbolo(raiz.childs[0],"metodo","","");
                     simbolo.parametros=[]
                     for(var i=0; i<raiz.childs[1].childs.length; i=i+2) {
-                        if(TS.getInstance().obtener(raiz.childs[1].childs[i+1])==null){
+                        
                             if(raiz.childs[1].childs[i]=="int"){
                                 simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"integer",0);
                             }
@@ -1056,10 +1042,7 @@ class Metodos{
                             }
                             TS.getInstance().insertar(simbolo2)
                             simbolo.parametros.push(simbolo2.nombre);
-                        }else{
-                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                            codigo="Error Semantico"+" Ya se declaro la variable anteriormente "+" fila "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna;
-                        }  
+                         
                         //codigo+=" tipo de dato: "+raiz.childs[1].childs[i]+" ";
                         //codigo+=" id "+raiz.childs[1].childs[i+1]+"\n";
                     }
@@ -1142,7 +1125,7 @@ class Metodos{
                     }
                     simbolo.parametros=[]
                     for(var i=0; i<raiz.childs[1].childs.length; i=i+2) {
-                        if(TS.getInstance().obtener(raiz.childs[1].childs[i+1])==null){
+                        
                             if(raiz.childs[1].childs[i]=="int"){
                                 simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"integer",0);
                             }
@@ -1160,10 +1143,7 @@ class Metodos{
                             }
                             TS.getInstance().insertar(simbolo2)
                             simbolo.parametros.push(simbolo2.nombre);
-                        }else{
-                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
-                            codigo="Error Semantico"+" Ya se declaro la variable anteriormente "+" fila "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna;
-                        }  
+                          
                         //codigo+=" tipo de dato: "+raiz.childs[1].childs[i]+" ";
                         //codigo+=" id "+raiz.childs[1].childs[i+1]+"\n";
                     }
