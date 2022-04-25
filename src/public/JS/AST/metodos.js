@@ -1080,6 +1080,110 @@ class Metodos{
 
                 break;
             
+            //-----------------------FUNCIONES-------------------------------
+            case "FUNCION_SIN_PA":
+                interprete=new Interprete();
+                let arregloInstrucciones3=[];
+
+                //DECLARANDO
+                if(TS.getInstance().obtener(raiz.childs[0])==null){
+                    if(raiz.childs[2]=="int"){
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_int","");
+                    }
+                    else if(raiz.childs[2]=="double"){
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_double","");
+                    }
+                    else if(raiz.childs[2]=="boolean"){
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_boolean","");
+                    }
+                    else if(raiz.childs[2]=="string"){
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_string","");
+                    }
+                    else if(raiz.childs[2]=="char"){
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_char","");
+                    }
+                    TS.getInstance().insertar(simbolo)
+                    raiz.childs[1].childs[0].childs.forEach(nodito => {
+                        //interprete.analizaMetodo("si");
+                        arregloInstrucciones3.push(nodito)
+                        //simbolo.valor+=this.interpretar(nodito);
+                        //simbolo.valor+=interprete.interpretar(nodito);
+                        //interprete.analizaMetodo(null);
+                    });
+                    simbolo.valor=arregloInstrucciones3;
+                    TS.getInstance().modificar(simbolo)
+                }else{
+                    L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro el metodo anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                    codigo="Error Semantico, Ya se declaro el metodo anteriormente"+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna+"\n";
+                }  
+
+                break;
+            
+            case "FUNCION_CON_PA":
+                interprete=new Interprete();
+                let arregloInstrucciones4=[];
+
+                //DECLARANDO
+                if(TS.getInstance().obtener(raiz.childs[0])==null){
+                    if(raiz.childs[3]=="int"){
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_int","");
+                    }
+                    else if(raiz.childs[3]=="double"){
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_double","");
+                    }
+                    else if(raiz.childs[3]=="boolean"){
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_boolean","");
+                    }
+                    else if(raiz.childs[3]=="string"){
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_string","");
+                    }
+                    else if(raiz.childs[3]=="char"){
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_char","");
+                    }
+                    simbolo.parametros=[]
+                    for(var i=0; i<raiz.childs[1].childs.length; i=i+2) {
+                        if(TS.getInstance().obtener(raiz.childs[1].childs[i+1])==null){
+                            if(raiz.childs[1].childs[i]=="int"){
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"integer",0);
+                            }
+                            else if(raiz.childs[1].childs[i]=="double"){
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"double","0.0");
+                            }
+                            else if(raiz.childs[1].childs[i]=="boolean"){
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"boolean",true);
+                            }
+                            else if(raiz.childs[1].childs[i]=="string"){
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"string","");
+                            }
+                            else if(raiz.childs[1].childs[i]=="char"){
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"char",'\u0000');
+                            }
+                            TS.getInstance().insertar(simbolo2)
+                            simbolo.parametros.push(simbolo2.nombre);
+                        }else{
+                            L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro la variable anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                            codigo="Error Semantico"+" Ya se declaro la variable anteriormente "+" fila "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna;
+                        }  
+                        //codigo+=" tipo de dato: "+raiz.childs[1].childs[i]+" ";
+                        //codigo+=" id "+raiz.childs[1].childs[i+1]+"\n";
+                    }
+                    TS.getInstance().insertar(simbolo)
+                    raiz.childs[2].childs[0].childs.forEach(nodito => {
+                        //interprete.analizaMetodo("si");
+                        arregloInstrucciones4.push(nodito)
+                        //simbolo.valor+=this.interpretar(nodito);
+                        //simbolo.valor+=interprete.interpretar(nodito);
+                        //interprete.analizaMetodo(null);
+                    });
+                    simbolo.valor=arregloInstrucciones4;
+                    TS.getInstance().modificar(simbolo)
+                }else{
+                     L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro el metodo anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
+                     codigo="Error Semantico, Ya se declaro el metodo anteriormente"+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna+"\n";
+                }  
+
+                break;
+            
                 
                 
         }

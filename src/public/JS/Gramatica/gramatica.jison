@@ -166,7 +166,8 @@ SENTENCIA: DECLARACION Tok_pyc{$$=$1}
            |SWITCH{$$=$1}
            |FOR{$$=$1}
            |METODOS{$$=$1}
-           |LLAMADAS{$$=$1}
+           |FUNCIONES{$$=$1}
+           |LLAMADAS Tok_pyc{$$=$1}
            |BREAK{$$=$1}
            |CONTINUE{$$=$1}
            |RETURN{$$=$1}
@@ -309,13 +310,37 @@ METODOS: Tok_ID Tok_par1 Tok_par2 BLOQUE {$$=new AST_Node("METODO_SIN_PA","METOD
         |Tok_run Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 BLOQUE {$$=new AST_Node("METODO_CON_RUN","METODO_CON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4,$6);}
         |Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_void BLOQUE {$$=new AST_Node("METODO_CON_PA","METODO_CON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$7);}
         |Tok_run Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_void BLOQUE {$$=new AST_Node("METODO_CON_RUN","METODO_CON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4,$8);}
+        //TIPOS INT, DOUBLE, boolean, string, char
+        |Tok_run Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_TD_int BLOQUE {$$=new AST_Node("METODO_SIN_RUN","METODO_SIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$7);}
+        |Tok_run Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_TD_double BLOQUE {$$=new AST_Node("METODO_SIN_RUN","METODO_SIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$7);}
+        |Tok_run Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_TD_boolean BLOQUE {$$=new AST_Node("METODO_SIN_RUN","METODO_SIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$7);}
+        |Tok_run Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_TD_string BLOQUE {$$=new AST_Node("METODO_SIN_RUN","METODO_SIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$7);}
+        |Tok_run Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_TD_char BLOQUE {$$=new AST_Node("METODO_SIN_RUN","METODO_SIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$7);}
+        |Tok_run Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_TD_int BLOQUE {$$=new AST_Node("METODO_CON_RUN","METODO_CON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4,$8);}
+        |Tok_run Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_TD_double BLOQUE {$$=new AST_Node("METODO_CON_RUN","METODO_CON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4,$8);}
+        |Tok_run Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_TD_boolean BLOQUE {$$=new AST_Node("METODO_CON_RUN","METODO_CON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4,$8);}
+        |Tok_run Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_TD_string BLOQUE {$$=new AST_Node("METODO_CON_RUN","METODO_CON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4,$8);}
+        |Tok_run Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_TD_char BLOQUE {$$=new AST_Node("METODO_CON_RUN","METODO_CON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4,$8);}
 ;
 
-LLAMADAS: Tok_ID Tok_par1 Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MSIN_PA","LLAMADA_MSIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1);}
-        | Tok_run Tok_ID Tok_par1 Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MSIN_RUN","LLAMADA_MSIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2);}
+FUNCIONES: Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_TD_int BLOQUE {$$=new AST_Node("FUNCION_SIN_PA","FUNCION_SIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$6,$5);}
+        |Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_TD_double BLOQUE {$$=new AST_Node("FUNCION_SIN_PA","FUNCION_SIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$6,$5);}
+        |Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_TD_boolean BLOQUE {$$=new AST_Node("FUNCION_SIN_PA","FUNCION_SIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$6,$5);}
+        |Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_TD_string BLOQUE {$$=new AST_Node("FUNCION_SIN_PA","FUNCION_SIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$6,$5);}
+        |Tok_ID Tok_par1 Tok_par2 Tok_dospuntos Tok_TD_char BLOQUE {$$=new AST_Node("FUNCION_SIN_PA","FUNCION_SIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$6,$5);}
+        //CON PARAMETOS
+        |Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_TD_int BLOQUE {$$=new AST_Node("FUNCION_CON_PA","FUNCION_CON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$7,$6);}
+        |Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_TD_double BLOQUE {$$=new AST_Node("FUNCION_CON_PA","FUNCION_CON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$7,$6);}
+        |Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_TD_boolean BLOQUE {$$=new AST_Node("FUNCION_CON_PA","FUNCION_CON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$7,$6);}
+        |Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_TD_string BLOQUE {$$=new AST_Node("FUNCION_CON_PA","FUNCION_CON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$7,$6);}
+        |Tok_ID Tok_par1 LISTA_PARAMETROS Tok_par2 Tok_dospuntos Tok_TD_char BLOQUE {$$=new AST_Node("FUNCION_CON_PA","FUNCION_CON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$7,$6);}
+;
+
+LLAMADAS: Tok_ID Tok_par1 Tok_par2 {$$=new AST_Node("LLAMADA_MSIN_PA","LLAMADA_MSIN_PA",this._$.first_line,@1.last_column);$$.addChilds($1);}
+        | Tok_run Tok_ID Tok_par1 Tok_par2 {$$=new AST_Node("LLAMADA_MSIN_RUN","LLAMADA_MSIN_RUN",this._$.first_line,@1.last_column);$$.addChilds($2);}
         //METODOS CON PARAMETOS
-        | Tok_ID Tok_par1 LISTA_EXP Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MCON_PA","LLAMADA_MCON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3);}
-        | Tok_run Tok_ID Tok_par1 LISTA_EXP Tok_par2 Tok_pyc {$$=new AST_Node("LLAMADA_MCON_RUN","LLAMADA_MCON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4);}
+        | Tok_ID Tok_par1 LISTA_EXP Tok_par2 {$$=new AST_Node("LLAMADA_MCON_PA","LLAMADA_MCON_PA",this._$.first_line,@1.last_column);$$.addChilds($1,$3);}
+        | Tok_run Tok_ID Tok_par1 LISTA_EXP Tok_par2 {$$=new AST_Node("LLAMADA_MCON_RUN","LLAMADA_MCON_RUN",this._$.first_line,@1.last_column);$$.addChilds($2,$4);}
 ;
 
 LISTA_EXP:LISTA_EXP Tok_coma EXP {$1.addChilds($3);$$=$1}
@@ -363,6 +388,7 @@ CONTINUE: Tok_continue Tok_pyc {$$= new AST_Node("CONTINUE","CONTINUE",this._$.f
 ;
 
 RETURN: Tok_return Tok_pyc {$$= new AST_Node("RETURN","RETURN",this._$.first_line,@1.last_column); $$.addChilds($1);}
+      | Tok_return EXP Tok_pyc {$$= new AST_Node("RETURN_VALOR","RETURN_VALOR",this._$.first_line,@1.last_column); $$.addChilds($1,$2);}
 ;
 
 EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.first_line,@2.last_column);$$.addChilds($1,new AST_Node("op",$2,this._$.first_line,@2.last_column),$3);}
@@ -422,6 +448,8 @@ EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.fi
     |Tok_ID Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 {$$= new AST_Node("acceso_vector2","acceso_vector2",this._$.first_line,@1.last_column);$$.addChilds($1,$3,$6);}
     |Tok_length Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("length",$3,this._$.first_line,@1.last_column));}
     |Tok_tochararray Tok_par1 EXP Tok_par2 {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("tochararray",$3,this._$.first_line,@1.last_column));}
+    |Tok_ID Tok_par1 Tok_par2 {$$= new AST_Node("retorno_sin","retorno_sin",this._$.first_line,@1.last_column);$$.addChilds($1);}
+    |Tok_ID Tok_par1 LISTA_EXP Tok_par2 {$$= new AST_Node("retorno_con","retorno_con",this._$.first_line,@1.last_column);$$.addChilds($1,$3);}
     ;
 
 

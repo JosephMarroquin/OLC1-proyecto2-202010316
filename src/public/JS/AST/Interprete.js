@@ -2,6 +2,7 @@ let runable;
 let alamcenaContinue;
 let almacenaBreak;
 let almacenaReturn;
+let valorRetorno;
 class Interprete{
     constructor(){
 
@@ -836,6 +837,7 @@ class Interprete{
             //
             case "LLAMADA_MSIN_PA":
                 metodos=new Metodos();
+                var BreakException = {};
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
@@ -844,12 +846,23 @@ class Interprete{
                 }else{
                     simbolo=TS.getInstance().obtener(raiz.childs[0]);
                     if(typeof simbolo.valor=='object'){
+                        try{
                         simbolo.valor.forEach(ins =>{
                             codigo+=metodos.interpretar(ins);
                             codigo+=this.interpretar(ins);
+                            if(almacenaReturn=="Si"){
+                                throw BreakException;
+                            }
                         });
+                    }catch (e) {
+                        if (e !== BreakException) throw e;
+                      }
                     }else{
                         codigo+=simbolo.valor;
+                    }
+                    if(almacenaReturn=="Si"){
+                        almacenaReturn=null
+                        break;
                     }
                     
                                    
@@ -861,6 +874,7 @@ class Interprete{
             case "LLAMADA_MCON_PA":
                 metodos=new Metodos();
                 op= new Operador();
+                var BreakException = {};
 
                 //DECLARANDO
                 simbolo=TS.getInstance().obtener(raiz.childs[0]);
@@ -884,10 +898,22 @@ class Interprete{
                     }
 
                     //INTERPRETO
+                    try{
                     simbolo.valor.forEach(ins =>{
                         codigo+=metodos.interpretar(ins);
                         codigo+=this.interpretar(ins);
+                        if(almacenaReturn=="Si"){
+                            throw BreakException;
+                        }
                     });
+                }catch (e) {
+                        if (e !== BreakException) throw e;
+                      }
+
+                    if(almacenaReturn=="Si"){
+                        almacenaReturn=null
+                        break;
+                    }
                     
                 }else{
                     codigo+=simbolo.valor;
@@ -912,6 +938,12 @@ class Interprete{
             case "RETURN":
                 almacenaReturn="Si"
                 break;
+            
+            case "RETURN_VALOR":
+                op = new Operador();
+                res = op.ejecutar(raiz.childs[1]);
+                valorRetorno=res;
+                break;
                 
                 
                 
@@ -929,19 +961,31 @@ class Interprete{
 
             case "METODO_SIN_RUN":
                 metodos=new Metodos();
+                var BreakException = {};
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
                     simbolo= new Simbolo(raiz.childs[0],"metodo","");
                     TS.getInstance().insertar(simbolo)
+                    try{
                     raiz.childs[1].childs[0].childs.forEach(nodito => {
                         runable="si"
                         simbolo.valor+=metodos.interpretar(nodito);
                         simbolo.valor+=this.interpretar(nodito);
                         runable=null;
+                        if(almacenaReturn=="Si"){
+                            throw BreakException;
+                        }
                     });
+                }catch (e) {
+                    if (e !== BreakException) throw e;
+                  }
                     TS.getInstance().modificar(simbolo)
                     codigo=simbolo.valor
+                    if(almacenaReturn=="Si"){
+                        almacenaReturn=null
+                        break;
+                    }
                 }else{
                     simbolo=TS.getInstance().obtener(raiz.childs[0]);
                     if(simbolo.valor==""){
@@ -965,19 +1009,30 @@ class Interprete{
             //
             case "LLAMADA_MSIN_RUN":
                 metodos=new Metodos();
-
+                var BreakException = {};
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
                     simbolo= new Simbolo(raiz.childs[0],"metodo","");
                     TS.getInstance().insertar(simbolo)
                 }else{
                     simbolo=TS.getInstance().obtener(raiz.childs[0]);
+                    try{
                     simbolo.valor.forEach(ins =>{
                         runable="si"
                         codigo+=metodos.interpretar(ins);
                         codigo+=this.interpretar(ins);
                         runable=null;
-                });               
+                        if(almacenaReturn=="Si"){
+                            throw BreakException;
+                        }
+                });
+            }catch (e) {
+                if (e !== BreakException) throw e;
+              }
+              if(almacenaReturn=="Si"){
+                almacenaReturn=null
+                break;
+            }               
                 }  
 
                 break;
@@ -986,6 +1041,7 @@ class Interprete{
             case "LLAMADA_MCON_RUN":
                 metodos=new Metodos();
                 op= new Operador();
+                var BreakException = {};
 
                 //DECLARANDO
                 simbolo=TS.getInstance().obtener(raiz.childs[0]);
@@ -1009,12 +1065,23 @@ class Interprete{
                     }
 
                     //INTERPRETO
+                    try{
                     simbolo.valor.forEach(ins =>{
                         runable="si"
                         codigo+=metodos.interpretar(ins);
                         codigo+=this.interpretar(ins);
                         runable=null;
+                        if(almacenaReturn=="Si"){
+                            throw BreakException;
+                        }
                     });
+                }catch (e) {
+                    if (e !== BreakException) throw e;
+                  }
+                  if(almacenaReturn=="Si"){
+                    almacenaReturn=null
+                    break;
+                }
                     
                 }
 
@@ -1024,6 +1091,7 @@ class Interprete{
             //
             case "METODO_CON_RUN":
                 metodos=new Metodos();
+                var BreakException = {};
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
@@ -1056,6 +1124,7 @@ class Interprete{
                         //codigo+=" id "+raiz.childs[1].childs[i+1]+"\n";
                     }
                     TS.getInstance().insertar(simbolo)
+                    try{
                     raiz.childs[2].childs[0].childs.forEach(nodito => {
                         runable="si"
                         //interprete.analizaMetodo("si");
@@ -1063,10 +1132,20 @@ class Interprete{
                         simbolo.valor+=this.interpretar(nodito);
                         //interprete.analizaMetodo(null);
                         runable=null;
+                        if(almacenaReturn=="Si"){
+                            throw BreakException;
+                        }
                     });
+                }catch (e) {
+                    if (e !== BreakException) throw e;
+                  }
                     TS.getInstance().modificar(simbolo)
                     codigo=simbolo.valor;
                     TS.getInstance().modificar(simbolo)
+                    if(almacenaReturn=="Si"){
+                        almacenaReturn=null
+                        break;
+                    }
                 }else{
                      L_Error.getInstance().insertar(new N_Error("Semantico","Ya se declaro el metodo anteriormente",raiz.childs[1].fila,raiz.childs[1].columna));
                      codigo="Error Semantico, Ya se declaro el metodo anteriormente"+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna+"\n";
