@@ -36,8 +36,10 @@ function appendTab(tab, nombre, contenido) {
       tt.append('<div class="ui tab tabc segment" data-tab="' + tn + '" id="tab-c-' + tn + '">'+'<textarea id="editor'+numberTabs+'"></textarea>' + 
       '<br>'+
       '<nav class="navbar navbar-dark bg-dark">'
-      +'<button class="btn btn-success" onclick="final(veditor'+numberTabs+',consola'+numberTabs+')">Analizar</button>'+
+      +'<button class="btn btn-success" onclick="final(veditor'+numberTabs+',consola'+numberTabs+')">Ejecutar</button>'+
       '<button class="btn btn-success" type="button"  onclick="openFile(veditor'+numberTabs+')">Abrir Archivo</button>'+
+      '<button  class="btn btn-success" type="button"  onclick="crearAr(veditor'+numberTabs+',consola'+numberTabs+')">Crear Archivo</button>'+
+      '<button  class="btn btn-success" type="button"  onclick="guardarArchivo(veditor'+numberTabs+',consola'+numberTabs+')">Guardar el archivo</button>'+
       '<button  class="btn btn-success" type="button"  onclick="genTS()">Generar Tabla de Simbolos</button>'+
       '<button  class="btn btn-success" type="button"  onclick="genERROR()">Generar Tabla de Errores</button>'
       +'</nav>'+
@@ -94,6 +96,27 @@ function genERROR(){
           return;
       }
   }
+
+//CREAR ARCHIVO
+function crearAr(id,consola){
+  consola.value='';
+  id.setValue('');
+  L_Error.getInstance().reiniciar();
+  TS.getInstance().reiniciar();
+}
+
+//GUARDAR ARCHIVO
+function guardarArchivo(id,consola){
+  var a = document.createElement('a');
+     var text=id.getValue();
+     var name='Archivo.cst'
+     var type='text/plain'
+      var file = new Blob([text], {type: type});
+      a.href = URL.createObjectURL(file);
+      a.download = name;
+      a.click();
+      a.remove();
+}
   
 // GENERO MI CODIGO DE GRAPHVIZ PARA MI ARBOL
 // YO RECORRO MI ARBOL 
@@ -201,6 +224,7 @@ function genERROR(){
       }
       fileInput = document.createElement("input")
       fileInput.type='file'
+      fileInput.accept='.cst'
       fileInput.style.display='none'
       fileInput.onchange=readFile
      
