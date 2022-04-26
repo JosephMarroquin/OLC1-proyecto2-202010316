@@ -30,6 +30,8 @@ var TS = (function(){
                     simbolo.valor=simbol.valor
                     simbolo.tipo=simbol.tipo
                     simbolo.parametros=simbol.parametros
+                    simbolo.linea=simbol.linea
+                    simbolo.columna=simbol.columna
                 }
             })
         }
@@ -63,6 +65,8 @@ var TS = (function(){
                 <th>Nombre</th>
                 <th>Tipo</th>
                 <th>Valor</th>
+                <th>Linea</th>
+                <th>Columna</th>
             </tr>`;
             var cuenta=1;
             this.simbolos.forEach(simbolo =>{
@@ -71,6 +75,8 @@ var TS = (function(){
                 texto+="<td>"+simbolo.nombre+"</td>\n";
                 texto+="<td>"+simbolo.tipo+"</td>\n";
                 texto+="<td>"+simbolo.valor+"</td>\n";
+                texto+="<td>"+simbolo.linea+"</td>\n";
+                texto+="<td>"+simbolo.columna+"</td>\n";
                 texto+="</tr>";
                 cuenta++;
             })

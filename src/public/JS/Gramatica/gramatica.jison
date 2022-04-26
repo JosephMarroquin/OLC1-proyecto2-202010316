@@ -171,6 +171,9 @@ SENTENCIA: DECLARACION Tok_pyc{$$=$1}
            |BREAK{$$=$1}
            |CONTINUE{$$=$1}
            |RETURN{$$=$1}
+           |error {console.error('Este es un error sintactico: ' + yytext + ', en la linea: ' + this._$.first_line + ', en la columna: ' + @1.last_column);
+                                          L_Error.getInstance().insertar(new N_Error("sintactico","No se esperaba Caracter: \" "+yytext+"\" ." ,this._$.first_line,@1.last_column));
+                                          return null;}
            ;
 
 
@@ -187,6 +190,7 @@ DECLARACIONyASIGNACION: Tok_TD_int ID_LIST Tok_asigna1 EXP {$$=new AST_Node("DEC
 ;
 
 VECTOR_CHAR:Tok_TD_char ID_LIST Tok_cor1 Tok_cor2 Tok_asigna1 EXP {$$=new AST_Node("VECTOR_CHAR","VECTOR_CHAR",this._$.first_line,@1.last_column); $$.addChilds($2,$6);}
+           |Tok_TD_char Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 EXP {$$=new AST_Node("VECTOR_CHAR","VECTOR_CHAR",this._$.first_line,@1.last_column); $$.addChilds($4,$6);}
 ;
 
 DECLARACION_VECTORES: Tok_TD_int ID_LIST Tok_cor1 Tok_cor2 Tok_asigna1 Tok_new Tok_TD_int Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES","DECLARACION_VECTORES",this._$.first_line,@1.last_column);
@@ -210,6 +214,28 @@ DECLARACION_VECTORES: Tok_TD_int ID_LIST Tok_cor1 Tok_cor2 Tok_asigna1 Tok_new T
                                                                    $$.addChilds($1,$2,$11,$14);}
                     | Tok_TD_char ID_LIST Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 Tok_asigna1 Tok_new Tok_TD_char Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES2","DECLARACION_VECTORES2",this._$.first_line,@1.last_column);
                                                                    $$.addChilds($1,$2,$11,$14);}
+                    //OTRO
+                    | Tok_TD_int Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_new Tok_TD_int Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES","DECLARACION_VECTORES",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$4,$9);}
+                    | Tok_TD_double Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_new Tok_TD_double Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES","DECLARACION_VECTORES",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$4,$9);}
+                    | Tok_TD_boolean Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_new Tok_TD_boolean Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES","DECLARACION_VECTORES",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$4,$9);}
+                    | Tok_TD_string Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_new Tok_TD_string Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES","DECLARACION_VECTORES",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$4,$9);}
+                    | Tok_TD_char Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_new Tok_TD_char Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES","DECLARACION_VECTORES",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$4,$9);}
+                    //VECTORES DE DOS DIMENSIONES
+                    | Tok_TD_int Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_new Tok_TD_int Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES2","DECLARACION_VECTORES2",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$6,$11,$14);}
+                    | Tok_TD_double Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_new Tok_TD_double Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES2","DECLARACION_VECTORES2",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$6,$11,$14);}
+                    | Tok_TD_boolean Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_new Tok_TD_boolean Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES2","DECLARACION_VECTORES2",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$6,$11,$14);}
+                    | Tok_TD_string Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_new Tok_TD_string Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES2","DECLARACION_VECTORES2",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$6,$11,$14);}
+                    | Tok_TD_char Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_new Tok_TD_char Tok_cor1 EXP Tok_cor2 Tok_cor1 EXP Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES2","DECLARACION_VECTORES2",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$6,$11,$14);}
 ;
 
 DECLARACION_VECTORES_TIPO2: Tok_TD_int ID_LIST Tok_cor1 Tok_cor2 Tok_asigna1 Tok_cor1 VECTOR_LIST Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO2","DECLARACION_VECTORES_TIPO2",this._$.first_line,@1.last_column);
@@ -233,6 +259,28 @@ DECLARACION_VECTORES_TIPO2: Tok_TD_int ID_LIST Tok_cor1 Tok_cor2 Tok_asigna1 Tok
                                                                    $$.addChilds($1,$2,$10,$14);}
                           | Tok_TD_char ID_LIST Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 Tok_asigna1 Tok_cor1 Tok_cor1 VECTOR_LIST Tok_cor2 Tok_coma Tok_cor1 VECTOR_LIST Tok_cor2 Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO22","DECLARACION_VECTORES_TIPO22",this._$.first_line,@1.last_column);
                                                                    $$.addChilds($1,$2,$10,$14);}
+                        //OTRO
+                          | Tok_TD_int Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_cor1 VECTOR_LIST Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO2","DECLARACION_VECTORES_TIPO2",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$4,$7);}
+                          | Tok_TD_double Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_cor1 VECTOR_LIST Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO2","DECLARACION_VECTORES_TIPO2",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$4,$7);}
+                          | Tok_TD_boolean Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_cor1 VECTOR_LIST Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO2","DECLARACION_VECTORES_TIPO2",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$4,$7);}
+                          | Tok_TD_string Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_cor1 VECTOR_LIST Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO2","DECLARACION_VECTORES_TIPO2",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$4,$7);}
+                          | Tok_TD_char Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_cor1 VECTOR_LIST Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO2","DECLARACION_VECTORES_TIPO2",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$4,$7);}
+                          //VECTORES DE DOS DIMENSIONES
+                          | Tok_TD_int Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_cor1 Tok_cor1 VECTOR_LIST Tok_cor2 Tok_coma Tok_cor1 VECTOR_LIST Tok_cor2 Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO22","DECLARACION_VECTORES_TIPO22",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$6,$10,$14);}
+                          | Tok_TD_double Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_cor1 Tok_cor1 VECTOR_LIST Tok_cor2 Tok_coma Tok_cor1 VECTOR_LIST Tok_cor2 Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO22","DECLARACION_VECTORES_TIPO22",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$6,$10,$14);}
+                          | Tok_TD_boolean Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_cor1 Tok_cor1 VECTOR_LIST Tok_cor2 Tok_coma Tok_cor1 VECTOR_LIST Tok_cor2 Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO22","DECLARACION_VECTORES_TIPO22",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$6,$10,$14);}
+                          | Tok_TD_string Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_cor1 Tok_cor1 VECTOR_LIST Tok_cor2 Tok_coma Tok_cor1 VECTOR_LIST Tok_cor2 Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO22","DECLARACION_VECTORES_TIPO22",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$6,$10,$14);}
+                          | Tok_TD_char Tok_cor1 Tok_cor2 Tok_cor1 Tok_cor2 ID_LIST Tok_asigna1 Tok_cor1 Tok_cor1 VECTOR_LIST Tok_cor2 Tok_coma Tok_cor1 VECTOR_LIST Tok_cor2 Tok_cor2 {$$=new AST_Node("DECLARACION_VECTORES_TIPO22","DECLARACION_VECTORES_TIPO22",this._$.first_line,@1.last_column);
+                                                                   $$.addChilds($1,$6,$10,$14);}
 ;
 
 VECTOR_LIST: VECTOR_LIST Tok_coma EXP {$1.addChilds($3); $$=$1;}
@@ -413,6 +461,7 @@ EXP: EXP Tok_mas EXP                    {$$= new AST_Node("EXP","EXP",this._$.fi
     |Tok_par1 EXP Tok_par2              {$$=$2}
     |Tok_menos ENTERO %prec UMENOS      {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("entero",$2*-1,this._$.first_line,@1.last_column));}
     |Tok_menos Tok_numero %prec UMENOS  {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("decimal",$2*-1,this._$.first_line,@1.last_column));}
+    |Tok_menos Tok_ID %prec UMENOS  {$$= new AST_Node("EXP","EXP",this._$.first_line,@1.last_column);$$.addChilds(new AST_Node("id_umenos",$2,this._$.first_line,@1.last_column));}
     |Tok_menos Tok_true %prec UMENOS    {L_Error.getInstance().insertar(new N_Error("Semantico","No esta permitida la negacion unario en esta expresion" ,this._$.first_line,@1.last_column));}
     |Tok_menos Tok_false %prec UMENOS   {L_Error.getInstance().insertar(new N_Error("Semantico","No esta permitida la negacion unario en esta expresion" ,this._$.first_line,@1.last_column));}
     |Tok_menos Tok_string %prec UMENOS  {L_Error.getInstance().insertar(new N_Error("Semantico","No esta permitida la negacion unario en esta expresion" ,this._$.first_line,@1.last_column));}

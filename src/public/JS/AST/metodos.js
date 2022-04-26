@@ -34,19 +34,19 @@ class Metodos{
                     raiz.childs[0].childs.forEach(hijo=>{
                         
                             if(raiz.childs[1]=="int"){
-                                simbolo= new Simbolo(hijo.value,"integer",0);
+                                simbolo= new Simbolo(hijo.value,"integer",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[1]=="double"){
-                                simbolo= new Simbolo(hijo.value,"double","0.0");
+                                simbolo= new Simbolo(hijo.value,"double","0.0","",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[1]=="boolean"){
-                                simbolo= new Simbolo(hijo.value,"boolean",true);
+                                simbolo= new Simbolo(hijo.value,"boolean",true,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[1]=="string"){
-                                simbolo= new Simbolo(hijo.value,"string","");
+                                simbolo= new Simbolo(hijo.value,"string","","",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[1]=="char"){
-                                simbolo= new Simbolo(hijo.value,"char",'\u0000');
+                                simbolo= new Simbolo(hijo.value,"char",'\u0000',"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             TS.getInstance().insertar(simbolo)
                         
@@ -126,19 +126,19 @@ class Metodos{
                     raiz.childs[0].childs.forEach(hijo=>{
                         
                             if(raiz.childs[2]=="int"){
-                                simbolo= new Simbolo(hijo.value,"integer",0);
+                                simbolo= new Simbolo(hijo.value,"integer",0,"",raiz.childs[2].fila,raiz.childs[2].columna);
                             }
                             else if(raiz.childs[2]=="double"){
-                                simbolo= new Simbolo(hijo.value,"double","0.0");
+                                simbolo= new Simbolo(hijo.value,"double","0.0","",raiz.childs[2].fila,raiz.childs[2].columna);
                             }
                             else if(raiz.childs[2]=="boolean"){
-                                simbolo= new Simbolo(hijo.value,"boolean",true);
+                                simbolo= new Simbolo(hijo.value,"boolean",true,"",raiz.childs[2].fila,raiz.childs[2].columna);
                             }
                             else if(raiz.childs[2]=="string"){
-                                simbolo= new Simbolo(hijo.value,"string","");
+                                simbolo= new Simbolo(hijo.value,"string","","",raiz.childs[2].fila,raiz.childs[2].columna);
                             }
                             else if(raiz.childs[2]=="char"){
-                                simbolo= new Simbolo(hijo.value,"char",'\u0000');
+                                simbolo= new Simbolo(hijo.value,"char",'\u0000',"",raiz.childs[2].fila,raiz.childs[2].columna);
                             }
                             TS.getInstance().insertar(simbolo)
                         
@@ -220,19 +220,19 @@ class Metodos{
                     raiz.childs[1].childs.forEach(hijo=>{
                         
                             if(raiz.childs[0]=="int"){
-                                simbolo= new Simbolo(hijo.value,"vector_integer",0);
+                                simbolo= new Simbolo(hijo.value,"vector_integer",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="double"){
-                                simbolo= new Simbolo(hijo.value,"vector_double",0);
+                                simbolo= new Simbolo(hijo.value,"vector_double",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="boolean"){
-                                simbolo= new Simbolo(hijo.value,"vector_boolean",0);
+                                simbolo= new Simbolo(hijo.value,"vector_boolean",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="string"){
-                                simbolo= new Simbolo(hijo.value,"vector_string",0);
+                                simbolo= new Simbolo(hijo.value,"vector_string",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="char"){
-                                simbolo= new Simbolo(hijo.value,"vector_char",0);
+                                simbolo= new Simbolo(hijo.value,"vector_char",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             TS.getInstance().insertar(simbolo)
                          
@@ -331,19 +331,19 @@ class Metodos{
                     raiz.childs[1].childs.forEach(hijo=>{
                         
                             if(raiz.childs[0]=="int"){
-                                simbolo= new Simbolo(hijo.value,"vector_integer",0);
+                                simbolo= new Simbolo(hijo.value,"vector_integer",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="double"){
-                                simbolo= new Simbolo(hijo.value,"vector_double",0);
+                                simbolo= new Simbolo(hijo.value,"vector_double",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="boolean"){
-                                simbolo= new Simbolo(hijo.value,"vector_boolean",0);
+                                simbolo= new Simbolo(hijo.value,"vector_boolean",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="string"){
-                                simbolo= new Simbolo(hijo.value,"vector_string",0);
+                                simbolo= new Simbolo(hijo.value,"vector_string",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="char"){
-                                simbolo= new Simbolo(hijo.value,"vector_char",0);
+                                simbolo= new Simbolo(hijo.value,"vector_char",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             TS.getInstance().insertar(simbolo)
                         
@@ -473,19 +473,19 @@ class Metodos{
                     raiz.childs[1].childs.forEach(hijo=>{
                         
                             if(raiz.childs[0]=="int"){
-                                simbolo= new Simbolo(hijo.value,"vector_integer",0);
+                                simbolo= new Simbolo(hijo.value,"vector_integer",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="double"){
-                                simbolo= new Simbolo(hijo.value,"vector_double",0);
+                                simbolo= new Simbolo(hijo.value,"vector_double",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="boolean"){
-                                simbolo= new Simbolo(hijo.value,"vector_boolean",0);
+                                simbolo= new Simbolo(hijo.value,"vector_boolean",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="string"){
-                                simbolo= new Simbolo(hijo.value,"vector_string",0);
+                                simbolo= new Simbolo(hijo.value,"vector_string",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="char"){
-                                simbolo= new Simbolo(hijo.value,"vector_char",0);
+                                simbolo= new Simbolo(hijo.value,"vector_char",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             TS.getInstance().insertar(simbolo)
                          
@@ -585,19 +585,19 @@ class Metodos{
                     raiz.childs[1].childs.forEach(hijo=>{
                         
                             if(raiz.childs[0]=="int"){
-                                simbolo= new Simbolo(hijo.value,"vector_integer",0);
+                                simbolo= new Simbolo(hijo.value,"vector_integer",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="double"){
-                                simbolo= new Simbolo(hijo.value,"vector_double",0);
+                                simbolo= new Simbolo(hijo.value,"vector_double",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="boolean"){
-                                simbolo= new Simbolo(hijo.value,"vector_boolean",0);
+                                simbolo= new Simbolo(hijo.value,"vector_boolean",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="string"){
-                                simbolo= new Simbolo(hijo.value,"vector_string",0);
+                                simbolo= new Simbolo(hijo.value,"vector_string",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             else if(raiz.childs[0]=="char"){
-                                simbolo= new Simbolo(hijo.value,"vector_char",0);
+                                simbolo= new Simbolo(hijo.value,"vector_char",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             }
                             TS.getInstance().insertar(simbolo)
                         
@@ -952,7 +952,7 @@ class Metodos{
                     //DECLARANDO
                     raiz.childs[0].childs.forEach(hijo=>{
                         
-                            simbolo= new Simbolo(hijo.value,"vector_char",0);
+                            simbolo= new Simbolo(hijo.value,"vector_char",0,"",raiz.childs[0].fila,raiz.childs[0].columna);
                             TS.getInstance().insertar(simbolo)
                         
                         
@@ -982,7 +982,7 @@ class Metodos{
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
-                    simbolo= new Simbolo(raiz.childs[0],"metodo","");
+                    simbolo= new Simbolo(raiz.childs[0],"metodo","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     TS.getInstance().insertar(simbolo)
                     raiz.childs[1].childs[0].childs.forEach(nodito => {
                         //interprete.analizaMetodo("si");
@@ -1021,24 +1021,24 @@ class Metodos{
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
-                    simbolo= new Simbolo(raiz.childs[0],"metodo","","");
+                    simbolo= new Simbolo(raiz.childs[0],"metodo","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     simbolo.parametros=[]
                     for(var i=0; i<raiz.childs[1].childs.length; i=i+2) {
                         
                             if(raiz.childs[1].childs[i]=="int"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"integer",0);
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"integer",0,"",raiz.childs[1].childs[i+1].fila,raiz.childs[1].childs[i+1].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="double"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"double","0.0");
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"double","0.0","",raiz.childs[1].childs[i+1].fila,raiz.childs[1].childs[i+1].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="boolean"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"boolean",true);
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"boolean",true,"",raiz.childs[1].childs[i+1].fila,raiz.childs[1].childs[i+1].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="string"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"string","");
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"string","","",raiz.childs[1].childs[i+1].fila,raiz.childs[1].childs[i+1].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="char"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"char",'\u0000');
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"char",'\u0000',"",raiz.childs[1].childs[i+1].fila,raiz.childs[1].childs[i+1].columna);
                             }
                             TS.getInstance().insertar(simbolo2)
                             simbolo.parametros.push(simbolo2.nombre);
@@ -1071,19 +1071,19 @@ class Metodos{
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
                     if(raiz.childs[2]=="int"){
-                        simbolo= new Simbolo(raiz.childs[0],"funcion_int","");
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_int","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     }
                     else if(raiz.childs[2]=="double"){
-                        simbolo= new Simbolo(raiz.childs[0],"funcion_double","");
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_double","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     }
                     else if(raiz.childs[2]=="boolean"){
-                        simbolo= new Simbolo(raiz.childs[0],"funcion_boolean","");
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_boolean","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     }
                     else if(raiz.childs[2]=="string"){
-                        simbolo= new Simbolo(raiz.childs[0],"funcion_string","");
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_string","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     }
                     else if(raiz.childs[2]=="char"){
-                        simbolo= new Simbolo(raiz.childs[0],"funcion_char","");
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_char","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     }
                     TS.getInstance().insertar(simbolo)
                     raiz.childs[1].childs[0].childs.forEach(nodito => {
@@ -1109,37 +1109,37 @@ class Metodos{
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
                     if(raiz.childs[3]=="int"){
-                        simbolo= new Simbolo(raiz.childs[0],"funcion_int","");
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_int","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     }
                     else if(raiz.childs[3]=="double"){
-                        simbolo= new Simbolo(raiz.childs[0],"funcion_double","");
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_double","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     }
                     else if(raiz.childs[3]=="boolean"){
-                        simbolo= new Simbolo(raiz.childs[0],"funcion_boolean","");
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_boolean","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     }
                     else if(raiz.childs[3]=="string"){
-                        simbolo= new Simbolo(raiz.childs[0],"funcion_string","");
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_string","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     }
                     else if(raiz.childs[3]=="char"){
-                        simbolo= new Simbolo(raiz.childs[0],"funcion_char","");
+                        simbolo= new Simbolo(raiz.childs[0],"funcion_char","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     }
                     simbolo.parametros=[]
                     for(var i=0; i<raiz.childs[1].childs.length; i=i+2) {
                         
                             if(raiz.childs[1].childs[i]=="int"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"integer",0);
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"integer",0,"",raiz.childs[1].childs[i+1].fila,raiz.childs[1].childs[i+1].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="double"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"double","0.0");
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"double","0.0","",raiz.childs[1].childs[i+1].fila,raiz.childs[1].childs[i+1].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="boolean"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"boolean",true);
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"boolean",true,"",raiz.childs[1].childs[i+1].fila,raiz.childs[1].childs[i+1].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="string"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"string","");
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"string","","",raiz.childs[1].childs[i+1].fila,raiz.childs[1].childs[i+1].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="char"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"char",'\u0000');
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"char",'\u0000',"",raiz.childs[1].childs[i+1].fila,raiz.childs[1].childs[i+1].columna);
                             }
                             TS.getInstance().insertar(simbolo2)
                             simbolo.parametros.push(simbolo2.nombre);

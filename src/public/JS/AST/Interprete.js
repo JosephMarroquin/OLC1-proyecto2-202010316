@@ -328,11 +328,11 @@ class Interprete{
                     raiz.childs[0].childs[0].childs.forEach(hijo=>{
                         
                             if(raiz.childs[0].childs[1]=="int"){
-                                simbolo= new Simbolo(hijo.value,"integer",0);
+                                simbolo= new Simbolo(hijo.value,"integer",0,"",raiz.childs[0].childs[1].fila,raiz.childs[0].childs[1].columna);
                                 TS.getInstance().insertar(simbolo)
                             }
                             else if(raiz.childs[0].childs[1]=="double"){
-                                simbolo= new Simbolo(hijo.value,"double","0.0");
+                                simbolo= new Simbolo(hijo.value,"double","0.0","",raiz.childs[0].childs[1].fila,raiz.childs[0].childs[1].columna);
                                 TS.getInstance().insertar(simbolo)
                             }
                          
@@ -411,11 +411,11 @@ class Interprete{
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
                             
                                 if(raiz.childs[0].childs[1]=="int"){
-                                    simbolo= new Simbolo(hijo.value,"integer",0);
+                                    simbolo= new Simbolo(hijo.value,"integer",0,"",raiz.childs[0].childs[1].fila,raiz.childs[0].childs[1].columna);
                                     TS.getInstance().insertar(simbolo)
                                 }
                                 else if(raiz.childs[0].childs[1]=="double"){
-                                    simbolo= new Simbolo(hijo.value,"double","0.0");
+                                    simbolo= new Simbolo(hijo.value,"double","0.0","",raiz.childs[0].childs[1].fila,raiz.childs[0].childs[1].columna);
                                     TS.getInstance().insertar(simbolo)
                                 }
                             
@@ -472,11 +472,11 @@ class Interprete{
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
                             
                                 if(raiz.childs[0].childs[1]=="int"){
-                                    simbolo= new Simbolo(hijo.value,"integer",0);
+                                    simbolo= new Simbolo(hijo.value,"integer",0,"",raiz.childs[0].childs[1].fila,raiz.childs[0].childs[1].columna);
                                     TS.getInstance().insertar(simbolo)
                                 }
                                 else if(raiz.childs[0].childs[1]=="double"){
-                                    simbolo= new Simbolo(hijo.value,"double","0.0");
+                                    simbolo= new Simbolo(hijo.value,"double","0.0","",raiz.childs[0].childs[1].fila,raiz.childs[0].childs[1].columna);
                                     TS.getInstance().insertar(simbolo)
                                 }
                             
@@ -533,11 +533,11 @@ class Interprete{
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
                             
                                 if(raiz.childs[0].childs[2]=="int"){
-                                    simbolo= new Simbolo(hijo.value,"integer",0);
+                                    simbolo= new Simbolo(hijo.value,"integer",0,"",raiz.childs[0].childs[2].fila,raiz.childs[0].childs[2].columna);
                                     TS.getInstance().insertar(simbolo)
                                 }
                                 else if(raiz.childs[0].childs[2]=="double"){
-                                    simbolo= new Simbolo(hijo.value,"double","0.0");
+                                    simbolo= new Simbolo(hijo.value,"double","0.0","",raiz.childs[0].childs[2].fila,raiz.childs[0].childs[2].columna);
                                     TS.getInstance().insertar(simbolo)
                                 }
                             
@@ -641,11 +641,11 @@ class Interprete{
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
                             
                                 if(raiz.childs[0].childs[2]=="int"){
-                                    simbolo= new Simbolo(hijo.value,"integer",0);
+                                    simbolo= new Simbolo(hijo.value,"integer",0,"",raiz.childs[0].childs[2].fila,raiz.childs[0].childs[2].columna);
                                     TS.getInstance().insertar(simbolo)
                                 }
                                 else if(raiz.childs[0].childs[2]=="double"){
-                                    simbolo= new Simbolo(hijo.value,"double","0.0");
+                                    simbolo= new Simbolo(hijo.value,"double","0.0","",raiz.childs[0].childs[2].fila,raiz.childs[0].childs[2].columna);
                                     TS.getInstance().insertar(simbolo)
                                 }
                             
@@ -731,11 +731,11 @@ class Interprete{
                         raiz.childs[0].childs[0].childs.forEach(hijo=>{
                             
                                 if(raiz.childs[0].childs[2]=="int"){
-                                    simbolo= new Simbolo(hijo.value,"integer",0);
+                                    simbolo= new Simbolo(hijo.value,"integer",0,"",raiz.childs[0].childs[2].fila,raiz.childs[0].childs[2].columna);
                                     TS.getInstance().insertar(simbolo)
                                 }
                                 else if(raiz.childs[0].childs[2]=="double"){
-                                    simbolo= new Simbolo(hijo.value,"double","0.0");
+                                    simbolo= new Simbolo(hijo.value,"double","0.0","",raiz.childs[0].childs[2].fila,raiz.childs[0].childs[2].columna);
                                     TS.getInstance().insertar(simbolo)
                                 }
                               
@@ -829,7 +829,7 @@ class Interprete{
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
-                    simbolo= new Simbolo(raiz.childs[0],"metodo","");
+                    simbolo= new Simbolo(raiz.childs[0],"metodo","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     TS.getInstance().insertar(simbolo)
                 }else{
                     simbolo=TS.getInstance().obtener(raiz.childs[0]);
@@ -845,8 +845,6 @@ class Interprete{
                     }catch (e) {
                         if (e !== BreakException) throw e;
                       }
-                    }else{
-                        codigo+=simbolo.valor;
                     }
                     if(almacenaReturn=="Si"){
                         almacenaReturn=null
@@ -903,8 +901,6 @@ class Interprete{
                         break;
                     }
                     
-                }else{
-                    codigo+=simbolo.valor;
                 }
 
                 break;
@@ -953,7 +949,7 @@ class Interprete{
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
-                    simbolo= new Simbolo(raiz.childs[0],"metodo","");
+                    simbolo= new Simbolo(raiz.childs[0],"metodo","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     TS.getInstance().insertar(simbolo)
                     try{
                     raiz.childs[1].childs[0].childs.forEach(nodito => {
@@ -1000,7 +996,7 @@ class Interprete{
                 var BreakException = {};
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
-                    simbolo= new Simbolo(raiz.childs[0],"metodo","");
+                    simbolo= new Simbolo(raiz.childs[0],"metodo","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     TS.getInstance().insertar(simbolo)
                 }else{
                     simbolo=TS.getInstance().obtener(raiz.childs[0]);
@@ -1083,24 +1079,24 @@ class Interprete{
 
                 //DECLARANDO
                 if(TS.getInstance().obtener(raiz.childs[0])==null){
-                    simbolo= new Simbolo(raiz.childs[0],"metodo","","");
+                    simbolo= new Simbolo(raiz.childs[0],"metodo","","",raiz.childs[0].fila,raiz.childs[0].columna);
                     simbolo.parametros=[]
                     for(var i=0; i<raiz.childs[1].childs.length; i=i+2) {
                         if(TS.getInstance().obtener(raiz.childs[1].childs[i+1])==null){
                             if(raiz.childs[1].childs[i]=="int"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"integer",0);
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"integer",0,"",raiz.childs[1].childs[i].fila,raiz.childs[1].childs[i].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="double"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"double","0.0");
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"double","0.0","",raiz.childs[1].childs[i].fila,raiz.childs[1].childs[i].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="boolean"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"boolean",true);
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"boolean",true,"",raiz.childs[1].childs[i].fila,raiz.childs[1].childs[i].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="string"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"string","");
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"string","","",raiz.childs[1].childs[i].fila,raiz.childs[1].childs[i].columna);
                             }
                             else if(raiz.childs[1].childs[i]=="char"){
-                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"char",'\u0000');
+                                simbolo2= new Simbolo(raiz.childs[1].childs[i+1],"char",'\u0000',"",raiz.childs[1].childs[i].fila,raiz.childs[1].childs[i].columna);
                             }
                             TS.getInstance().insertar(simbolo2)
                             simbolo.parametros.push(simbolo2.nombre);

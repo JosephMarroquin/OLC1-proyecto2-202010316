@@ -89,6 +89,14 @@ class Operador{
                     Resultado.valor=simbolo.valor;
                     console.log(raiz);
                     return Resultado;
+            
+            case "id_umenos":
+                    Resultado = new ResultadoOp();
+                    let simboloo= TS.getInstance().obtener(raiz.value);
+                    Resultado.tipo=simboloo.tipo;
+                    Resultado.valor=simboloo.valor*-1;
+                    console.log(raiz);
+                    return Resultado;
 
             case "entero":
                 Resultado= new ResultadoOp();
