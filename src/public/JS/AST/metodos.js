@@ -64,7 +64,7 @@ class Metodos{
                                 TS.getInstance().modificar(simbolo)
                             }else{
                                 L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
-                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                codigo="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                             }
                         }
                         else if(simbolo.tipo=="double"){
@@ -76,7 +76,7 @@ class Metodos{
                                 TS.getInstance().modificar(simbolo)
                             }else{
                                 L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
-                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                codigo="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                             }
                         }
                         else if(simbolo.tipo=="boolean"){
@@ -88,7 +88,7 @@ class Metodos{
                                 TS.getInstance().modificar(simbolo)
                             }else{
                                 L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un boolean",raiz.childs[1].fila,raiz.childs[1].columna));
-                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un boolean "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                codigo="Error Semantico"+" El valor asignado no corresponde a un boolean "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                             }
                         }
                         else if(simbolo.tipo=="string"){
@@ -100,7 +100,7 @@ class Metodos{
                                 TS.getInstance().modificar(simbolo)
                             }else{
                                 L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un string",raiz.childs[1].fila,raiz.childs[1].columna));
-                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un string "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                codigo="Error Semantico"+" El valor asignado no corresponde a un string "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                             }
                         }
                         else if(simbolo.tipo=="char"){
@@ -112,7 +112,7 @@ class Metodos{
                                 TS.getInstance().modificar(simbolo)
                             }else{
                                 L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un char",raiz.childs[1].fila,raiz.childs[1].columna));
-                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un char "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                codigo="Error Semantico"+" El valor asignado no corresponde a un char "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                             }
                         }
                         
@@ -157,7 +157,7 @@ class Metodos{
                                 TS.getInstance().modificar(simbolo)
                             }else{
                                 L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
-                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                codigo="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                             }
                         }
                         else if(simbolo.tipo=="double"){
@@ -169,7 +169,7 @@ class Metodos{
                                 TS.getInstance().modificar(simbolo)
                             }else{
                                 L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
-                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                codigo="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                             }
                         }
                         else if(simbolo.tipo=="boolean"){
@@ -181,7 +181,7 @@ class Metodos{
                                 TS.getInstance().modificar(simbolo)
                             }else{
                                 L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un boolean",raiz.childs[1].fila,raiz.childs[1].columna));
-                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un boolean "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                codigo="Error Semantico"+" El valor asignado no corresponde a un boolean "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                             }
                         }
                         else if(simbolo.tipo=="string"){
@@ -193,7 +193,7 @@ class Metodos{
                                 TS.getInstance().modificar(simbolo)
                             }else{
                                 L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un string",raiz.childs[1].fila,raiz.childs[1].columna));
-                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un string "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                codigo="Error Semantico"+" El valor asignado no corresponde a un string "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                             }
                         }
                         else if(simbolo.tipo=="char"){
@@ -205,7 +205,7 @@ class Metodos{
                                 TS.getInstance().modificar(simbolo)
                             }else{
                                 L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un char",raiz.childs[1].fila,raiz.childs[1].columna));
-                                simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un char "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                                codigo="Error Semantico"+" El valor asignado no corresponde a un char "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                             }
                         }
                         
@@ -773,7 +773,7 @@ class Metodos{
                             TS.getInstance().modificar(simbolo)
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
-                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            codigo="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                         }  
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
@@ -790,7 +790,7 @@ class Metodos{
                             TS.getInstance().modificar(simbolo)
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
-                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            codigo="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                         }  
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
@@ -807,7 +807,7 @@ class Metodos{
                             TS.getInstance().modificar(simbolo)
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un boolean",raiz.childs[1].fila,raiz.childs[1].columna));
-                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un boolean "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            codigo="Error Semantico"+" El valor asignado no corresponde a un boolean "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                         }  
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
@@ -824,7 +824,7 @@ class Metodos{
                             TS.getInstance().modificar(simbolo)
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un string",raiz.childs[1].fila,raiz.childs[1].columna));
-                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un string "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            codigo="Error Semantico"+" El valor asignado no corresponde a un string "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                         }  
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
@@ -841,7 +841,7 @@ class Metodos{
                             TS.getInstance().modificar(simbolo)
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un char",raiz.childs[1].fila,raiz.childs[1].columna));
-                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un char "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            codigo="Error Semantico"+" El valor asignado no corresponde a un char "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                         }  
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
@@ -864,7 +864,7 @@ class Metodos{
                             TS.getInstance().modificar(simbolo)
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un entero",raiz.childs[1].fila,raiz.childs[1].columna));
-                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            codigo="Error Semantico"+" El valor asignado no corresponde a un entero "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                         }  
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
@@ -882,7 +882,7 @@ class Metodos{
                             TS.getInstance().modificar(simbolo)
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un double",raiz.childs[1].fila,raiz.childs[1].columna));
-                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            codigo="Error Semantico"+" El valor asignado no corresponde a un double "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                         }  
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
@@ -900,7 +900,7 @@ class Metodos{
                             TS.getInstance().modificar(simbolo)
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un boolean",raiz.childs[1].fila,raiz.childs[1].columna));
-                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un boolean "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            codigo="Error Semantico"+" El valor asignado no corresponde a un boolean "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                         }  
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
@@ -918,7 +918,7 @@ class Metodos{
                             TS.getInstance().modificar(simbolo)
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un string",raiz.childs[1].fila,raiz.childs[1].columna));
-                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un string "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            codigo="Error Semantico"+" El valor asignado no corresponde a un string "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                         }  
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
@@ -936,7 +936,7 @@ class Metodos{
                             TS.getInstance().modificar(simbolo)
                         }else{
                             L_Error.getInstance().insertar(new N_Error("Semantico","El valor asignado no corresponde a un char",raiz.childs[1].fila,raiz.childs[1].columna));
-                            simbolo.valor="Error Semantico"+" El valor asignado no corresponde a un char "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
+                            codigo="Error Semantico"+" El valor asignado no corresponde a un char "+" fila: "+raiz.childs[1].fila+" columna "+raiz.childs[1].columna
                         }  
                     }else{
                         L_Error.getInstance().insertar(new N_Error("Semantico"," Declaracion incorrecta de un vector ",raiz.childs[1].fila,raiz.childs[1].columna));
