@@ -404,8 +404,10 @@ MODIFICA_VECTOR: Tok_ID Tok_cor1 EXP Tok_cor2 Tok_asigna1 EXP {$$=new AST_Node("
 ;
 
 
-LISTA_PARAMETROS: LISTA_PARAMETROS Tok_coma TIPO_IDENTIFICADOR Tok_ID {$1.addChilds($3,$4);$$=$1}
-                | TIPO_IDENTIFICADOR Tok_ID {$$=new AST_Node("LISTA_PARAMETROS","LISTA_PARAMETROS",this._$.first_line,@1.last_column);$$.addChilds($1,$2);}
+LISTA_PARAMETROS: LISTA_PARAMETROS Tok_coma TIPO_IDENTIFICADOR Tok_ID {$1.addChilds($3,$4,"");$$=$1}
+                | TIPO_IDENTIFICADOR Tok_ID {$$=new AST_Node("LISTA_PARAMETROS","LISTA_PARAMETROS",this._$.first_line,@1.last_column);$$.addChilds($1,$2,"");}
+                | LISTA_PARAMETROS Tok_coma TIPO_IDENTIFICADOR Tok_cor1 Tok_cor2 Tok_ID {$1.addChilds($3,$6,$4);$$=$1}
+                | TIPO_IDENTIFICADOR Tok_cor1 Tok_cor2 Tok_ID {$$=new AST_Node("LISTA_PARAMETROS","LISTA_PARAMETROS",this._$.first_line,@1.last_column);$$.addChilds($1,$4,$2);}
 ;
 
 TIPO_IDENTIFICADOR:Tok_TD_int {$$=$1}

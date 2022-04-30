@@ -924,9 +924,7 @@ class Interprete{
                 break;
             
             case "RETURN_VALOR":
-                op = new Operador();
-                res = op.ejecutar(raiz.childs[1]);
-                valorRetorno=res;
+                almacenaReturn="Si"
                 break;
                 
                 
